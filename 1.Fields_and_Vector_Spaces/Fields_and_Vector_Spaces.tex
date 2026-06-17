@@ -1,0 +1,515 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsthm}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\title{Fields and Vector Spaces}
+\author{Jin-Ren Ryan Wang}
+\date{\today}
+
+\maketitle
+
+\section{Fields (= Scalar)}
+
+\subsection{Definition}
+A set $F$ is called a $field$ if we can define two operators $+$ and $\cdot$ s.t.:
+
+\begin{description}
+
+\item[(A0)] For any $x, y \in F$, we have $x + y \in F$. (Closure under $+$)
+\item[(A1)] For any $x, y \in F$, we have $x + y = y + x$. (Community under $+$)
+\item[(A2)] For any $x, y, z \in F$, we have  $(x + y) + z = x + (y + z)$. (Associativity under $+$)
+\item[(A3)] There $\exists 0 \in F$ s.t. $x + 0 = x$, $\forall x \in F$. (Existence of additive identity)
+\item[(A4)] $\forall x \in F$, there $\exists x^\prime \in F$ s.t. $x + x^\prime$ = 0. (Existence of additive inverse)
+\item[(M0)] For any $x, y \in F$, we have $x \cdot y \in F$. (Closure under $\cdot$)
+\item[(M1)] $\forall x, y \in F$, we have $x \cdot y$ = $y \cdot x$. (Community under $\cdot$)
+\item[(M2)] For any $x, y, z \in F$, we have $(x \cdot y) \cdot z$ = $x \cdot (y \cdot z)$. (Associativity under $\cdot$)
+\item[(M3)] There $\exists 1 \in F$ s.t. $1 \neq 0$ and $x \cdot 1 = x$, $\forall x \in F$. (Existence of multiplicative identity)
+\item[(M4)] $\forall x \in F \setminus \{0\}$, there $\exists x^{\prime\prime}$ s.t. $x \cdot x^{\prime\prime} = 1$. (Existence of multiplicative inverse)
+\item[(D1)] For any $x, y, z \in F$, $x \cdot (y + z)$ = $x \cdot y$ + $x \cdot z$. (Distributivity)
+
+\end{description}
+
+\subsection{Examples}
+
+\begin{description}
+\item[1.] The sets $\mathbb{R}$, $\mathbb{C}$, $\mathbb{Q}$ are Fields.
+\item[2.] $M_n(\mathbb{R})$ = \{n by n matrices with entries in $\mathbb{R}$\} is not a Field. (Mutiplication of matrices is not commutative in general $AB \neq BA$)
+\end{description}
+
+\section{Vector Space (= spaces that behaves like vectors)}
+
+\subsection{Definition}
+Let $F$ be a $field$. A set $V$ is called a $vector$ $space$ over $F$ if we can endow with two operations : addition and scalar multiplication by $F$ s.t.:
+\begin{description}
+
+\item[(A0)] $\mathbf{v_1} + \mathbf{v_2} \in V$ for any $\mathbf{v_1}, \mathbf{v_2} \in V$. (Closure under +)
+\item[(A1)] $\mathbf{v_1} + \mathbf{v_2}$ = $\mathbf{v_1} + \mathbf{v_2}$ for any $\mathbf{v_1}, \mathbf{v_2} \in V$. (Commutative under +)
+\item[(A2)] $\mathbf{v_1} + (\mathbf{v_2} + \mathbf{v_3})$ = $(\mathbf{v_1} + \mathbf{v_2}) + \mathbf{v_3}$ for any $\mathbf{v_1}, \mathbf{v_2}, \mathbf{v_3} \in V$. (Associative under +)
+\item[(A3)] There $\exists \mathbf{0} \in V$ s.t. $\mathbf{v} + \mathbf{0}$ = $\mathbf{v}$, $\forall \mathbf{v} \in V$. (Existence of zero vector)
+\item[(A4)] $\forall \mathbf{v} \in V$, there $\exists \mathbf{v^\prime} \in V$ s.t. $\mathbf{v} + \mathbf{v^\prime} = \mathbf{0}$. (Existence of additive inverse)
+\item[(S0)] $\alpha\mathbf{v} \in V$ $\forall \alpha \in F$ and $\mathbf{v} \in V$. (Closure under $\cdot$)
+\item[(S1)] $\alpha(\mathbf{v_1} + \mathbf{v2}) = \alpha\mathbf{v_1} + \alpha\mathbf{v_2}$ $\forall \alpha \in F$ and $\mathbf{v_1}, \mathbf{v_2} \in V$. (Distributivity)
+\item[(S2)] $(\alpha + \beta)\mathbf{v} = \alpha\mathbf{v} + \beta\mathbf{v}$ $\forall \alpha, \beta \in F$ and $\mathbf{v} \in V$. (Distributivity)
+\item[(S3)] $(\alpha\beta)\mathbf{v} = \alpha(\beta\mathbf{v})$ $\forall \alpha, \beta \in F$ and $\mathbf{v} \in V$. (Associativity for scalar multiplication)
+\item[(S4)] $1\mathbf{v} = \mathbf{v}$, $\forall \mathbf{v} \in V$. (1 as a "scalar identity")
+
+\end{description}
+
+\subsection{Examples}
+
+\begin{description}
+\item[1.] $V = \mathbb{R}^n$ is a vector space over $\mathbb{R}$\\ \textcolor{red}{(add on $\mathbb{R}^n$, scalar multiplication by $\mathbb{R}$)}\\ In this case, zero vector $\mathbf{0}$ is given by $(0, 0,\ldots, 0)$\\ In general, let $F$ be a $field$ ($\mathbb{R}$ or $\mathbb{Q}$ or $\mathbb{C}$ or $\mathbb{F}_2 \ldots$), 
+\[
+F^n
+\coloneqq
+\{(x_1,\ldots,x_n):x_i\in F\}
+\]
+\item[2.] Let $F$ be a $field$. Define $F[x]$
+\[
+F[x]
+\coloneqq
+\left\{
+f(x) 
+=
+a_0+a_1x+\cdots+a_nx^n
+:
+a_i\in F
+\right\}
+\]
+Then $V = F[x]$ (Addition, scalar multiplication by $F$)\\ In this case, the zero vector $\mathbf{0}$ is given by "zero polynomial"
+
+\end{description}
+
+\section{Basic properties of vector spaces}
+
+$\textbf{Theorem 1.4.1.}$ $\quad$ Let $V$ be a vector space over $F$. 
+Then $\forall \mathbf{v} \in V$, its additive inverse (described in (A4)) $\mathbf{v^\prime}$ is unique. Conventionally, we denote $\mathbf{v^\prime}$ as $\mathbf{-v}$.
+
+Suppose $\mathbf{v^\prime}$ and $\mathbf{v^{\prime\prime}}$ are two distinct additive inverse of $\mathbf{v}$.
+\begin{proof}
+\[
+\begin{aligned}
+\mathbf{v^{\prime\prime}} 
+&= \mathbf{0} + \mathbf{v^{\prime\prime}}\\ 
+&= (\mathbf{v^\prime} + \mathbf{v}) + \mathbf{v^{\prime\prime}}\\ 
+&= \mathbf{v^\prime} + (\mathbf{v} + \mathbf{v^{\prime\prime}})\\
+&= \mathbf{v^\prime} + \mathbf{0}\\
+&= \mathbf{v^\prime}\\
+\end{aligned}
+\]
+
+Contradiction! Thus additive inverse is unique.
+\end{proof}
+
+$\textbf{Theorem 1.4.2.}$ $\quad$ Let $V$ be a vector space over $F$. Then:
+\begin{description}
+
+\item[(1)] $0 \cdot \mathbf{v}$ = $\mathbf{0}$, $\forall \mathbf{v} \in V$   
+\item[(2)] For any $a \in F$ and $\mathbf{v} \in V$, we have $(-a)\mathbf{v} = -(a\mathbf{v})$
+
+\end{description}
+(1)
+\begin{proof}
+Take any $\mathbf{v} \in V$. Let $\mathbf{w} = 0 \cdot \mathbf{v}$  $\qquad\qquad$ WTS : $\mathbf{w} = \mathbf{0}$
+\[
+\begin{aligned}
+\mathbf{w} + \mathbf{w}
+&= 0 \cdot \mathbf{v} + 0 \cdot \mathbf{v}\\
+&= (0 + 0) \cdot \mathbf{v}\\
+&= 0 \cdot \mathbf{v}\\
+&= \mathbf{w}\\
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+\mathbf{w} + \mathbf{w} + \mathbf{-w}
+&= \mathbf{w} + \mathbf{-w}\\
+\implies \mathbf{w} = \mathbf{0}\\
+\end{aligned}
+\]
+\end{proof}
+
+(2) 
+\begin{proof}
+WTS: $(-a)\mathbf{v}$ is the additive inverse of $\alpha\mathbf{v}$
+\[
+\left\{
+\begin{aligned}
+a\mathbf{v} + (-a)\mathbf{v}
+&= (a + (-a))\mathbf{v}\\ 
+&= 0\mathbf{v}\\ 
+&= \mathbf{0}\\
+a\mathbf{v} + (-a\mathbf{v}) &= \mathbf{0}    
+\end{aligned}
+\right.
+\]
+
+By Uniqueness of additive inverse, we must have
+\[
+(-a)\mathbf{v} = (-a\mathbf{v})
+\]
+\end{proof}
+
+\section{subspaces}
+Some vector spaces might be ‘too big’ and be unwieldy to deal with. Therefore, it is often
+convenient to look at ‘smaller vector spaces’ inside a given vector space. These are called
+$\textbf{subspaces}$.
+
+\subsection{Definition}
+Let $V$ be a vector space over $F$. A subset $W$ of $V$ is called a $\textbf{subspace of V}$ if $W$ is also a vector space over $F$ with addition and scalar multiplication inherited from $V$.
+
+\subsection{Theorems}
+$\textbf{Theorem 1.5.1}$ $\quad$ Let $V$ be a vector space over $F$ and let $W \subset V$. Then $W$ is a subspace of $V$ iff. the following are satisfied:
+\begin{itemize}
+    \item $W$ is not empty;
+    \item $W$ is closed under addition : $\mathbf{w_1} + \mathbf{w_2} \in W$, $\forall \mathbf{w_1}, \mathbf{w_2} \in W$;
+    \item $W$ is closed to under scalar multiplication : $\alpha\mathbf{w} \in W$ $\forall \alpha \in F$ and $\mathbf{w} \in W$.
+\end{itemize}
+
+\begin{proof}
+$(\Leftarrow)$ Suppose $W \subseteq V$ and (1), (2), (3) are satisfied.
+
+Goal: $W$ is itself a vector space. i.e. (A0 $\sim$ A4), (S0 $\sim$ S4) are valid.
+
+\begin{itemize}
+    \item[(A0)] is free of charge because of (2).
+
+    \item[(A1)] Let $\mathbf{w_1, w_2}\in W$. Since $W\subseteq V$, we have
+    $\mathbf{w_1, w_2}\in V$. As $V$ is given, addition on $V$ is commutative
+    \[
+        \mathbf{w_1 + w_2 = w_2 + w_1}.
+    \]
+    Hence $W$ inherits commutativity of addition from $V$.
+
+    \item[\textcolor{red}{(A2), (S1)--(S4)}] \textcolor{red}{Indeed, these axioms are inherited from $V$.}
+
+    \item[(S0)] is free of charge because of (3).
+
+    \item[(A3)] Existence of the zero vector.
+
+    Since $W$ is nonempty by (1), choose $\mathbf{w}\in W$.
+    By (3),
+    \[
+        0\cdot \mathbf{w}\in W.
+    \]
+    Since $0\cdot \mathbf{tw} = \mathbf{0}$, we obtain
+    \[
+        \mathbf{0}\in W.
+    \]
+
+    \item[(A4)] Existence of additive inverses.
+
+    Let $\mathbf{w}\in W$. By (3),
+    \[
+        (-1)\mathbf{w}\in W.
+    \]
+    Since $(-1)\mathbf{w = -w}$,
+    \[
+        \mathbf{-w}\in W.
+    \]
+
+\end{itemize}
+
+Therefore $W$ satisfies all vector space axioms, and hence $W$ is a vector space over $F$.
+
+\end{proof}
+
+$\textbf{Theorem 1.5.2}$ $\quad$ Let $A$ be an $m\times n$ matrix. Then the solution space
+\[
+W=\{\mathbf{v}\in\mathbb{R}^n: A\mathbf{v}=\mathbf{0}\}
+\]
+forms a subspace of $\mathbb{R}^n$.
+
+\begin{proof}
+We verify the three subspace conditions.
+
+\begin{enumerate}
+    \item $W$ is nonempty.
+
+    Since
+    \[
+    A\mathbf{0} = \mathbf{0},
+    \]
+    we have $\mathbf{0}\in W$.
+
+    \item $W$ is closed under addition.
+
+    Let $\mathbf{u,v}\in W$. Then
+    \[
+    A\mathbf{u} = \mathbf{0},\qquad A\mathbf{v} = \mathbf{0}.
+    \]
+    Hence
+    \[
+    A\mathbf{(u + v)} = A\mathbf{u} + A\mathbf{v} = \mathbf{0 + 0} = \mathbf{0}.
+    \]
+    Therefore $\mathbf{u + v}\in W$.
+
+    \item $W$ is closed under scalar multiplication.
+
+    Let $\mathbf{v}\in W$ and $c\in\mathbb{R}$.
+    Since $A\mathbf{v} = \mathbf{0}$,
+    \[
+    A(c\mathbf{v}) = c(A\mathbf{v}) = c\mathbf{0} = \mathbf{0}.
+    \]
+    Therefore $c\mathbf{v}\in W$.
+
+\end{enumerate}
+
+Thus $W$ is a subspace of $\mathbb{R}^n$.
+\end{proof}
+
+\textbf{Theorem 1.5.3}
+
+If $W_1$ and $W_2$ are subspaces of $V$, then
+\[ 
+W_1\cap W_2
+\]
+is also a subspace of $V$.
+
+\begin{proof}
+By the Subspace Criterion:
+
+\bigskip
+
+1. Since $\mathbf{0}\in W_1$ and $\mathbf{0}\in W_2$,
+
+\[
+\mathbf{0}\in W_1\cap W_2.
+\]
+
+2. Let $\mathbf{v_1,v_2}\in W_1\cap W_2$. Then
+
+\[
+\mathbf{v_1 + v_2}\in W_1 \qquad\text{and}\qquad \mathbf{v_1 + v_2}\in W_2,
+\]
+
+so
+
+\[
+\mathbf{v_1 + v_2}\in W_1\cap W_2.
+\]
+
+3. Let $\mathbf{v}\in W_1\cap W_2$ and $\alpha\in F$. Then
+
+\[
+\alpha \mathbf{v}\in W_1 \qquad\text{and}\qquad \alpha \mathbf{v}\in W_2,
+\]
+
+so
+
+\[
+\alpha \mathbf{v}\in W_1\cap W_2.
+\]
+
+Hence $W_1\cap W_2$ is a subspace of $V$.
+\end{proof}
+
+\subsection{Example of subspaces}
+\subsubsection{Subspaces of $\mathbb{R}^n$}
+
+Show that
+\[
+W = \{(x,y)\in\mathbb{R}^2:x+2y=0\}
+\]
+is a subspace of $\mathbb{R}^2$.
+
+\begin{proof}
+By the Subspace Criterion, it suffices to verify that $W$ is nonempty,
+closed under addition, and closed under scalar multiplication.
+
+\begin{enumerate}
+\item $(0,0)\in W$ since $0 + 2\cdot 0 = 0$.
+
+\item Let $\mathbf{w_1} = (a,b), \mathbf{w_2} = (c,d)\in W$. Then
+
+\[
+a + 2b = 0,\qquad c + 2d = 0.
+\]
+
+Hence
+
+\[
+(a + c) + 2(b + d) = (a + 2b)+(c + 2d) = 0.
+\]
+
+Therefore $\mathbf{w_1} + \mathbf{w_2}\in W$.
+
+\item Let $\mathbf{w} = (a,b)\in W$ and $r\in\mathbb R$. Then
+
+\[
+ra + 2(rb) = r(a + 2b) = 0.
+\]
+
+Therefore $r\mathbf{w}\in W$.
+\end{enumerate}
+
+Hence $W$ is a subspace of $\mathbb R^2$.
+\end{proof}
+
+\subsubsection{Subspaces of polynomial space}
+
+$F[x]_{\le n}$ is a subspace of $F[x]$.
+
+\begin{proof}
+By the Subspace Criterion, it suffices to verify that
+$F[x]_{\le n}$ is nonempty, closed under addition, and closed under scalar multiplication.
+
+\bigskip
+
+1. The zero polynomial belongs to $F[x]_{\le n}$, so
+\[
+0\in F[x]_{\le n}.
+\]
+
+2. Let $f,g\in F[x]_{\le n}$. Then
+
+\[
+\deg(f)\le n, \qquad \deg(g)\le n.
+\]
+
+Hence
+
+\[
+\deg(f+g)\le \max\{\deg(f),\deg(g)\}\le n.
+\]
+
+Therefore
+
+\[
+f+g\in F[x]_{\le n}.
+\]
+
+3. Let $f\in F[x]_{\le n}$ and $c\in F$. Then
+
+\[
+\deg(cf)\le \deg(f)\le n.
+\]
+
+Therefore
+
+\[
+cf\in F[x]_{\le n}.
+\]
+
+Hence $F[x]_{\le n}$ is a subspace of $F[x]$.
+\end{proof}
+
+\subsubsection{Subspaces of Function Spaces, take differentiable function for example}
+
+Let
+
+\[
+C(D) = \{f:D\to\mathbb R:f\text{ is continuous}\}.
+\]
+
+Define
+
+\[
+D(D) = \{f:D\to\mathbb R:f\text{ is differentiable}\}.
+\]
+
+\bigskip
+
+$D(D)$ is a subspace of $C(D)$.
+
+\begin{proof}
+By the Subspace Criterion, it suffices to verify the following.
+
+\bigskip
+
+1. The zero function belongs to $D(D)$.
+
+2. Let $f,g\in D(D)$. Since the sum of two differentiable
+functions is differentiable,
+
+\[
+f+g\in D(D).
+\]
+
+3. Let $f\in D(D)$ and $\alpha\in\mathbb R$. Since a scalar
+multiple of a differentiable function is differentiable,
+
+\[
+\alpha f\in D(D).
+\]
+
+Therefore $D(D)$ is a subspace of $C(D)$.
+\end{proof}
+
+\subsubsection{Subspaces of matrix space, take symmetric matrix for example}
+
+Recall that the transpose of a matrix $A = (a_{ij})$ is
+
+\[
+A^T = (a_{ji}).
+\]
+
+Define
+
+\[
+\mathrm{Sym}_n(F) = \{A\in M_n(F):A^T=A\}.
+\]
+
+The matrices in $\mathrm{Sym}_n(F)$ are called symmetric matrices.
+
+\[
+\mathrm{Sym}_n(F) \text{ is a subspace of } M_n(F).
+\]
+
+\begin{proof}
+By the Subspace Criterion, it suffices to verify that
+$\mathrm{Sym}_n(F)$ is nonempty, closed under addition,
+and closed under scalar multiplication.
+
+\bigskip
+
+1. Since
+
+\[
+0^T = 0,
+\]
+
+the zero matrix belongs to $\mathrm{Sym}_n(F)$.
+
+2. Let $A,B\in\mathrm{Sym}_n(F)$. Then
+
+\[
+A^T = A, \qquad B^T = B.
+\]
+
+Hence
+
+\[
+(A + B)^T = A^T + B^T = A + B,
+\]
+
+so $A + B\in\mathrm{Sym}_n(F)$.
+
+3. Let $A\in\mathrm{Sym}_n(F)$ and $c\in F$. Then
+
+\[
+(cA)^T = cA^T = cA,
+\]
+
+so $cA\in\mathrm{Sym}_n(F)$.
+
+\bigskip
+
+Hence $\mathrm{Sym}_n(F)$ is a subspace of $M_n(F)$.
+
+\end{proof}
+
+\end{document} 
