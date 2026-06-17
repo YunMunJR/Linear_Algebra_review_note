@@ -94,7 +94,9 @@ Then $V = F[x]$ (Addition, scalar multiplication by $F$)\\ In this case, the zer
 
 \section{Basic properties of vector spaces}
 
-$\textbf{Theorem 1.4.1.}$ $\quad$ Let $V$ be a vector space over $F$. 
+$\textbf{Theorem 1.4.1.}$ 
+
+Let $V$ be a vector space over $F$. 
 Then $\forall \mathbf{v} \in V$, its additive inverse (described in (A4)) $\mathbf{v^\prime}$ is unique. Conventionally, we denote $\mathbf{v^\prime}$ as $\mathbf{-v}$.
 
 Suppose $\mathbf{v^\prime}$ and $\mathbf{v^{\prime\prime}}$ are two distinct additive inverse of $\mathbf{v}$.
@@ -110,10 +112,16 @@ Suppose $\mathbf{v^\prime}$ and $\mathbf{v^{\prime\prime}}$ are two distinct add
 \end{aligned}
 \]
 
+\bigskip
+
 Contradiction! Thus additive inverse is unique.
 \end{proof}
 
-$\textbf{Theorem 1.4.2.}$ $\quad$ Let $V$ be a vector space over $F$. Then:
+\bigskip
+
+$\textbf{Theorem 1.4.2.}$ 
+
+Let $V$ be a vector space over $F$. Then
 \begin{description}
 
 \item[(1)] $0 \cdot \mathbf{v}$ = $\mathbf{0}$, $\forall \mathbf{v} \in V$   
@@ -172,7 +180,9 @@ $\textbf{subspaces}$.
 Let $V$ be a vector space over $F$. A subset $W$ of $V$ is called a $\textbf{subspace of V}$ if $W$ is also a vector space over $F$ with addition and scalar multiplication inherited from $V$.
 
 \subsection{Theorems}
-$\textbf{Theorem 1.5.1}$ $\quad$ Let $V$ be a vector space over $F$ and let $W \subset V$. Then $W$ is a subspace of $V$ iff. the following are satisfied:
+$\textbf{Theorem 1.5.1}$ 
+
+Let $V$ be a vector space over $F$ and let $W \subset V$. Then $W$ is a subspace of $V$ iff. the following are satisfied:
 \begin{itemize}
     \item $W$ is not empty;
     \item $W$ is closed under addition : $\mathbf{w_1} + \mathbf{w_2} \in W$, $\forall \mathbf{w_1}, \mathbf{w_2} \in W$;
@@ -186,6 +196,8 @@ Goal: $W$ is itself a vector space. i.e. (A0 $\sim$ A4), (S0 $\sim$ S4) are vali
 
 \begin{itemize}
     \item[(A0)] is free of charge because of (2).
+    
+    \bigskip
 
     \item[(A1)] Let $\mathbf{w_1, w_2}\in W$. Since $W\subseteq V$, we have
     $\mathbf{w_1, w_2}\in V$. As $V$ is given, addition on $V$ is commutative
@@ -194,12 +206,17 @@ Goal: $W$ is itself a vector space. i.e. (A0 $\sim$ A4), (S0 $\sim$ S4) are vali
     \]
     Hence $W$ inherits commutativity of addition from $V$.
 
+    \bigskip
+
     \item[\textcolor{red}{(A2), (S1)$\sim$(S4)}] \textcolor{red}{Indeed, these axioms are inherited from $V$.}
 
+    \bigskip
+    
     \item[(S0)] is free of charge because of (3).
 
+    \bigskip
+
     \item[(A3)] Since $W$ is nonempty by (1), choose $\mathbf{w}\in W$. By (3),
-    
     \[
         0\cdot \mathbf{w}\in W.
     \]
@@ -208,8 +225,9 @@ Goal: $W$ is itself a vector space. i.e. (A0 $\sim$ A4), (S0 $\sim$ S4) are vali
         \mathbf{0}\in W.
     \]
 
+    \bigskip
+
     \item[(A4)] Let $\mathbf{w}\in W$. By (3),
-    
     \[
         (-1)\mathbf{w}\in W.
     \]
@@ -218,13 +236,17 @@ Goal: $W$ is itself a vector space. i.e. (A0 $\sim$ A4), (S0 $\sim$ S4) are vali
         \mathbf{-w}\in W.
     \]
 
+    \bigskip
+
 \end{itemize}
 
 Therefore $W$ satisfies all vector space axioms, and hence $W$ is a vector space over $F$.
 
 \end{proof}
 
-$\textbf{Theorem 1.5.2}$ $\quad$ Let $A$ be an $m\times n$ matrix. Then the solution space
+$\textbf{Theorem 1.5.2}$ 
+
+Let $A$ be an $m\times n$ matrix. Then the solution space
 \[
 W=\{\mathbf{v}\in\mathbb{R}^n: A\mathbf{v}=\mathbf{0}\}
 \]
@@ -234,17 +256,15 @@ forms a subspace of $\mathbb{R}^n$.
 We verify the three subspace conditions.
 
 \begin{enumerate}
-    \item $W$ is nonempty.
-
-    Since
+    \item Since
     \[
     A\mathbf{0} = \mathbf{0},
     \]
     we have $\mathbf{0}\in W$.
 
-    \item $W$ is closed under addition.
+    \bigskip
 
-    Let $\mathbf{u,v}\in W$. Then
+    \item Let $\mathbf{u,v}\in W$. Then
     \[
     A\mathbf{u} = \mathbf{0},\qquad A\mathbf{v} = \mathbf{0}.
     \]
@@ -252,23 +272,25 @@ We verify the three subspace conditions.
     \[
     A\mathbf{(u + v)} = A\mathbf{u} + A\mathbf{v} = \mathbf{0 + 0} = \mathbf{0}.
     \]
-    Therefore $\mathbf{u + v}\in W$.
+    Therefore $\mathbf{u + v}\in W$. Hence $W$ is closed under addition.
 
-    \item $W$ is closed under scalar multiplication.
+    \bigskip
 
-    Let $\mathbf{v}\in W$ and $c\in\mathbb{R}$.
+    \item Let $\mathbf{v}\in W$ and $c\in\mathbb{R}$.
     Since $A\mathbf{v} = \mathbf{0}$,
     \[
     A(c\mathbf{v}) = c(A\mathbf{v}) = c\mathbf{0} = \mathbf{0}.
     \]
-    Therefore $c\mathbf{v}\in W$.
+    Therefore $c\mathbf{v}\in W$. Hence $W$ is closed under scalar multiplication.
+
+    \bigskip
 
 \end{enumerate}
 
-Thus $W$ is a subspace of $\mathbb{R}^n$.
+Since the above three conditions are satisfied, $W$ is a subspace of $\mathbb{R}^n$.
 \end{proof}
 
-\textbf{Theorem 1.5.3}
+\textbf{Theorem 1.5.3} 
 
 If $W_1$ and $W_2$ are subspaces of $V$, then
 \[ 
@@ -282,36 +304,36 @@ By the Subspace Criterion:
 \bigskip
 
 1. Since $\mathbf{0}\in W_1$ and $\mathbf{0}\in W_2$,
-
 \[
 \mathbf{0}\in W_1\cap W_2.
 \]
 
-2. Let $\mathbf{v_1,v_2}\in W_1\cap W_2$. Then
+\bigskip
 
+2. Let $\mathbf{v_1,v_2}\in W_1\cap W_2$. Then
 \[
 \mathbf{v_1 + v_2}\in W_1 \qquad\text{and}\qquad \mathbf{v_1 + v_2}\in W_2,
 \]
-
 so
-
 \[
 \mathbf{v_1 + v_2}\in W_1\cap W_2.
 \]
 
-3. Let $\mathbf{v}\in W_1\cap W_2$ and $\alpha\in F$. Then
+\bigskip
 
+3. Let $\mathbf{v}\in W_1\cap W_2$ and $\alpha\in F$. Then
 \[
 \alpha \mathbf{v}\in W_1 \qquad\text{and}\qquad \alpha \mathbf{v}\in W_2,
 \]
-
 so
-
 \[
 \alpha \mathbf{v}\in W_1\cap W_2.
 \]
 
+\bigskip
+
 Hence $W_1\cap W_2$ is a subspace of $V$.
+
 \end{proof}
 
 \subsection{Example of subspaces}
@@ -330,27 +352,28 @@ closed under addition, and closed under scalar multiplication.
 \begin{enumerate}
 \item $(0,0)\in W$ since $0 + 2\cdot 0 = 0$.
 
+\bigskip
+
 \item Let $\mathbf{w_1} = (a,b), \mathbf{w_2} = (c,d)\in W$. Then
-
 \[
-a + 2b = 0,\qquad c + 2d = 0.
+a + 2b = 0,\qquad c + 2d = 0. 
 \]
-
 Hence
-
 \[
 (a + c) + 2(b + d) = (a + 2b)+(c + 2d) = 0.
 \]
-
 Therefore $\mathbf{w_1} + \mathbf{w_2}\in W$.
 
-\item Let $\mathbf{w} = (a,b)\in W$ and $r\in\mathbb R$. Then
+\bigskip
 
+\item Let $\mathbf{w} = (a,b)\in W$ and $r\in\mathbb R$. Then
 \[
 ra + 2(rb) = r(a + 2b) = 0.
 \]
-
 Therefore $r\mathbf{w}\in W$.
+
+\bigskip
+
 \end{enumerate}
 
 Hence $W$ is a subspace of $\mathbb R^2$.
@@ -371,49 +394,45 @@ $F[x]_{\le n}$ is nonempty, closed under addition, and closed under scalar multi
 0\in F[x]_{\le n}.
 \]
 
-2. Let $f,g\in F[x]_{\le n}$. Then
+\bigskip
 
+2. Let $f,g\in F[x]_{\le n}$. The
 \[
 \deg(f)\le n, \qquad \deg(g)\le n.
 \]
-
 Hence
-
 \[
 \deg(f+g)\le \max\{\deg(f),\deg(g)\}\le n.
 \]
-
 Therefore
-
 \[
 f+g\in F[x]_{\le n}.
 \]
 
-3. Let $f\in F[x]_{\le n}$ and $c\in F$. Then
+\bigskip
 
+3. Let $f\in F[x]_{\le n}$ and $c\in F$. Then
 \[
 \deg(cf)\le \deg(f)\le n.
 \]
-
 Therefore
-
 \[
 cf\in F[x]_{\le n}.
 \]
 
+\bigskip
+
 Hence $F[x]_{\le n}$ is a subspace of $F[x]$.
+
 \end{proof}
 
 \subsubsection{Subspaces of Function Spaces, take differentiable function for example}
 
 Let
-
 \[
 C(D) = \{f:D\to\mathbb R:f\text{ is continuous}\}.
 \]
-
 Define
-
 \[
 D(D) = \{f:D\to\mathbb R:f\text{ is differentiable}\}.
 \]
@@ -431,17 +450,19 @@ By the Subspace Criterion, it suffices to verify the following.
 
 2. Let $f,g\in D(D)$. Since the sum of two differentiable
 functions is differentiable,
-
 \[
 f+g\in D(D).
 \]
 
+\bigskip
+
 3. Let $f\in D(D)$ and $\alpha\in\mathbb R$. Since a scalar
 multiple of a differentiable function is differentiable,
-
 \[
 \alpha f\in D(D).
 \]
+
+\bigskip
 
 Therefore $D(D)$ is a subspace of $C(D)$.
 \end{proof}
@@ -449,19 +470,16 @@ Therefore $D(D)$ is a subspace of $C(D)$.
 \subsubsection{Subspaces of matrix space, take symmetric matrix for example}
 
 Recall that the transpose of a matrix $A = (a_{ij})$ is
-
 \[
 A^T = (a_{ji}).
 \]
 
 Define
-
 \[
 \mathrm{Sym}_n(F) = \{A\in M_n(F):A^T=A\}.
 \]
 
 The matrices in $\mathrm{Sym}_n(F)$ are called symmetric matrices.
-
 \[
 \mathrm{Sym}_n(F) \text{ is a subspace of } M_n(F).
 \]
@@ -474,33 +492,29 @@ and closed under scalar multiplication.
 \bigskip
 
 1. Since
-
 \[
 0^T = 0,
 \]
-
 the zero matrix belongs to $\mathrm{Sym}_n(F)$.
 
-2. Let $A,B\in\mathrm{Sym}_n(F)$. Then
+\bigskip
 
+2. Let $A,B\in\mathrm{Sym}_n(F)$. Then
 \[
 A^T = A, \qquad B^T = B.
 \]
-
 Hence
-
 \[
 (A + B)^T = A^T + B^T = A + B,
 \]
-
 so $A + B\in\mathrm{Sym}_n(F)$.
 
-3. Let $A\in\mathrm{Sym}_n(F)$ and $c\in F$. Then
+\bigskip
 
+3. Let $A\in\mathrm{Sym}_n(F)$ and $c\in F$. Then
 \[
 (cA)^T = cA^T = cA,
 \]
-
 so $cA\in\mathrm{Sym}_n(F)$.
 
 \bigskip
