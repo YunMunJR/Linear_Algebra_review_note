@@ -1,0 +1,604 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    \vspace*{\fill}
+
+    {\Huge Basis and Dimension I}
+
+    \vspace{1cm}
+
+    {\Large Jin-Ren Ryan Wang\par}
+
+    \vspace{0.5cm}
+
+    {\large \today\par}
+
+    \vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\section{Linear combination}
+
+\subsection{Definition}
+\textbf{Definition 2.2.1.}
+
+Let $S$ = \{$\mathbf{v_1}, \mathbf{v_2},\ldots, \mathbf{v_m}$\} be a subset of $V$. Then the expression
+\begin{center}
+    $a_1\mathbf{v_1} + a2\mathbf{v_2} + \ldots + a_m\mathbf{v_m}$, with $a_i \in F$
+\end{center}
+
+
+is called a $linear$ $combination$ of $S$.
+
+\subsection{Example}
+
+\textbf{1.}
+(2, 1, 0) is A linear combination of $S$ = \{(1, 2, 3), (4, 5, 6)\} because
+\[
+    (2, 1, 0) 
+    = 
+    -2 \cdot (1, 2, 3) + 1 \cdot (4, 5, 6).
+\]
+
+\textbf{2.}
+$f(x)$ = $x^{3} + 2x + 1$ in $\mathbb{R}[x]$ is a linear combination of $S$ = $\{1,x,x^{2},x^{3}\}$ because
+\[
+    f(x) = 1 \cdot 1 + 2 \cdot x + 0 \cdot x^{2} + 1 \cdot x^{3}.
+\]
+
+\textbf{3. (polynomial)} 
+Show that $\{2x+1,\;x^2+3\}$ is linearly independent in $\mathbb{R}[x]_{\le 2}$.\\
+Suppose
+\[
+    a_1(2x+1)+a_2(x^2+3)=0. 
+\]
+\[
+    \implies a_2x^2+2a_1x+(a_1+3a_2)=0. 
+\]
+By comparing coefficients yields
+\[
+a_2=0,\quad 2a_1=0,\quad a_1+3a_2=0.\implies a_1=a_2=0
+\]
+Therefore
+$\{2x+1,\;x^2+3\}$ is linearly independent.    
+
+\newpage
+
+\section{Linear dependence and independence}
+
+\subsection{Definition}
+\textbf{Definition 2.2.2.}
+\begin{enumerate}
+    \item A \textcolor{red}{finite} subset $S$ = $\{\mathbf{v_1},\mathbf{v_2},\ldots,\mathbf{v_m}\}$ of $V$ is called $linearly$ $independent$ if
+    \[
+        a_1\mathbf{v_1} + a_2\mathbf{v_2} + \ldots + a_m\mathbf{v_m} = \mathbf{0} \implies a_1 = a_2 = \ldots = a_m = 0.
+    \]   In other words, the only way to obtain $\mathbf{0}$ as a linear combination of $S$ is by taking all scalars to 0.
+
+    \item More generally, an \textcolor{red}{infinite} subset $S'$ of $V$ is said to be $linearly$ $independent$ if every finite subset $S \subseteq S'$ is $linearly$ $independent$.
+
+    \item A subset $S''$ is called $linearly$ $dependent$ if it is $not$ $linearly$ $independent$.
+
+\end{enumerate}
+
+\subsection{Example}
+
+Prove that, in $\mathbb{R}^3$,
+
+\begin{enumerate}
+    \item $S_1$ = \{(1, 2, 3), (4, 5, 6)\} is linearly independent:
+    \begin{proof}
+        Suppose
+        \[
+        a_1(1,2,3) + a_2(4,5,6) = (0,0,0).
+        \]
+        Then
+        \[
+        \begin{cases}
+        a_1 + 4a_2 = 0,\\
+        2a_1 + 5a_2 = 0,\\
+        3a_1 + 6a_2 = 0.
+        \end{cases}
+        \]
+        From the first two equations,
+        \[
+        2(a_1+4a_2)-(2a_1+5a_2) = 3a_2 = 0.
+        \]
+        Hence $a_2 = 0$, and therefore $a_1 = 0$, so the trivial solution is the only solution.\\
+        $\implies$ $\{(1,2,3),(4,5,6)\}$ is linearly independent.
+    \end{proof}
+    \item $S_2$ = \{(1, 2, 3), (4, 5, 6), (7, 8, 9)\} is linearly dependent.  
+        \begin{proof}
+            As noted previously, 
+            \[
+                1 \cdot (1, 2, 3) + (-2) \cdot (4, 5, 6) + 1 \cdot (7, 8, 9) = (0, 0, 0)
+            \] By def, $S_2$ is not linearly independent.
+        \end{proof}
+\end{enumerate}
+
+\subsection{Theorem}
+
+\textbf{Theorem 2.2.1.} 
+
+$\{\mathbf{v_1}, \mathbf{v_2}, \ldots, \mathbf{v_m}\}$ is linearly dependent iff. either $\mathbf{v_1}$ = $\mathbf{0}$ or
+for some r, $\mathbf{v_r}$ is a linear combination of  $\mathbf{v_1}, \mathbf{v_2}, \ldots, \mathbf{v_{r - 1}}$
+\begin{proof}
+
+\textcolor{red}{($\Rightarrow$)} Given $S=\{\mathbf{v_1},\dots,\mathbf{v_m}\}$ is NOT linearly dependent.
+
+\textbf{Case 1.} $\mathbf{v_1}=\mathbf{0}$.$\quad$Then there is nothing to prove.
+
+\textbf{Case 2.} $\mathbf{v_1}\neq \mathbf{0}$.
+
+Since $S$ is linearly dependent, there exist scalars
+$a_1, \ldots, a_m$, not all zero, s.t.
+
+\[
+a_1\mathbf{v_1} + \cdots + a_m\mathbf{v_m}=\mathbf{0}.
+\]
+
+Let $r$ be the largest index such that
+
+\begin{center}
+    $a_r\neq 0.$ $(a_{r+1} = a_{r+2} = \ldots = a_m = 0)$
+\end{center}
+
+Hence $(*)$ becomes
+\[
+a_1\mathbf{v_1} + a_2\mathbf{v_2} + \cdots + a_r\mathbf{v_r} = 0.
+\]
+
+Since $a_r\neq 0$, we may solve for $\mathbf{v_r}$:
+\[
+\mathbf{v_r}
+=
+-\frac{a_1}{a_r}\mathbf{v_1}
+-\frac{a_2}{a_r}\mathbf{v_2}
+-\cdots
+-\frac{a_{r-1}}{a_r}\mathbf{v_{r-1}}.
+\]
+
+Therefore $\mathbf{v_r}$ is a linear combination of
+\[
+\{\mathbf{v_1},\dots,\mathbf{v_{r-1}}\}.
+\]
+
+\textcolor{red}{($\Leftarrow$)} 
+
+\textbf{Case 1.} Suppose $\mathbf{v_1} = \mathbf{0}$\\
+$\Rightarrow$ $1\mathbf{v_1} + 0\mathbf{v_2} + 0\mathbf{v_3} + \ldots = 0\mathbf{v_m}$ = $\mathbf{0}$ \\
+$\Rightarrow$ \textcolor{red}{The coefficients are NOT all zero.}
+
+\textbf{Case 2.} $\mathbf{v_1}\neq 0$.
+
+Assume that there  $\exists r$ s.t.
+\[
+\mathbf{v_r} = a_1\mathbf{v_1} + a_2\mathbf{v_2} + \cdots + a_{r-1}\mathbf{v_{r-1}}.
+\]
+
+Then
+\[
+a_1\mathbf{v_1} + a_2\mathbf{v_2} + \cdots + a_{r-1}\mathbf{v_{r-1}} - \mathbf{v_r} = 0.
+\]
+
+Since the coefficient of $\mathbf{v_r}$ is $-1\neq 0$,
+the coefficients are not all zero.
+
+Therefore there exists a nontrivial linear relation among the vectors in $S$.
+
+Hence $S$ is linearly dependent.
+
+\end{proof}
+
+\section{Spanning sets}
+
+\subsection{Definition}
+
+\textbf{Definition 2.3.1. (Linear span)}
+
+\begin{enumerate}
+    \item Let $S = \{\mathbf{v_1}, \mathbf{v_2}, \ldots, \mathbf{v_m}\}$ be a finite subset of $V$. Then define the (linear) span of $S$ by
+    \[
+        \operatorname{span}(S) \coloneq \{a_1\mathbf{v_1} + a_2\mathbf{v_2} + \ldots + a_m\mathbf{v_m}\} : a_i \in F
+    \]
+    the set of all linear combination of $S$.\\
+    i.e. span($S$) = \{all linear combination of $S$\}
+    \item More generally, if $S$ is an infinite subset of $V$ (i.e. $S$ contains infinitely many elements). then we define
+    \[
+        \operatorname{span}(S)
+        =
+        \bigcup_{S'\subset S} \operatorname{span}(S')    
+    \]
+    where $S'$ runs through all finite subsets of $S$.
+\end{enumerate}
+
+\textbf{Definition 2.3.2. (Span as a verb)}
+
+If $V$ = $\operatorname{span}(S)$ (i.e. every $\mathbf{v} \in V$ can be written as a linear combination
+of members in $S$.), we say that $S$ spans $V$ or $S$ is a spanning set of $V$.
+
+\subsection{Remark}
+
+By Convention, we have 
+\fcolorbox{red}{white}{$\operatorname{span}(\emptyset) = \{\mathbf{0}\}$}.
+\qquad
+$\leftarrow$
+\textcolor{red}{empty sum is defined to be $0$}
+
+\subsection{Theorem}
+\textbf{Therorem 2.3.1.}
+
+$\operatorname{span}(S)$ is a subspace of $V$.
+
+\begin{proof}
+This is straight-forward, so we do it "verbally":
+
+\begin{enumerate}
+    \item \textbf{(Closed under addition)}
+    
+    The sum of any two linear combinations of $S$ is still a linear combination of $S$ (by adding up the coefficients).
+
+    \item \textbf{(Closed under scalar multiplication)}
+    
+    A scalar multiple of a linear combination of $S$ is still a linear combination of $S$ (by scaling the coefficients).
+
+    \item
+    
+    If $S$ is non-empty, then $\operatorname{span}(S)$ is also non-empty. If $S$ is empty, then
+    \[
+        \operatorname{span}(S)=\{0\},
+    \]
+    which is also non-empty.
+\end{enumerate}
+\end{proof}
+
+\subsection{Example}
+
+\textbf{1.}
+
+\bigskip
+
+Let $S$ = \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\} $\subseteq$ $\mathbb{R}^{3}$
+\begin{align*}
+\operatorname{span}(S) 
+&\coloneq
+\{a(1, 0, 0) + b(0, 1, 0) + c(0, 0, 1) : a, b, c \in \mathbb{R}\}\\
+&= 
+\{(a, b, c) : a, b, c \in \mathbb{R}^{3}\}\\    
+&= 
+\mathbb{R}^{3}
+\end{align*}
+
+\textbf{2.}
+
+\bigskip
+
+$S'$ = \{(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1)\} also spans $\mathbb{R}^{3}$ because
+More concretely, for any (a, b, c) $\in \mathbb{R}$,
+\[
+\underbrace{(a, b, c) = a(1, 0, 0) + b(0, 1, 0) + c(0, 0, 1) + 0(1, 1, 1)
+}_{\text{linear combination of $S'$}}
+\]
+
+\newpage
+
+\section{Basis}
+
+\subsection{Definition}
+
+\textbf{Definition 2.4.1.}
+
+A subset $S$ of $V$ is called a \emph{basis} of $V$ if
+
+\begin{description}
+    \item[(1)] $S$ is linearly independent.
+    \item[(2)] $S$ spans $V$, i.e.\ every $\mathbf{v}\in V$ can be written as a linear combination of $S$.
+\end{description}
+
+Moreover, if $S$ can be taken to be a finite set, then we say that $V$ is a
+\emph{finite-dimensional} vector space. Otherwise, we say that it is
+\emph{infinite-dimensional}.
+
+\bigskip
+
+\textbf{Definition 2.4.2.}
+
+Fix an order of elements in a basis $S$. In this case, we call
+$(a_1,a_2,\ldots,a_m)$ the \emph{coordinates} of $\mathbf{v}$ with respect to the basis
+$S$ and write
+
+\[
+[\mathbf{v}]_S=(a_1,a_2,\ldots,a_m).
+\]
+
+\subsection{Therorem}
+
+\textbf{Theorem 2.4.1.}
+
+Suppose
+\[
+S=\{\mathbf{v_1,v_2,\ldots,v_m}\}
+\]
+is a basis of $V$. Then for every $v\in V$, there exists a unique collection of scalars
+$a_1,a_2,\ldots,a_m\in F$ such that
+
+\[
+\mathbf{v}=a_1\mathbf{v_1}+a_2\mathbf{v_2}+\cdots+a_m\mathbf{v_m}.
+\]
+
+\begin{proof}
+Since $S$ is a basis of $V$, it spans $V$. Therefore every $v\in V$ can be
+written as a linear combination of the vectors in $S$.
+
+To prove uniqueness, suppose
+\[
+\mathbf{v}=a_1\mathbf{v_1}+a_2\mathbf{v_2}+\cdots+a_m\mathbf{v_m}
+\]
+
+and
+\[
+\mathbf{v}=b_1\mathbf{v_1}+b_2\mathbf{v_2}+\cdots+b_m\mathbf{v_m},
+\]
+
+where $a_i,b_i\in F$.
+
+Subtracting the two equations, we obtain
+\[
+\mathbf{0}=(a_1-b_1)\mathbf{v_1}+(a_2-b_2)\mathbf{v_2}+\cdots+(a_m-b_m)\mathbf{v_m}.
+\]
+
+Since $S$ is a basis, it is linearly independent. Hence
+\[
+(a_1-b_1)=(a_2-b_2)=\cdots=(a_m-b_m)=0.
+\]
+
+Therefore
+\[
+a_1=b_1,\quad a_2=b_2,\quad \ldots,\quad a_m=b_m.
+\]
+
+Thus the representation of $v$ is unique.
+\end{proof}
+
+\subsection{Example}
+
+\textbf{1. Non-uniqueness of a basis}
+
+\bigskip
+
+The set
+\[
+S=\{(1,0,0),(1,1,0),(1,1,1)\}
+\]
+
+is also a basis for $\mathbb{R}^3$ because it is linearly independent and for every
+$(a,b,c)\in\mathbb{R}^3$,
+
+\[
+(a,b,c)
+=
+(a-b)(1,0,0)
++
+(b-c)(1,1,0)
++
+c(1,1,1).
+\]
+
+Hence every vector in $\mathbb{R}^3$ is a linear combination of vectors in $S$.
+
+Moreover, since $S$ is finite, $\mathbb{R}^3$ is finite-dimensional.
+
+\bigskip
+
+\textbf{2. Infinite-dimensional example}
+
+\bigskip
+
+Consider $\mathbb{R}[x]$.
+
+We claim that $\mathbb{R}[x]$ cannot be spanned by any finite set of polynomials.
+
+\begin{proof}
+Suppose
+\[
+S=\{f_1,f_2,\ldots,f_m\}
+\]
+
+spans $\mathbb{R}[x]$.
+
+Let
+\[
+N=\max\{\deg(f_1),\deg(f_2),\ldots,\deg(f_m)\}.
+\]
+
+Then every polynomial in $\operatorname{span}(S)$ is a linear combination of
+$f_1,f_2,\ldots,f_m$, and therefore has degree at most $N$.
+
+However,
+\[
+x^{N+1}
+\]
+
+has degree $N+1$, so
+\[
+x^{N+1}\notin \operatorname{span}(S).
+\]
+
+This contradicts the assumption that $S$ spans $\mathbb{R}[x]$.
+
+\bigskip
+
+Therefore, $\mathbb{R}[x]$ is infinite-dimensional.
+\end{proof}
+
+\bigskip
+
+\textbf{3.}
+
+\bigskip
+
+As observed previously, for
+\[
+\mathbf{v}=(a,b,c)\in\mathbb{R}^3,
+\]
+
+we have
+
+\begin{itemize}
+
+\item with respect to the standard basis
+\[
+S_1=\{(1,0,0),(0,1,0),(0,0,1)\},
+\]
+
+we have
+\[
+[\mathbf{v}]_{S_1}=(a,b,c).
+\]
+
+\item (\emph{Order matters}) with respect to the reordered standard basis
+\[
+S_1'=\{(0,1,0),(0,0,1),(1,0,0)\},
+\]
+
+we have
+\[
+[\mathbf{v}]_{S_1'}=(b,c,a).
+\]
+
+\item with respect to the basis
+\[
+S_2=\{(1,0,0),(1,1,0),(1,1,1)\},
+\]
+
+we have
+\[
+[\mathbf{v}]_{S_2}=(a-b,b-c,c).
+\]
+
+\end{itemize}
+
+\subsubsection{Remark}
+In particular, the same vector $\mathbf{v}$ may have different coordinates with respect to a different choices of basis.
+
+\newpage
+
+\section{Dimension}
+
+\subsection{Definition}
+
+\textbf{Definition 2.5.1}
+
+Suppose $V$ is a finite-dimensional vector space over $F$.
+
+Define the dimension of $V$ to be the size of a (and hence any) basis of $V$:
+
+\[
+\dim_F(V)=|S|
+\]
+
+where $S$ is a basis of $V$.
+
+
+\subsection{Theorem}
+
+\textbf{Theorem 2.5.1.(Exchange Theorem / Replacement Theorem)}
+
+Suppose
+
+\begin{itemize}
+    \item $S_1=\{\mathbf{v_1,v_2,\ldots,v_n}\}$ is a spanning set of $V$;
+
+    \item $S_2=\{\mathbf{w_1,w_2,\ldots,w_m}\}$ is linearly independent.
+\end{itemize}
+
+Then
+\[
+m\le n.
+\]
+
+\begin{proof}
+    This proof will be provided after develping \emph{sifiting method} theorem in\\
+    other chapter.
+\end{proof}
+
+\textbf{Theorem 2.5.2. (Basis Theorem)}
+
+Suppose $V$ is a finite-dimensional vector space over $F$.
+If $S_1$ and $S_2$ are both bases of $V$, then $S_1$ and $S_2$
+contain the same number of elements.
+
+\begin{proof}
+Let $S_1$ and $S_2$ be two bases of $V$.
+
+\begin{itemize}
+    \item Since $S_1$ is a basis, it is linearly independent.
+    
+    Since $S_2$ is a basis, it is a spanning set.
+    
+    By the Exchange Theorem,
+    \[
+    |S_1|\le |S_2|.
+    \]
+
+    \item Since $S_2$ is a basis, it is linearly independent.
+
+    Since $S_1$ is a basis, it is a spanning set.
+    
+    By the Exchange Theorem,
+    \[
+    |S_2|\le |S_1|.
+    \]
+
+\end{itemize}
+
+Hence,
+
+\[
+|S_1|=|S_2|.
+\]
+
+Therefore every basis of $V$ has the same cardinality.
+\end{proof}
+
+\subsection{Example}
+
+\textbf{1.}
+
+\bigskip
+
+Since
+\[
+S=\{(1,0,0),(0,1,0),(0,0,1)\}
+\]
+
+is a basis of $\mathbb{R}^3$ (as a vector space over $\mathbb{R}$), we conclude that
+\[
+\dim_{\mathbb{R}}(\mathbb{R}^3)
+=
+|S|
+=
+3.
+\]
+
+\end{document}
