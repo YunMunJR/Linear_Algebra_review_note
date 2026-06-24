@@ -1,5 +1,5 @@
 # Linear Algebra Review Note
-This repository is my own review on course Introduction to Linear Algebra I and Introduction to Linear Algebra II at department of Mathematics, NTU.
+This repository is my own review on courses Introduction to Linear Algebra I and Introduction to Linear Algebra II at department of Mathematics, NTU.
 
 Completed part: Fields and Vector Spaces
 
