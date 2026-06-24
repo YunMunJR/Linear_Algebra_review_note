@@ -39,7 +39,7 @@
 \section{Fields (= Scalar)}
 
 \subsection{Definition}
-A set $F$ is called a $field$ if we can define two operators $+$ and $\cdot$ s.t.
+A set $F$ is called a \emph{field} if we can define two operators $+$ and $\cdot$ s.t.
 
 \begin{description}
 
@@ -60,9 +60,9 @@ A set $F$ is called a $field$ if we can define two operators $+$ and $\cdot$ s.t
 \subsection{Examples}
 
 \begin{description}
-\item[1.] The sets $\mathbb{R}$, $\mathbb{C}$, $\mathbb{Q}$ are $fields$.
-\item[2.] $M_n(\mathbb{R})$ = \{n by n matrices with entries in $\mathbb{R}$\} is not a $field$. (Mutiplication of matrices is not commutative in general $AB \neq BA$)
-\item[3.] $\mathbb{F}_{2}$ = \{0, 1\} is a $field$.
+\item[1.] The sets $\mathbb{R}$, $\mathbb{C}$, $\mathbb{Q}$ are \emph{fields}.
+\item[2.] $M_n(\mathbb{R})$ = \{n by n matrices with entries in $\mathbb{R}$\} is not a \emph{field}. (Mutiplication of matrices is not commutative in general $AB \neq BA$)
+\item[3.] $\mathbb{F}_{2}$ = \{0, 1\} is a \emph{field}.
 
 \[
 \begin{array}{c|cc}
@@ -94,7 +94,7 @@ A set $F$ is called a $field$ if we can define two operators $+$ and $\cdot$ s.t
 \section{Vector Space (= spaces that behaves like vectors)}
 
 \subsection{Definition}
-Let $F$ be a $field$. A set $V$ is called a $vector$ $space$ over $F$ if we can endow with two operations : addition and scalar multiplication by $F$ s.t.
+Let $F$ be a $field$. A set $V$ is called a \emph{vector space} over $F$ if we can endow with two operations : addition and scalar multiplication by $F$ s.t.
 \begin{description}
 
 \item[(A0)] $\mathbf{v_1} + \mathbf{v_2} \in V$ for any $\mathbf{v_1}, \mathbf{v_2} \in V$. (Closure under +)
@@ -113,13 +113,13 @@ Let $F$ be a $field$. A set $V$ is called a $vector$ $space$ over $F$ if we can 
 \subsection{Examples}
 
 \begin{description}
-\item[1.] $V = \mathbb{R}^n$ is a vector space over $\mathbb{R}$\\ \textcolor{red}{(add on $\mathbb{R}^n$, scalar multiplication by $\mathbb{R}$)}\\ In this case, zero vector $\mathbf{0}$ is given by $(0, 0,\ldots, 0)$\\ In general, let $F$ be a $field$ ($\mathbb{R}$ or $\mathbb{Q}$ or $\mathbb{C}$ or $\mathbb{F}_2 \ldots$), 
+\item[1.] $V = \mathbb{R}^n$ is a vector space over $\mathbb{R}$\\ \textcolor{red}{(add on $\mathbb{R}^n$, scalar multiplication by $\mathbb{R}$)}\\ In this case, zero vector $\mathbf{0}$ is given by $(0, 0,\ldots, 0)$\\ In general, let $F$ be a \emph{field} ($\mathbb{R}$ or $\mathbb{Q}$ or $\mathbb{C}$ or $\mathbb{F}_2 \ldots$), 
 \[
 F^n
 \coloneqq
 \{(x_1,\ldots,x_n):x_i\in F\}
 \]
-\item[2.] Let $F$ be a $field$. Define $F[x]$
+\item[2.] Let $F$ be a \emph{field}. Define $F[x]$
 \[
 F[x]
 \coloneqq
@@ -137,7 +137,7 @@ Then $V = F[x]$ (Addition, scalar multiplication by $F$)\\ In this case, the zer
 
 \section{Basic properties of vector spaces}
 
-$\textbf{Theorem 1.4.1.}$ 
+\textbf{Theorem 1.4.1.}
 
 Let $V$ be a vector space over $F$. 
 Then $\forall \mathbf{v} \in V$, its additive inverse (described in (A4)) $\mathbf{v^\prime}$ is unique. Conventionally, we denote $\mathbf{v^\prime}$ as $\mathbf{-v}$.
@@ -158,7 +158,7 @@ Contradiction! Thus additive inverse is unique.
 
 \bigskip
 
-$\textbf{Theorem 1.4.2.}$ 
+\textbf{Theorem 1.4.2.}
 
 Let $V$ be a vector space over $F$. Then
 \begin{description}
@@ -211,10 +211,10 @@ convenient to look at ‘smaller vector spaces’ inside a given vector space. T
 $\textbf{subspaces}$.
 
 \subsection{Definition}
-Let $V$ be a vector space over $F$. A subset $W$ of $V$ is called a $\textbf{subspace of V}$ if $W$ is also a vector space over $F$ with addition and scalar multiplication inherited from $V$.
+Let $V$ be a vector space over $F$. A subset $W$ of $V$ is called a \emph{subspace of V} if $W$ is also a vector space over $F$ with addition and scalar multiplication inherited from $V$.
 
 \subsection{Theorems}
-$\textbf{Theorem 1.5.1}$ 
+\textbf{Theorem 1.5.1.}
 
 Let $V$ be a vector space over $F$ and let $W \subset V$. Then $W$ is a subspace of $V$ iff. the following are satisfied:
 \begin{itemize}
@@ -278,7 +278,7 @@ Therefore $W$ satisfies all vector space axioms, and hence $W$ is a vector space
 
 \end{proof}
 
-$\textbf{Theorem 1.5.2}$ 
+\textbf{Theorem 1.5.2.}
 
 Let $A$ be an $m\times n$ matrix. Then the solution space
 \[
@@ -324,7 +324,7 @@ We verify the three subspace conditions.
 Since the above three conditions are satisfied, $W$ is a subspace of $\mathbb{R}^n$.
 \end{proof}
 
-\textbf{Theorem 1.5.3} 
+\textbf{Theorem 1.5.3.} 
 
 If $W_1$ and $W_2$ are subspaces of $V$, then
 \[ 
