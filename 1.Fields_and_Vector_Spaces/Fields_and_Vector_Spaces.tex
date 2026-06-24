@@ -14,16 +14,32 @@
 
 \begin{document}
 
-\title{Fields and Vector Spaces}
-\author{Jin-Ren Ryan Wang}
-\date{\today}
+\begin{titlepage}
+    \centering
 
-\maketitle
+    \vspace*{\fill}
+
+    {\Huge Fields and Vector Spaces}
+
+    \vspace{1cm}
+
+    {\Large Jin-Ren Ryan Wang\par}
+
+    \vspace{0.5cm}
+
+    {\large \today\par}
+
+    \vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
 
 \section{Fields (= Scalar)}
 
 \subsection{Definition}
-A set $F$ is called a $field$ if we can define two operators $+$ and $\cdot$ s.t.:
+A set $F$ is called a $field$ if we can define two operators $+$ and $\cdot$ s.t.
 
 \begin{description}
 
@@ -44,14 +60,41 @@ A set $F$ is called a $field$ if we can define two operators $+$ and $\cdot$ s.t
 \subsection{Examples}
 
 \begin{description}
-\item[1.] The sets $\mathbb{R}$, $\mathbb{C}$, $\mathbb{Q}$ are Fields.
-\item[2.] $M_n(\mathbb{R})$ = \{n by n matrices with entries in $\mathbb{R}$\} is not a Field. (Mutiplication of matrices is not commutative in general $AB \neq BA$)
+\item[1.] The sets $\mathbb{R}$, $\mathbb{C}$, $\mathbb{Q}$ are $fields$.
+\item[2.] $M_n(\mathbb{R})$ = \{n by n matrices with entries in $\mathbb{R}$\} is not a $field$. (Mutiplication of matrices is not commutative in general $AB \neq BA$)
+\item[3.] $\mathbb{F}_{2}$ = \{0, 1\} is a $field$.
+
+\[
+\begin{array}{c|cc}
++ & 0 & 1\\
+\hline
+0 & 0 & 1\\
+1 & 1 & 0
+\end{array}
+\qquad
+\begin{array}{c|cc}
+\times & 0 & 1\\
+\hline
+0 & 0 & 0\\
+1 & 0 & 1
+\end{array}
+\]
+
+\[
+\frac{a}{1}\coloneqq a, \qquad \forall a\in\mathbb{F}_2.
+\]
+
+\[
+\mathbb{F}_2 \text{ satisfies (A0--A4), (M0--M4), and (P1).}
+\]
 \end{description}
+
+\newpage
 
 \section{Vector Space (= spaces that behaves like vectors)}
 
 \subsection{Definition}
-Let $F$ be a $field$. A set $V$ is called a $vector$ $space$ over $F$ if we can endow with two operations : addition and scalar multiplication by $F$ s.t.:
+Let $F$ be a $field$. A set $V$ is called a $vector$ $space$ over $F$ if we can endow with two operations : addition and scalar multiplication by $F$ s.t.
 \begin{description}
 
 \item[(A0)] $\mathbf{v_1} + \mathbf{v_2} \in V$ for any $\mathbf{v_1}, \mathbf{v_2} \in V$. (Closure under +)
@@ -104,15 +147,11 @@ Suppose $\mathbf{v^\prime}$ and $\mathbf{v^{\prime\prime}}$ are two distinct add
 \[
 \begin{aligned}
 \mathbf{v^{\prime\prime}} 
-&= \mathbf{0} + \mathbf{v^{\prime\prime}}\\ 
-&= (\mathbf{v^\prime} + \mathbf{v}) + \mathbf{v^{\prime\prime}}\\ 
-&= \mathbf{v^\prime} + (\mathbf{v} + \mathbf{v^{\prime\prime}})\\
-&= \mathbf{v^\prime} + \mathbf{0}\\
+&= \mathbf{0} + \mathbf{v^{\prime\prime}} = (\mathbf{v^\prime} + \mathbf{v}) + \mathbf{v^{\prime\prime}}\\ 
+&= \mathbf{v^\prime} + (\mathbf{v} + \mathbf{v^{\prime\prime}}) = \mathbf{v^\prime} + \mathbf{0}\\
 &= \mathbf{v^\prime}\\
 \end{aligned}
 \]
-
-\bigskip
 
 Contradiction! Thus additive inverse is unique.
 \end{proof}
@@ -134,20 +173,15 @@ Take any $\mathbf{v} \in V$. Let $\mathbf{w} = 0 \cdot \mathbf{v}$  $\qquad\qqua
 \[
 \begin{aligned}
 \mathbf{w} + \mathbf{w}
-&= 0 \cdot \mathbf{v} + 0 \cdot \mathbf{v}\\
-&= (0 + 0) \cdot \mathbf{v}\\
-&= 0 \cdot \mathbf{v}\\
-&= \mathbf{w}\\
+&= 0 \cdot \mathbf{v} + 0 \cdot \mathbf{v} = (0 + 0) \cdot \mathbf{v} = 0 \cdot \mathbf{v} = \mathbf{w}\\
+\end{aligned}
+\]
+\[
+\begin{aligned}
+\mathbf{w} + \mathbf{w} + \mathbf{(-w)} = \mathbf{w} + \mathbf{(-w)} \implies \mathbf{w} = \mathbf{0}\\
 \end{aligned}
 \]
 
-\[
-\begin{aligned}
-\mathbf{w} + \mathbf{w} + \mathbf{-w}
-&= \mathbf{w} + \mathbf{-w}\\
-\implies \mathbf{w} = \mathbf{0}\\
-\end{aligned}
-\]
 \end{proof}
 
 (2) 
@@ -157,7 +191,7 @@ WTS: $(-a)\mathbf{v}$ is the additive inverse of $\alpha\mathbf{v}$
 \left\{
 \begin{aligned}
 a\mathbf{v} + (-a)\mathbf{v}
-&= (a + (-a))\mathbf{v}\\ 
+&= (a + (-a))\mathbf{v}\\
 &= 0\mathbf{v}\\ 
 &= \mathbf{0}\\
 a\mathbf{v} + (-a\mathbf{v}) &= \mathbf{0}    
