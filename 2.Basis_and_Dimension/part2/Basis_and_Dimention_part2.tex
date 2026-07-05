@@ -1,0 +1,1491 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    \vspace*{\fill}
+
+    {\Huge Basis and Dimension II}
+
+    \vspace{1cm}
+
+    {\Large Jin-Ren Ryan Wang\par}
+
+    \vspace{0.5cm}
+
+    {\large \today\par}
+
+    \vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\section{Dimensions of standard spaces}
+
+Recall that for a vector space $V$ over $F$,
+
+\begin{itemize}
+    \item $S$ is a basis for $V$ if $S$ is linearly independent such that
+    $V=\operatorname{span}(S)$;
+
+    \item $\dim_F(V)=|S|$.
+\end{itemize}
+
+(Sometimes we may suppress $\dim_F$ as just $\dim$ if the underlying field is clear.)
+
+\subsection{Example}
+
+\textbf{1. (Vectors)}
+
+\[
+V=F^n
+\]
+
+is a vector space over $F$.
+\[
+\dim_F(F^n)=n.
+\]
+
+The standard basis is
+\[
+\{\mathbf{e_1,e_2,\ldots,e_n}\},
+\]
+
+where
+
+\[
+\{\mathbf{e_1}=(1,0,\ldots,0),
+\mathbf{e_2}=(0,1,\ldots,0),
+\ldots,
+\mathbf{e_n}=(0,0,\ldots,1)\}.
+\]
+
+\textbf{2. (Matrix spaces)}
+
+\[
+\dim_F(M_n(F))=n^2.
+\]
+
+The ``standard'' basis is
+\[
+\{E_{11},E_{12},\ldots,E_{nn}\},
+\]
+
+where $E_{ij}$ is the matrix whose $(i,j)$ entry is $1$ and all other entries are $0$.\\
+i.e.
+
+\[
+E_{11}
+=
+\begin{pmatrix}
+1&0&\cdots&0\\
+0&0&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&0
+\end{pmatrix},
+\quad
+E_{12}
+=
+\begin{pmatrix}
+0&1&\cdots&0\\
+0&0&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&0
+\end{pmatrix},
+\quad
+\ldots
+\quad
+E_{nn}
+=
+\begin{pmatrix}
+0&0&\cdots&0\\
+0&0&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&1
+\end{pmatrix}.
+\]
+
+\textbf{3.}
+
+Find a basis and the dimension of the following subspace of $\mathbb{R}^4$:
+
+\[
+W=
+\left\{
+(x,y,z,w)\in\mathbb{R}^4 :
+x+y+z+w=0
+\text{ and }
+-x+2z+3w=0
+\right\}.
+\]
+
+\textbf{Step 1: Simplifying the equations}
+
+\[
+\left\{
+\begin{aligned}
+x+y+z+w &= 0 \qquad (1)\\
+-x+2z+3w &= 0 \qquad (2)
+\end{aligned}
+\right.
+\]
+
+Adding $(1)$ and $(2)$, we obtain
+
+\[
+\left\{
+\begin{aligned}
+x+y+z+w &= 0 \qquad (1)\\
+y+3z+4w &= 0 \qquad (2)'
+\end{aligned}
+\right.
+\]
+
+\bigskip
+
+\textbf{Step 2: Backward substitution}
+
+By $(2)'$,
+\[
+y+3z+4w=0.
+\]
+
+Let
+\[
+z=s,\qquad w=t.
+\]
+
+Then
+\[
+y=-3s-4t.
+\]
+
+By $(1)$,
+\[
+x+y+z+w=0,
+\]
+
+so
+\begin{align*}
+x+(-3s-4t)+s+t &=0\\
+x-2s-3t &=0\\
+x &=2s+3t.
+\end{align*}
+
+Therefore
+\[
+W
+=
+\left\{
+(2s+3t,-3s-4t,s,t) : s,t\in\mathbb R
+\right\}.
+\]
+
+\[
+=
+\left\{
+s(2,-3,1,0) + t(3,-4,0,1) : s,t\in\mathbb R
+\right\}.
+\]
+
+\[
+=
+\operatorname{span}
+\left\{
+(2,-3,1,0),
+(3,-4,0,1)
+\right\}.
+\]
+
+As
+\[
+B=
+\{(2,-3,1,0),(3,-4,0,1)\}
+\]
+
+spans $W$, and $B$ is linearly independent, by def, $B$ forms a basis of $W$.
+
+Therefore,
+\[
+\dim_{\mathbb R}(W)=2.
+\]
+
+\textbf{4. (Polynomial of degree at most $n$)}
+
+\[
+\dim_F(F[x]_{\le n})=n+1.
+\]
+
+The ``standard'' basis is
+\[
+\{1,x,x^2,\ldots,x^n\}.
+\]
+
+\textbf{5. (Zero space)}
+
+Recall that
+\[
+\{0\}
+=
+\operatorname{span}(\varnothing),
+\]
+
+where
+\[
+\varnothing
+\]
+
+denotes the empty set.
+
+Therefore,
+\[
+\varnothing
+\]
+
+forms a basis of
+\[
+\{0\}.
+\]
+
+Hence,
+\[
+\dim_F(\{0\})
+=
+|\varnothing|
+=
+0.
+\]
+
+\textbf{6. (Complex numbers)}
+
+\[
+\mathbb C
+=
+\{
+a\cdot 1+b\cdot\sqrt{-1} : a,b\in\mathbb R\}.
+\]
+
+Hence,
+\[
+\dim_{\mathbb R}(\mathbb C)=2.
+\]
+
+On the other hand,
+\[
+\mathbb C
+=
+\{
+a\cdot 1
+:
+a\in\mathbb C
+\}.
+\]
+
+Hence,
+\[
+\dim_{\mathbb C}(\mathbb C)=1.
+\]
+
+\newpage
+
+\section{Consequence of Replacement Theorem}
+
+\subsection{Theorem}
+
+\textbf{Theorem 3.2.1.}
+
+Let $V$ be a vector space over $F$ of dimension $n$, and let
+$S\subseteq V$.
+
+\begin{enumerate}
+    \item If $|S|>n$, then $S$ cannot be linearly independent.
+
+    \item If $|S|<n$, then $S$ cannot span $V$.
+\end{enumerate}
+
+(1)
+\begin{proof}
+
+Given $|S|>n$.
+
+Suppose, for contradiction, that $S$ is linearly independent.
+
+Let $B$ be a basis of $V$. Then
+\[
+|B|=n.
+\]
+
+Since $B$ spans $V$, the Replacement Theorem implies
+\[
+|S|\le |B|=n,
+\]
+
+which contradicts $|S|>n$.
+
+Therefore, $S$ cannot be linearly independent.
+
+\end{proof}
+
+(2)
+\begin{proof}
+Given $|S|<n$.
+
+Suppose, for contradiction, that $S$ spans $V$.
+
+Let $B$ be a basis of $V$. Then
+\[
+|B|=n.
+\]
+
+Since $B$ is linearly independent and $S$ spans $V$, the Replacement Theorem implies
+\[
+|B|\le |S|.
+\]
+
+Hence
+\[
+n=|B|\le |S|,
+\]
+
+which contradicts $|S|<n$.
+
+Therefore, $S$ cannot span $V$
+\end{proof}
+
+\newpage
+
+\textbf{Theorem 3.2.2.}
+Let $V$ and $W$ be finite-dimensional vector spaces.
+
+If
+\begin{enumerate}
+    \item $W\subseteq V$,
+    \item $\dim_F(W)=\dim_F(V)$,
+\end{enumerate}
+
+then
+\[
+W=V.
+\]
+
+\begin{proof}
+Given
+\[
+W\subseteq V
+\]
+
+and
+\[
+\dim_F(W)=\dim_F(V)=n.
+\]
+
+We WTS that $V\subseteq W$.
+
+Suppose not. Then there exists
+\[
+\mathbf{v}\in V
+\]
+
+such that
+\[
+\mathbf{v}\notin W.
+\]
+
+Let
+\[
+S=\{\mathbf{w_1,\ldots,w_n}\}
+\]
+
+be a basis of $W$.
+
+Since
+\[
+W=\operatorname{span}(S),
+\]
+
+we have
+\[
+\mathbf{v}\notin\operatorname{span}(S).
+\]
+
+Therefore,
+\[
+S'=\{\mathbf{w_1,\ldots,w_n,v}\}
+\]
+
+is linearly independent in $V$.
+
+Since
+\[
+\dim_F(V)=n,
+\]
+
+Theorem 3.2.1 implies that any linearly independent subset\\
+of $V$ contains at most $n$ vectors.
+
+However,
+\[
+|S'|=n+1,
+\]
+
+a contradiction.
+
+Hence
+\[
+V\subseteq W.
+\]
+
+Together with
+\[
+W\subseteq V,
+\]
+
+we conclude that
+\[
+W=V.
+\]
+\end{proof}
+
+\textbf{Theorem 3.2.3.}
+Let $V$ be a vector space of dimension $n$. Then any $n$ linearly independent vectors form a basis of $V$.
+
+(In literature, we say that any maximal linearly independent subset forms a basis.)
+
+\begin{proof}
+Let $S$ be a linearly independent subset of $V$ with
+\[
+|S|=n.
+\]
+
+We WTS that
+\[
+\operatorname{span}(S)=V.
+\]
+
+Let
+\[
+W=\operatorname{span}(S).
+\]
+
+Then $W$ is a subspace of $V$, so
+\[
+W\subseteq V.
+\]
+
+Since $S$ spans $W$ and is linearly independent, $S$ is a basis of $W$.
+
+Therefore,
+\[
+\dim_F(W)=|S|=n.
+\]
+
+Since
+\[
+\dim_F(V)=n,
+\]
+
+we have
+\[
+\dim_F(W)=\dim_F(V).
+\]
+
+By Theorem 3.2.2,
+\[
+W=V.
+\]
+
+Hence
+\[
+\operatorname{span}(S)=V.
+\]
+
+Therefore $S$ is a basis of $V$.
+
+\end{proof}
+
+\subsection{Example}
+
+\textbf{1.} 
+$S_1=\{(1,0,1),(1,1,0),(2,3,1),(-1,2,3)\}$ cannot be linearly independent.
+
+\[
+S_1=\{(1,0,1),(1,1,0),(2,3,1),(-1,2,3)\}.
+\]
+
+Since
+\[
+\dim_{\mathbb R}(\mathbb R^3)=3,
+\]
+
+Theorem 3.2.1 implies that any linearly independent subset of $\mathbb R^3$ contains at most $3$ vectors.
+
+However,
+\[
+|S_1|=4.
+\]
+
+Therefore $S_1$ cannot be linearly independent.
+
+\bigskip
+
+\textbf{2.}
+$S_2=\{(1,0,1),(1,1,0)\}$ cannot span $\mathbb{R}^3$.
+
+\[
+S_2=\{(1,0,1),(1,1,0)\}.
+\]
+
+Since
+\[
+\dim_{\mathbb R}(\mathbb R^3)=3,
+\]
+
+Theorem 3.2.1 implies that any spanning subset of$\mathbb R^3$ must contain at least $3$ vectors.
+
+However,
+\[
+|S_2|=2.
+\]
+
+Therefore $S_2$ cannot span $\mathbb R^3$.
+
+\bigskip
+
+\textbf{3.}
+The subset $S=\{(1,0,1),(1,1,0),(2,3,1)\}$ forms a basis of $\mathbb{R}^3$.
+
+(Check.) $S$ is linearly independent.
+
+Since
+\[
+\dim_{\mathbb R}(\mathbb R^3)=3=|S|,
+\]
+
+$S$ is a \textcolor{red}{maximal linearly independent set}. Therefore $S$ is a basis of $\mathbb R^3$.
+
+Remark: This avoids the tedious check of spanning.
+
+\bigskip
+
+\textbf{4.}
+Let $V=M_2(\mathbb{R})$ and consider the subset
+\[
+S=
+\left\{
+A_1=
+\begin{pmatrix}
+1&1\\
+0&0
+\end{pmatrix},
+\;
+A_2=
+\begin{pmatrix}
+1&0\\
+1&0
+\end{pmatrix},
+\;
+A_3=
+\begin{pmatrix}
+1&0\\
+0&1
+\end{pmatrix},
+\;
+A_4=
+\begin{pmatrix}
+0&1\\
+0&1
+\end{pmatrix},
+\;
+A_5=
+\begin{pmatrix}
+0&1\\
+0&1
+\end{pmatrix},
+\;
+A_6=
+\begin{pmatrix}
+0&0\\
+1&1
+\end{pmatrix}
+\right\}.
+\]
+
+(a)
+Prove that $\operatorname{span}(S) = V$
+
+\newpage
+
+\begin{proof}
+Let
+\[
+S'=\{A_1,A_2,A_3,A_4\}.
+\]
+
+Suppose
+\[
+a_1A_1+a_2A_2+a_3A_3+a_4A_4
+=
+\begin{pmatrix}
+0&0\\
+0&0
+\end{pmatrix}.
+\]
+
+By comparing the entries, we obtain
+\[
+\left\{
+\begin{aligned}
+a_1+a_2+a_3 &=0,\\
+a_1+a_4 &=0,\\
+a_2 &=0,\\
+a_3+a_4 &=0.
+\end{aligned}
+\right.
+\]
+
+Hence
+\[
+a_1=a_2=a_3=a_4=0.
+\]
+
+Therefore $S'$ is linearly independent.
+
+Since
+\[
+|S'|=4
+=
+\dim_{\mathbb R}(M_2(\mathbb R)),
+\]
+
+Theorem 3.2.3 implies that $S'$ is a basis of $V$.
+
+Thus
+\[
+V=\operatorname{span}(S').
+\]
+
+Since
+\[
+S'\subseteq S,
+\]
+
+we conclude that
+\[
+\operatorname{span}(S)=V.
+\]
+\end{proof}
+
+(b)
+Find a subset of $S$ that is a basis of $V$
+
+By part (a),
+\[
+\{A_1,A_2,A_3,A_4\}
+\]
+is a basis of $V$.\\
+
+(c)
+Find a subset of $S$ with 4 elements which is not a basis of $V$
+
+Observe that
+\[
+A_1+A_6=A_2+A_4
+=
+\textcolor{red}{
+\begin{pmatrix}
+1&1\\
+1&1
+\end{pmatrix}.
+}
+\]
+
+Therefore
+\[
+A_1-A_2-A_4+A_6
+=
+\begin{pmatrix}
+0&0\\
+0&0
+\end{pmatrix}.
+\]
+
+Since the coefficients are not all zero,
+\[
+\{A_1,A_2,A_4,A_6\}
+\]
+
+is linearly dependent.
+
+Hence
+\[
+\{A_1,A_2,A_4,A_6\}
+\]
+
+is not a basis of $V$.
+
+\newpage
+
+\section{Sifiting and proof of Replacement Theorem}
+
+\subsection{Theorem}
+
+\textbf{Theorem 3.3.1.}
+A subset
+\[
+S=\{\mathbf{v_1,v_2,\ldots,v_m}\}
+\]
+of $V$ is linearly independent if and only if for each
+$r=1,\ldots,m$,
+$v_r$ is not a linear combination of
+$\mathbf{v_1,v_2,\ldots,v_{r-1}}$.
+In particular, this requires
+$\mathbf{v_1}\neq\mathbf{0}$.
+
+\begin{proof}
+This is just Theorem 2.2.1.
+\end{proof}
+
+\textbf{Theorem 3.3.2.}
+Let
+\[
+S=\{\mathbf{v_1,v_2,\ldots,v_m,w}\}.
+\]
+
+If $w$ is a linear combination of
+$\mathbf{v_1,v_2,\ldots,v_m}$, then
+\[
+\operatorname{span}(S)=\operatorname{span}\{\mathbf{v_1,v_2,\ldots,v_m}\}.
+\]
+
+\begin{proof}
+\textcolor{red}{$(\subseteq)$}\\
+Given
+\[
+\mathbf{w}=a_1\mathbf{v_1}+a_2\mathbf{v_2}+\cdots+a_m\mathbf{v_m}
+\]
+
+for some $a_i\in F$.
+
+We first show
+\[
+\operatorname{span}(S)\subseteq\operatorname{span}\{\mathbf{v_1,v_2,\ldots,v_m}\}.
+\]
+
+Let $\mathbf{v}\in\operatorname{span}(S)$. Then
+
+\begin{align*}
+\mathbf{v}
+&=b_1\mathbf{v_1}+b_2\mathbf{v_2}+\cdots+b_m\mathbf{v_m}+c\mathbf{w}\\
+&=b_1\mathbf{v_1}+b_2\mathbf{v_2}+\cdots+b_m\mathbf{v_m}
++c(a_1\mathbf{v_1}+\cdots+a_m\mathbf{v_m})\\
+&=(b_1+ca_1)\mathbf{v_1}+(b_2+ca_2)\mathbf{v_2}+\cdots+(b_m+ca_m)\mathbf{v_m}.
+\end{align*}
+
+Hence
+\[
+\mathbf{v}\in\operatorname{span}\{\mathbf{v_1,v_2,\ldots,v_m}\},
+\]
+
+so
+\[
+\operatorname{span}(S)\subseteq\operatorname{span}\{\mathbf{v_1,v_2,\ldots,v_m}\}.
+\]
+
+\textcolor{red}{$(\subseteq)$}\\
+Conversely, let
+\[
+\mathbf{v}\in\operatorname{span}\{\mathbf{v_1,v_2,\ldots,v_m}\}.
+\]
+
+Then
+\begin{align*}
+\mathbf{v}
+&=d_1\mathbf{v_1}+d_2\mathbf{v_2}+\cdots+d_m\mathbf{v_m}\\
+&=\underbrace{d_1\mathbf{v_1}+d_2\mathbf{v_2}+\cdots+d_m\mathbf{v_m}+0\cdot \mathbf{w}
+}_{\text{linear combination of $S$}}.
+\end{align*}
+
+Hence
+\[
+\mathbf{v}\in\operatorname{span}(S),
+\]
+
+which implies
+\[
+\operatorname{span}\{\mathbf{v_1,v_2,\ldots,v_m}\}\subseteq\operatorname{span}(S).
+\]
+
+Therefore,
+\[
+\operatorname{span}(S)=\operatorname{span}\{\mathbf{v_1,v_2,\ldots,v_m}\}.
+\]
+\end{proof}
+
+\textbf{Theorem 3.3.3. (Sifiting method)}
+Let
+\[
+S=\{\mathbf{v_1,v_2,\ldots,v_m}\}
+\]
+
+be a subset of $V$. Then there exists a subset
+\[
+S'\subseteq S
+\]
+
+such that
+
+\begin{enumerate}
+    \item $S'$ is linearly independent; and
+    \item $\operatorname{span}(S')=\operatorname{span}(S).$
+\end{enumerate}
+
+\begin{proof}
+For each $r$, check whether $\mathbf{v_r}$ is a linear combination of the
+previous vectors
+\[
+\mathbf{v_1,v_2,\ldots,v_{r-1}}.
+\]
+
+\begin{enumerate}
+    \item Keep $\mathbf{v_r}$ in $S$ if $\mathbf{v_r}$ is \emph{not} a linear combination of
+    $\mathbf{v_1,v_2,\ldots,v_{r-1}}$ (not redundant).
+
+    \item Remove $\mathbf{v_r}$ from $S$ if $\mathbf{v_r}$ \emph{is} a linear combination of
+    $\mathbf{v_1,v_2,\ldots,v_{r-1}}$ (redundant).
+\end{enumerate}
+
+After this process, we obtain a subset $S'$ in which no element is a
+linear combination of the preceding members. Therefore, by Theorem~3.3.1, $S'$ is linearly independent.
+Moreover, by Theorem~3.3.2, removing redundant members from $S$ does not
+change its linear span. Hence, we have $\operatorname{span}(S')=\operatorname{span}(S)$.
+
+\end{proof}
+
+\textbf{Theorem 3.3.4. (Basis extension theorem)}
+
+Let $V$ be a finite-dimensional vector space, and let $S$ be a linearly independent subset of $V$. Then $S$ can be extended into a basis of $V$.
+
+\begin{proof}
+Let
+\[
+S=\{\mathbf{v_1,\ldots,v_m}\}
+\]
+
+be a linearly independent subset of $V$.
+
+Let
+\[
+B=\{b_1,\ldots,b_n\}
+\]
+
+be any basis of $V$.
+
+Consider
+\[
+S\cup B = \{\mathbf{v_1,\ldots,v_m,b_1,\ldots,b_n}\}.
+\]
+
+Apply the Sifting Method to $S\cup B$.
+
+Since $S$ is linearly independent, none of the vectors
+$\mathbf{v_1,\ldots,v_m}$ will be removed during the sifting process.
+
+Hence we obtain
+\[
+S\cup B',\qquad\text{where }B'\subseteq B.
+\]
+
+Notice that
+
+\begin{enumerate}
+    \item $S\cup B'$ is linearly independent;
+    \item $\operatorname{span}(S\cup B')= \operatorname{span}(S\cup B).$
+\end{enumerate}
+
+Since $B$ is a basis of $V$,
+\[
+\operatorname{span}(S\cup B)=V.
+\]
+
+Therefore,
+\[
+\operatorname{span}(S\cup B')=V.
+\]
+
+Hence $S\cup B'$ is both linearly independent and spans $V$.
+Therefore,
+\[
+S\cup B'
+\]
+
+forms a basis of $V$, which is an extension of $S$.
+\end{proof}
+
+\newpage
+
+\subsection{Proof of Exchange/Replacement Theorem}
+This is the proof of Replacement Theorem (Theorem 2.5.1) which says that if
+\begin{itemize}
+    \item
+    $S_1=\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$ is a spanning set of $V$.
+
+    \item
+    $S_2=\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_m\}$ is linearly independent.
+\end{itemize}
+
+Then
+\[
+m\le n.
+\]
+
+\begin{proof}
+Idea: Insert $\mathbf{w}_j$ one-by-one into $S_1$, then apply the Sifting Method.
+
+Consider
+\[
+B_1
+=
+\{\textcolor{red}{\mathbf{w}_1},\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}
+=
+\{\textcolor{red}{\mathbf{w}_1}\}\cup S_1.
+\]
+
+Applying the Sifting Method to $B_1$, we must remove some $\mathbf{v}_i$'s. Hence we obtain
+\[
+B_1' =\{\textcolor{red}{\mathbf{w}_1}\}\cup S_1', \text{ where } |S_1'|<|S_1|.
+\]
+
+Moreover,
+\[
+B_1'
+\]
+remains a spanning set of $V$.
+
+Now consider
+\[
+B_2 = \{\textcolor{red}{\mathbf{w}_2,\mathbf{w}_1}\}\cup S_1'.
+\]
+
+Applying the Sifting Method again, none of the $\mathbf{w}_i$'s will be removed because
+\[
+S_2 = \{\mathbf{w}_1,\ldots,\mathbf{w}_m\}
+\]
+is linearly independent.
+
+Hence we obtain
+\[
+B_2' = \{\textcolor{red}{\mathbf{w}_2,\mathbf{w}_1}\}\cup S_1'', \text{ where } |S_1''|<|S_1'|.
+\]
+
+Continue this process. Finally we obtain
+\[
+B_m' = \{\textcolor{red}{\mathbf{w}_m,\mathbf{w}_{m-1},\ldots,\mathbf{w}_1}\} \cup S_1^{(m)},
+\]
+where
+\[
+0 \le |S_1^{(m)}| < |S_1^{(m-1)}| < \cdots < |S_1''| < |S_1'| < |S_1| = n.
+\]
+
+Thus there are at least $\textcolor{red}{m}$ distinct integers strictly less than $n$. 
+
+Therefore, we must have
+\[
+\textcolor{red}{m}\le n.
+\]
+\end{proof}
+
+\section{Direct sum of subspaces}
+
+\subsection{Definition}
+
+\textbf{Definition 3.4.1. (Sum of subspaces)}
+
+Let $W_1$, $W_2$ be subspaces of a vector space $V$. Then define
+\begin{align*}
+    W_1 + W_2 \coloneq \{\mathbf{w_1} + \mathbf{w_2} : \mathbf{w_1}\in W_1 \text{ and } \mathbf{w_2}\in W_2\} 
+\end{align*}
+
+\textbf{Definition 3.4.2. (Direct Sum)}
+
+We write $W_1 + W_2$ = $W_1 \bigoplus W_2$ if $W_1 \cap W_2$ = \{$\mathbf{0}$\}. In this case, \\
+we call it the \emph{direct sum} (instead of just sum) of $W_1$ and $W_2$.
+
+\subsection{Theorem}
+
+\textbf{Theorem 3.4.1.}
+
+Let $W_1 + W_2$ be a subspaces of $V$. Indeed, this is smallest subspace\\ 
+containing both $W_1$ and $W_2$
+
+\begin{proof}
+We verify the three subspace conditions.
+
+\bigskip
+
+\fbox{Non-empty}
+
+Since $W_1$ and $W_2$ are subspaces,
+\[
+\textcolor{red}{\mathbf{0}}\in \textcolor{red}{W_1},\qquad \textcolor{green}{\mathbf{0}}\in \textcolor{green}{W_2}.
+\]
+Hence
+\[
+\mathbf{0}=\textcolor{red}{\mathbf{0}}+\textcolor{green}{\mathbf{0}}\in \textcolor{red}{W_1}+\textcolor{green}{W_2}. \implies W_1 + W_2 \text{ is non-empty.}
+\]
+
+\fbox{Closed under addition}
+
+Let
+\[
+\mathbf{a},\mathbf{b}\in W_1+W_2.
+\]
+Then
+\[
+\left\{
+\begin{aligned}
+\mathbf{a}&=\mathbf{w}_1+\mathbf{w}_2 \quad \text{ for some } \mathbf{w}_1\in W_1 \text{ and } \mathbf{w}_2\in W_2. \\
+\mathbf{b}&=\textcolor{red}{\mathbf{w}_1'+\mathbf{w}_2'} \quad \text{ for some } \textcolor{red}{\mathbf{w}_1'}\in W_1 \text{ and } \textcolor{red}{\mathbf{w}_2'}\in W_2.
+\end{aligned}
+\right.
+\]
+
+Therefore,
+\[
+\begin{aligned}
+\mathbf{a}+\mathbf{b}
+&=(\mathbf{w}_1+\textcolor{red}{\mathbf{w}_1'})+(\mathbf{w}_2+\textcolor{red}{\mathbf{w}_2'}).
+\end{aligned}
+\]
+
+Since $W_1$ and $W_2$ are subspaces,
+\[
+\mathbf{w}_1+\textcolor{red}{\mathbf{w}_1'}\in W_1, \qquad \mathbf{w}_2+\textcolor{red}{\mathbf{w}_2'}\in W_2.
+\]
+Hence
+\[
+\mathbf{a}+\mathbf{b}\in W_1+W_2. \implies W_1 + W_2 \text{ is Closed under addition}
+\]
+
+\fbox{Closed under scalar multiplication}
+
+Let
+\[
+\mathbf{a}\in W_1+W_2, \text{ and } c \text{ is a scalar}
+\]
+
+Then
+\[
+\left\{
+\begin{aligned}
+\mathbf{a}&=\mathbf{w}_1+\mathbf{w}_2 \text{ for some } \mathbf{w_1}\in W_1 \text{ and } \mathbf{w_2}\in W_2\\
+c\mathbf{a}&=c(\mathbf{w}_1+\mathbf{w}_2)=c\mathbf{w_1}+c\mathbf{w_2} \text{ for some } \mathbf{w_1}\in W_1 \text{ and } \mathbf{w_2}\in W_2        
+\end{aligned}
+\right.
+\]
+
+Since
+\[
+c\mathbf{w}_1\in W_1,\qquad c\mathbf{w}_2\in W_2,
+\]
+we conclude that
+\[
+c\mathbf{a}\in W_1+W_2.
+\]
+
+Therefore, $W_1+W_2$ is a subspace of $V$.
+\end{proof}
+
+\textbf{Theorem 3.4.2.}
+
+Let $V$ be a finite-dimensional vector space, and let $W_1,W_2$ be subspaces of $V$. Then
+\[
+\dim(W_1+W_2)=\dim(W_1)+\dim(W_2)-\dim(W_1\cap W_2).
+\]
+
+\begin{proof}
+
+\fbox{Idea. Skill for dimension formula: Start with the ``smallest'' subspace}
+
+\[
+\fcolorbox{red}{white}{\textcolor{red}{$W_1\cap W_2\subseteq W_1,\;W_2 \subseteq W_1+W_2.$}}
+\]
+
+Let
+\[
+n=\dim(W_1\cap W_2),
+\]
+and let
+\[
+B=\{\mathbf{b}_1,\mathbf{b}_2,\ldots,\mathbf{b}_n\}
+\]
+be a basis of $W_1\cap W_2$.
+
+Since $B\subseteq \textcolor{red}{W_1}$ and $B$ is linearly independent,
+by the Basis Extension Theorem, we can extend $B$ to a basis of $W_1$:
+\[
+B_1= \{\mathbf{b}_1,\ldots,\mathbf{b}_n, \textcolor{red}{\mathbf{s}_1,\ldots,\mathbf{s}_p}\}, \text{ a basis of } \textcolor{red}{W_1}
+\]
+
+Similarly, since $B\subseteq \textcolor{red}{W_2}$ and $B$ is linearly independent,
+we may extend $B$ to a basis of $W_2$:
+\[
+B_2= \{\mathbf{b}_1,\ldots,\mathbf{b}_n, \mathbf{t}_1,\ldots,\mathbf{t}_q\}, \text{ a basis of } \textcolor{red}{W_2}
+\]
+
+\fbox{BIG CLAIM}
+
+Let
+\[
+S= \{\mathbf{b}_1,\ldots,\mathbf{b}_n, \textcolor{red}{\mathbf{s}_1,\ldots,\mathbf{s}_p}, \mathbf{t}_1,\ldots,\mathbf{t}_q\}.
+\]
+
+We claim that $S$ forms a basis of $W_1+W_2$.
+
+\medskip
+
+\begin{proof}[Proof of the claim]
+We verify the three subspace conditions:
+
+(1) \fbox{$S$ spans $W_1+W_2$}
+
+Let
+\[
+\mathbf{w}\in W_1+W_2.
+\]
+
+Then there $\exists$ $\mathbf{w}_1\in W_1$ and $\mathbf{w}_2\in W_2$ s.t.
+
+\[
+\mathbf{w}=\mathbf{w}_1+\mathbf{w}_2 \in W_1+W_2
+\]
+
+Since $B_1$ is a basis of $W_1$,
+\[
+\mathbf{w}_1= \sum_{i=1}^{n}\alpha_i\mathbf{b}_i + \sum_{j=1}^{p}\beta_j\textcolor{red}{\mathbf{s}_j}.
+\]
+
+And $B_2$ is a basis of $W_2$,
+\[
+\mathbf{w}_2= \sum_{i=1}^{n}\alpha_i'\mathbf{b}_i + \sum_{k=1}^{q}\gamma_k\mathbf{t}_k.
+\]
+
+So
+\[
+\begin{aligned}
+\mathbf{w}
+&=
+\mathbf{w}_1+\mathbf{w}_2\\
+&=
+\sum_{i=1}^{n}(\alpha_i+\alpha_i')\mathbf{b}_i+\sum_{j=1}^{p} \beta_j\textcolor{red}{\mathbf{s}_j} + \sum_{k=1}^{q}\gamma_k\mathbf{t}_k.
+\end{aligned}
+\]
+
+Therefore,
+\[
+\mathbf{w}\in\operatorname{span}(S).
+\]
+
+Hence $S$ spans $W_1+W_2$.
+
+\medskip
+
+(2) \fbox{$S$ is linearly independent.}
+
+Suppose $\exists$ scalars $\alpha_i$, \textcolor{red}{$\beta_j$}, $\gamma_k$ s.t.
+\[
+\sum_{i=1}^{n}\alpha_i\mathbf{b}_i + \sum_{j=1}^{p}\textcolor{red}{\beta_j\mathbf{s}_j} + \sum_{i=1}^{q}\gamma_k\mathbf{t}_k= \mathbf0.
+\]
+
+Rearranging,
+\[
+\sum_{i=1}^{n}\alpha_i\mathbf{b}_i + \sum_{j=1}^{p}\textcolor{red}{\beta_j\mathbf{s}_j} = -\sum_{k=1}^{q}\gamma_k\mathbf{t}_k.
+\]
+
+Let $\mathbf{v}$ be left-hand side. Undoubtedly, $\mathbf{v}$ equals right-hand side.
+
+Clearly, $\mathbf{v}$ belongs to both $W_1$ and $W_2$. Hence both sides belong to $W_1\cap W_2$.
+
+As
+\[
+B=\{\mathbf{b}_1,\ldots,\mathbf{b}_n\}
+\]
+is a basis of $W_1\cap W_2$, $\mathbf{v}$ can be written as
+\[
+\mathbf{v} = \sum_{i=1}^{n}\sigma_i\mathbf{b}_i \implies \mathbf{0} =  \sum_{i=1}^{n}\sigma_i\mathbf{b}_i + \sum_{k=1}^{q}\gamma_k\mathbf{t_k}
+\]
+
+As $B_2$ = \{$\mathbf{b}_1, \ldots \mathbf{b}_n,$, $\mathbf{t}_1, \ldots \mathbf{t}_q$\} is linearly independent,
+this forces \fcolorbox{red}{white}{$\sigma_i$ = 0 $\forall i$}, \fcolorbox{red}{white}{$\gamma_k$ = 0 $\forall k$}
+
+Then the rearranging part above can be reduced to
+\[
+\sum_{i=1}^{n}\alpha_i\mathbf{b}_i + \sum_{j=1}^{p}\textcolor{red}{\beta_j\mathbf{s}_j} = \mathbf{0}.
+\]
+
+As $B_1$ = \{$\mathbf{b}_1, \ldots \mathbf{b}_n,$, $\mathbf{s}_1, \ldots \mathbf{s}_p$\} is linearly independent,
+this forces \fcolorbox{red}{white}{$\alpha_i$ = 0 $\forall i$}, \fcolorbox{red}{white}{$\beta_j$ = 0 $\forall j$}
+
+So $S$ is linearly independent.
+
+\end{proof}
+
+\bigskip
+
+Hence $S$ is a basis of $W_1+W_2$,
+\[
+\begin{aligned}
+\dim(W_1+W_2)
+&=
+|S|\\
+&=
+n+p+q\\
+&=
+(n+p)+(n+q)-n\\
+&=
+\dim(W_1)+\dim(W_2)-\dim(W_1\cap W_2).
+\end{aligned}
+\]
+
+\end{proof}
+
+\textbf{Theorem 3.4.3.}
+
+If $W_1,W_2$ are finite-dimensional subspaces of $V$ with $W_1\cap W_2=\{\mathbf{0}\}$,
+
+then
+\[
+\dim(W_1\oplus W_2)
+=
+\dim(W_1)+\dim(W_2).
+\]
+
+\begin{proof}
+
+Since
+\[
+W_1\oplus W_2=W_1+W_2,
+\]
+By Theorem 3.4.2, we have
+\[
+\begin{aligned}
+\dim(W_1\oplus W_2)
+&=\dim(W_1+W_2) \\
+&=\dim(W_1)+\dim(W_2)-\dim(W_1\cap W_2) \\
+&=\dim(W_1)+\dim(W_2)-\textcolor{red}{0} \\
+&=\dim(W_1)+\dim(W_2).
+\end{aligned}
+\]
+
+\end{proof}
+
+\newpage
+
+\textbf{Theorem 3.4.4.}
+
+Let $V$ be a finite-dimensional vector space and let $W$ be a subspace of $V$.
+Then there exists another subspace $W'$ of $V$ such that $V=W\oplus W'$.\\
+
+In this case, we call $W'$ A \emph{complementary subspace} of $W$ in $V$.
+
+\begin{proof}
+
+Let
+\[
+S=\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}
+\]
+
+be a basis of $W$.
+
+By the Basis Extension Theorem, we may extend \textcolor{red}{$S$} to a basis of $V$, and we say that
+\[
+\textcolor{red}{S'}= \{\underbrace{\mathbf{v}_1,\ldots,\mathbf{v}_k}_{\textcolor{red}{\text{span W}}}, \mathbf{s}_1,\ldots,\mathbf{s}_n \}.
+\]
+
+Define
+\[
+W'= \operatorname{span} \{\mathbf{s}_1,\ldots,\mathbf{s}_n \}.
+\]
+
+Let $V$ = $W \bigoplus W'$, we claim that
+\[
+\text{(1) }V\subseteq W+W',
+\qquad
+\text{(2) }W\cap W'=\{\mathbf0\}.
+\]
+
+\begin{proof}[proof of (1)]
+Let
+\[
+\mathbf{v}\in V.
+\]
+
+As $\textcolor{red}{S'}$ is a basis of $V$,
+\[
+\mathbf{v} = \underbrace{\sum_{i=1}^{k}\alpha_i\mathbf{v}_i}_{\in W} + \underbrace{\sum_{j=1}^{n}\beta_j\mathbf{s}_j}_{\in W'} \in W + W'
+\]
+
+\end{proof}
+
+\begin{proof}[proof of (2)]
+Let
+\[
+\mathbf{w}\in W\cap W'.
+\]
+
+Since both $\mathbf{w}\in W$ and $\mathbf{w}\in W'$,
+
+\[
+\mathbf{w} = \sum_{i=1}^{k}\alpha_i\mathbf{v}_i = \sum_{j=1}^{n}\beta_j\mathbf{s}_j.
+\]
+
+Hence,
+\[
+\sum_{i=1}^{k}\alpha_i\mathbf{v}_i-\sum_{j=1}^{n}\beta_j\mathbf{s}_j=\mathbf0.
+\]
+
+Since \textcolor{red}{$S'$} is linearly independent,
+\[
+\alpha_i=\beta_j=0, \quad \forall i,j
+\]
+
+Thus, $\mathbf{w}=\mathbf0,$  $\implies$ $W\cap W'=\{\mathbf0\}$.
+
+\end{proof}
+
+\end{proof}
+
+\subsection{Question}
+Question: Is true that, $\dim(W_1+W_2+W_3) = \dim(W_1)+\dim(W_2)+\dim(W_3)-\dim(W_1\cap W_2)-\dim(W_2\cap W_3)-\dim(W_3\cap W_1)+\dim(W_1\cap W_2\cap W_3)?$
+
+Answer: \textcolor{red}{False}.
+
+\subsection{Example}
+
+\subsubsection{Direct sum of symmetric and skew-symmetric matrices}
+Consider the vector space $V=M_n(\mathbb{C})$ and two of its subspaces :
+\begin{itemize}
+    \item $W_1=\{A\in M_n(\mathbb{C})\mid A^t=A\}$
+    \item $W_2=\{A\in M_n(\mathbb{C})\mid A^t=-A\}$
+\end{itemize}
+
+Prove that $V=W_1\oplus W_2$.
+
+\begin{proof}
+We need to show
+\begin{itemize}
+    \item[(1)]$V=W_1+W_2$\\
+    i.e. any square matrix is a sum of a symmetric and a skew-symmetric matrix
+    \item[(2)]$W_1\cap W_2=\{\textcolor{red}{\mathbf{0}}\} \quad$ ($\textcolor{red}{\text{zero matrix}}$) 
+\end{itemize}
+
+\medskip
+
+\begin{proof}[proof of (1)]
+Let
+\[
+A\in M_n(\mathbb C).
+\]
+
+Observe that
+\[
+A=\textcolor{red}{\frac12(A+A^t)}+\frac12(A-A^t).
+\]
+
+Let
+\[
+B=\frac12(A+A^t), \qquad C=\frac12(A-A^t).
+\]
+
+Then
+\[
+B^t = \frac12(A+A^t)^t = \frac12(A^t+A) = B,
+\]
+
+so $B$ is symmetric.
+
+\medskip
+
+Similarly,
+\[
+C^t = \frac12(A-A^t)^t = \frac12(A^t-A) = -C,
+\]
+
+so $C$ is skew-symmetric
+
+\medskip
+
+Therefore,
+\[
+A=B+C\in W_1+W_2,
+\]
+
+which implies
+\[
+V=W_1+W_2.
+\]
+
+\end{proof}
+
+\medskip
+
+\begin{proof}[proof of (2)]
+Let
+\[
+A\in W_1\cap W_2.
+\]
+
+Then
+\[
+A^t=A,\quad A^t=-A.
+\]
+
+Hence,
+\[
+A=-A,
+\]
+
+so
+\[
+2A=\textcolor{red}{\mathbf{0}}.
+\]
+
+Since the underlying field is $\mathbb C$,
+\[
+A=\textcolor{red}{\mathbf{0}}.
+\]
+
+Therefore,
+\[
+W_1\cap W_2=\{\textcolor{red}{\mathbf{0}}\}.
+\]
+
+\end{proof}
+
+\medskip
+
+Combining (1) and (2), we conclude that
+\[
+V=W_1 \textcolor{red}{\oplus} W_2.
+\]
+
+\end{proof}
+
+\end{document}
