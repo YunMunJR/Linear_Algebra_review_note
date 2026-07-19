@@ -1,0 +1,888 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]}
+{\end{proof}}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    \vspace*{\fill}
+
+    {\Huge Linear Transformations I}
+
+    \vspace{1cm}
+
+    {\Large Jin-Ren Ryan Wang\par}
+
+    \vspace{0.5cm}
+
+    {\large \today\par}
+
+    \vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\section{Linear Transformation}
+
+\subsection{Motivation: Matrices as Functions}
+
+Let $F$ be a field and $M_{m\times n}(F)$ be the collection of all $m\times n$ matrices over the field $F$.
+
+Let $A\in M_{m\times n}(F)$ be such a matrix. Every matrix naturally defines a function
+\[
+f_A:F^n\rightarrow F^m \text{ defined by } f_A(v)=Av.
+\]
+
+By using properties of matrix multiplication, we have
+
+\begin{itemize}
+    \item $f_A(\mathbf{v_1+v_2})=A(\mathbf{v_1+v_2})=A\mathbf{v_1}+A\mathbf{v_2}=f_A(\mathbf{v_1})+f_A(\mathbf{v_2})$ for all $\mathbf{v_1,v_2}\in F^n$.
+    \item $f_A(\lambda \mathbf{v})=A(\lambda \mathbf{v})=\lambda(A\mathbf{v})=\lambda f_A(\mathbf{v})$ for every $\lambda\in F$ and $\mathbf{v}\in F^n$.
+\end{itemize}
+
+Our goal is to study functions on \emph{other vector spaces} that \emph{behave like matrices}.\\
+We call them \emph{linear transformations}.
+
+\subsection{Definition}
+
+Matrices can be viewed as functions between vector spaces.  
+This motivates the following definition.
+
+\textbf{Definition 4.2.1.}
+Let $V$ and $W$ be vector spaces over the same field $F$. A function $f:V\to W$ is called a
+\textbf{linear transformation}/\textbf{linear map}/\textbf{linear function}
+if it satisfies:
+
+\begin{enumerate}
+    \item (Additivity) $f(\mathbf{v_1+v_2})=f(\mathbf{v_1})+f(\mathbf{v_2}),\quad\forall\,\mathbf{v_1,v_2}\in V.$
+
+    \item (Homogeneity) $f(\lambda \mathbf{v})=\lambda f(\mathbf{v}),\quad\forall\,\lambda\in F,\mathbf{v}\in V.$
+\end{enumerate}
+
+\subsection{Theorem}
+
+\textbf{Theorem 4.3.1.}
+Suppose $f:V\rightarrow W$ be a linear transformation. Then $f(\mathbf{0}_V)=\mathbf{0}_W$.
+
+\begin{proof}
+Since
+\[
+\mathbf{0}_V=\mathbf{0}_V+\mathbf{0}_V,
+\]
+we have
+\[
+\begin{aligned}
+f(\mathbf{0}_V) =f(\mathbf{0}_V+\mathbf{0}_V)=f(\mathbf{0}_V)+f(\mathbf{0}_V) \implies f(\mathbf{0}_V)=\mathbf{0}_W.
+\end{aligned}
+\]
+
+\end{proof}
+
+\newpage
+
+\textbf{Theorem 4.3.2. (Linear maps are determined by their action on a basis)}
+
+Let $f:V\rightarrow W$ be a linear transformation, where $V$ is finite-dimensional.
+
+Let $\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$ is a basis of $V$. Then $f$ is determined by $f(\mathbf{v}_1),\,f(\mathbf{v}_2),\,\ldots,\,f(\mathbf{v}_n)$.
+
+More precisely, it means
+
+\begin{enumerate}
+    \item $\forall \mathbf{v} \in V$, $f(\mathbf{v})$ is a linear combination of $f(\mathbf{v}_1),f(\mathbf{v}_2),\ldots,f(\mathbf{v}_n)$.
+
+    \item Suppose the linear map $g:V\rightarrow W$ satisfies $g(\mathbf{v}_i)=f(\mathbf{v}_i),\quad\forall i=1,\ldots,n$.\\
+    Then $g(\mathbf{v})=f(\mathbf{v})$, $\forall \mathbf{v}\in V$.
+\end{enumerate}
+
+\begin{proof}
+
+Let $\mathbf{v}\in V$. Since $\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$ is a basis of $V$, we can write
+
+$\mathbf{v}=\alpha_1\mathbf{v}_1+\alpha_2\mathbf{v}_2+\cdots+\alpha_n\mathbf{v}_n$. Then
+\[
+\begin{aligned}
+f(\mathbf{v})=f(\alpha_1\mathbf{v}_1+\cdots+\alpha_n\mathbf{v}_n)=\alpha_1f(\mathbf{v}_1)+\cdots+\alpha_nf(\mathbf{v}_n).
+\end{aligned}
+\]
+
+In particular, $f(\mathbf{v})$ is determined by $f(\mathbf{v}_1),\ldots,f(\mathbf{v}_n)$. This proves (1).
+
+\medskip
+
+Now suppose another linear transformation $g:V\rightarrow W$ satisfies $g(\mathbf{v}_i)=f(\mathbf{v}_i)$, then
+\[
+\begin{aligned}
+g(\mathbf{v})
+&=
+g(\alpha_1\mathbf{v}_1+\cdots+\alpha_n\mathbf{v}_n)\\
+&=
+\alpha_1g(\mathbf{v}_1)+\cdots+\alpha_ng(\mathbf{v}_n)\\
+&=
+\alpha_1f(\mathbf{v}_1)+\cdots+\alpha_nf(\mathbf{v}_n)\\
+&=
+f(\alpha_1\mathbf{v}_1+\cdots+\alpha_n\mathbf{v}_n)\\
+&=
+f(\mathbf{v}).
+\end{aligned}
+\]
+
+This proves (2)
+
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{Rotation and Reflection}
+
+Let
+
+\[
+\operatorname{Rot}_{\theta}:\mathbb{R}^2\rightarrow\mathbb{R}^2
+\]
+
+be defined by
+
+\[
+\operatorname{Rot}_{\theta}(\mathbf{v})
+=
+\begin{pmatrix}
+\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
+\end{pmatrix}
+\mathbf{v}.
+\]
+
+Similarly,
+
+\[
+\operatorname{Ref}_{\theta}:\mathbb{R}^2\rightarrow\mathbb{R}^2
+\]
+
+is defined by
+
+\[
+\operatorname{Ref}_{\theta}(\mathbf{v})
+=
+\begin{pmatrix}
+\cos(2\theta) & \sin(2\theta)\\
+\sin(2\theta) & -\cos(2\theta)
+\end{pmatrix}
+\mathbf{v},
+\]
+
+which represents reflection along the line
+
+\[
+y=\tan(\theta)x.
+\]
+
+Since both functions are of the form
+
+\[
+f(\mathbf{v})=A\mathbf{v},
+\]
+
+they satisfy the two properties of linear transformations.
+
+Hence,
+
+\[
+\operatorname{Rot}_{\theta},\;
+\operatorname{Ref}_{\theta}
+:\mathbb{R}^2\rightarrow\mathbb{R}^2
+\]
+
+are both linear transformations.
+
+\subsubsection{Differentiation}
+
+Define $D:\mathbb{R}[x]_{\le n} \longrightarrow \mathbb{R}[x]_{\le n-1}$
+by
+\[
+D(f(x))=f'(x).
+\]
+
+To verify that $D$ is linear, check the two defining properties.
+
+\begin{enumerate}
+    \item For any $f_1(x),f_2(x)\in\mathbb{R}[x]_{\le n}$,
+    \[
+    \begin{aligned}
+    D(\textcolor{red}{f_1(x)+f_2(x)})
+    &=\textcolor{red}{(f_1(x)+f_2(x))'} \\
+    &=\textcolor{red}{f_1'(x)+f_2'(x)} \\
+    &=D(\textcolor{red}{f_1(x)})+D(\textcolor{red}{f_2(x)}).
+    \end{aligned}
+    \]
+
+    \item For every $\lambda\in\mathbb{R}$,
+    \[
+    \begin{aligned}
+    D(\lambda \textcolor{red}{f(x)})
+    &=(\lambda \textcolor{red}{f(x)})'\\
+    &=\lambda \textcolor{red}{f'(x)}\\
+    &=\lambda D(\textcolor{red}{f(x)}).
+    \end{aligned}
+    \]
+\end{enumerate}
+
+Therefore, $D$ "behaves like matrices" $\implies$ D is a linear transformation.
+
+\newpage
+
+\subsubsection{Trace}
+
+Recall the trace map
+\[
+\operatorname{tr}:M_n(\mathbb{C})\rightarrow\mathbb{C},
+\]
+
+defined by
+\[
+\operatorname{tr}(A)=a_{11}+a_{22}+\cdots+a_{nn},
+\]
+
+where $A=(a_{ij}).$
+
+\medskip
+
+To verify linearity,
+\begin{enumerate}
+    \item For any $A,B\in M_n(\mathbb{C})$,
+    \[
+    \operatorname{tr}(\textcolor{red}{A+B}) = \operatorname{tr}(\textcolor{red}{A}) + \operatorname{tr}(\textcolor{red}{B}).
+    \]
+
+    \item For every $\lambda\in\mathbb{C}$,
+    \[
+    \operatorname{tr}(\lambda \textcolor{red}{A}) = \lambda\operatorname{tr}(\textcolor{red}{A}).
+    \]
+\end{enumerate}
+
+Hence,
+\[
+\operatorname{tr}:M_n(\mathbb{C})\rightarrow\mathbb{C}
+\]
+
+is a linear transformation.
+
+\subsubsection{Composition Operator}
+
+Fix a continuous function $g\in C(\mathbb{R}).$. Then $S_g:C(\mathbb{R})\rightarrow C(\mathbb{R})$ is defined by
+\[
+S_g(f(x)) = f(g(x)) \text{ is a linear transformation. }
+\]
+In particular, if $g(x)=x-\alpha$ (with fixed $\alpha \in \mathbb{R}$), then $S_g$ refers to the function
+that shifts the the graph of $f(x)$ by $\alpha$ units to the right.
+
+\begin{solution}
+
+To verify linearity,
+
+\begin{enumerate}
+    \item For any $f_1,f_2\in C(\mathbb{R})$,
+    \[
+    \begin{aligned}
+    S_g(\textcolor{red}{f_1+f_2})
+    &= \textcolor{red}{f_1(g(x))}+\textcolor{red}{f_2(g(x))}\\
+    &= S_g(\textcolor{red}{f_1})+S_g(\textcolor{red}{f_2}).
+    \end{aligned}
+    \]
+
+    \item For every $\lambda\in\mathbb{R}$,
+    \[
+    \begin{aligned}
+    S_g(\lambda \textcolor{red}{f})
+    &= \lambda \textcolor{red}{f(g(x))}\\
+    &= \lambda S_g(\textcolor{red}{f}).
+    \end{aligned}
+    \]
+\end{enumerate}
+
+Hence, $S_g:C(\mathbb{R})\rightarrow C(\mathbb{R})$ is a linear transformation.
+
+\end{solution}
+
+\section{Kernel and Image}
+
+\subsection{Definition 4.4.1.}
+Let $f:V\rightarrow W$ be a linear transformation. Define
+\begin{enumerate}
+    \item the \textbf{kernel} (or \textbf{nullspace}) of $f$ by
+    \[
+    \operatorname{ker}(f)
+    =
+    \left\{
+    \mathbf{v}\in V
+    \mid
+    f(\mathbf{v})=\mathbf{0}_W
+    \right\}.
+    \]
+
+    i.e. the kernel consists of all vectors in the domain that become the zero vector under $f$.
+
+    \item the \textbf{image} (or \textbf{range}) of $f$ by
+    \[
+    \operatorname{im}(f)
+    =
+    \left\{
+    \mathbf{w}\in W
+    \mid
+    \mathbf{w}=f(\mathbf{v})
+    \text{ for some }
+    \mathbf{v}\in V
+    \right\}.
+    \]
+
+    i.e. the image/range consists of all the possible outputs of the function $f$.
+\end{enumerate}
+
+\subsection{Theorem}
+
+\textbf{Theorem 4.4.1. (Properties of kernel)}
+
+Let $f:V\rightarrow W$ be a linear transformation.
+
+\begin{enumerate}
+    \item $\operatorname{ker}(f)$ is a subspace of $V$.
+
+    \item $f$ is injective if and only if $\operatorname{ker}(f)=\{\mathbf{0}_V\}$.
+\end{enumerate}
+
+\begin{proof}
+
+(1) To show that $\operatorname{ker}(f)$ is a subspace of $V$, we verify the three subspace conditions.
+
+\begin{itemize}
+    \item \fbox{Nonempty.}
+
+    Since $f$ is linear, $f(\mathbf{0}_V)=\mathbf{0}_W$ $\implies \mathbf{0}_V\in\operatorname{ker}(f).$
+
+    \item \fbox{Closed under addition.}
+
+    Let $\mathbf{v}_1,\mathbf{v}_2\in\operatorname{ker}(f)$ $\implies f(\mathbf{v}_1)=\mathbf{0}_W,\quad f(\mathbf{v}_2)=\mathbf{0}_W.$
+    
+    Check:
+    \[
+    \begin{aligned}
+    f(\mathbf{v}_1+\mathbf{v}_2)
+    &=
+    f(\mathbf{v}_1)+f(\mathbf{v}_2)\\
+    &=
+    \mathbf{0}_W+\mathbf{0}_W\\
+    &=
+    \mathbf{0}_W.
+    \end{aligned}
+    \]
+    $\implies \mathbf{v}_1+\mathbf{v}_2\in\operatorname{ker}(f)$.
+    \newpage
+
+    \item \fbox{Closed under scalar multiplication.}
+
+    Let
+    $\lambda\in F$ and $\mathbf{v}\in\operatorname{ker}(f)$.
+
+    Then
+    \[
+    \begin{aligned}
+    f(\lambda\mathbf{v})
+    &=
+    \lambda f(\mathbf{v})\\
+    &=
+    \lambda\mathbf{0}_W\\
+    &=
+    \mathbf{0}_W.
+    \end{aligned}
+    \]
+    $\implies \lambda\mathbf{v}\in\operatorname{ker}(f)$.
+
+\end{itemize}
+
+Therefore, $\operatorname{ker}(f)$ is a subspace of $V$.
+
+\medskip
+
+(2) We show both directions.
+
+$(\Rightarrow)$
+
+Suppose $f$ is injective. If $\mathbf{v}\in\operatorname{ker}(f)$, then
+
+\[
+f(\mathbf{v})=\mathbf{0}_W=f(\mathbf{0}_V).
+\]
+
+Since $f$ is injective, $\mathbf{v}=\mathbf{0}_V$ $\implies \operatorname{ker}(f) = \{\mathbf{0}_V\}$.
+
+$(\Leftarrow)$
+
+Suppose $\operatorname{ker}(f)=\{\mathbf{0}_V\}$. If $f(\mathbf{v}_1)=f(\mathbf{v}_2)$, then
+
+\[
+\begin{aligned}
+f(\mathbf{v}_1-\mathbf{v}_2)= f(\mathbf{v}_1)-f(\mathbf{v}_2)=\mathbf{0}_W.\\
+\implies \mathbf{v}_1-\mathbf{v}_2 \in \ker(f)   
+\end{aligned}
+\]
+
+Therefore, $\mathbf{v}_1-\mathbf{v}_2=\mathbf{0}_V$, which implies $\mathbf{v}_1=\mathbf{v}_2$.
+
+Thus $f$ is injective.
+
+\end{proof}
+
+\textbf{Theorem 4.4.2. (Properties of image)}
+
+Let $f:V\rightarrow W$ be a linear transformation.
+
+\begin{enumerate}
+    \item $\operatorname{im}(f)$ is a subspace of $W$.
+
+    \item $f$ is surjective if and only if $\operatorname{im}(f)=W$. \textcolor{red}{($\leftarrow$ def of surjectivity (nothing to prove))}
+\end{enumerate}
+
+\begin{proof}
+
+(1) We verify the three subspace conditions.
+
+\begin{itemize}
+    \item \fbox{Nonempty.}
+
+    Since $f(\mathbf{0}_V)=\mathbf{0}_W$, we have $\mathbf{0}_W\in\operatorname{im}(f)$.
+
+    \item \fbox{Closed under addition.}
+
+    Let $\mathbf{w}_1,\mathbf{w}_2 \in \operatorname{im}(f)$.
+
+    Then there $\exists$ $\mathbf{v}_1,\mathbf{v}_2\in V$ s.t. $\mathbf{w}_1=f(\mathbf{v}_1),\quad\mathbf{w}_2=f(\mathbf{v}_2)$.
+
+    Hence,
+    \[
+    \begin{aligned}
+    \mathbf{w}_1+\mathbf{w}_2
+    &=
+    f(\mathbf{v}_1)+f(\mathbf{v}_2)\\
+    &=
+    f(\mathbf{v}_1+\mathbf{v}_2).
+    \end{aligned}
+    \]
+
+    Therefore, $\mathbf{w}_1+\mathbf{w}_2\in\operatorname{im}(f)$.
+
+    \item \fbox{Closed under scalar multiplication.}
+
+    Let $\mathbf{w}=f(\mathbf{v})$. Then $\lambda\mathbf{w}=\lambda f(\mathbf{v})=f(\lambda\mathbf{v})$, so $\lambda\mathbf{w}\in\operatorname{im}(f)$.
+\end{itemize}
+
+Therefore, $\operatorname{im}(f)$ is a subspace of $W$.
+
+\medskip
+
+(2)
+
+By definition,
+
+\[
+\begin{aligned}
+f \text{ is surjective}
+&\iff
+\forall\,\mathbf{w}\in W,\;
+\exists\,\mathbf{v}\in V
+\text{ s.t. } f(\mathbf{v})=\mathbf{w}\\
+&\iff
+W\subseteq\operatorname{im}(f).   
+\end{aligned}
+\]
+
+Since $\operatorname{im}(f)\subseteq W$ always holds, we conclude
+\[
+f
+\text{ is surjective}
+\iff
+\operatorname{im}(f)=W.
+\]
+
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{Differentiation}
+
+Consider $D:\mathbb{R}[x]_{\le3}\longrightarrow \mathbb{R}[x]_{\le2}$ defined by
+\[
+D(f(x))=f'(x).
+\]
+
+\begin{solution}
+First, compute the kernel.
+
+\[
+\begin{aligned}
+\operatorname{ker}(D)
+&=
+\{\textcolor{red}{f\in\mathbb{R}[x]_{\le3}}:D(\textcolor{red}{f})=0\}\\
+&=
+\{f\in\mathbb{R}[x]_{\le3}:\textcolor{red}{f'(x)}=0\}\\
+&=
+\{\text{constant polynomials}\}\\
+&=\mathbb{R}.
+\end{aligned}
+\]
+
+As $\operatorname{ker}(D)\neq\{\mathbf{0}\}$, we deduce that $D$ is not injective.
+
+Next, compute the image. Let
+\[
+p(x)=ax^2+bx+c\in \mathbb{R}[x]_{\le2}.
+\]
+
+Then
+\[
+p(x)=D\!
+\left(\textcolor{red}{\frac{a}{3}x^3+\frac{b}{2}x^2+cx}\right).
+\]
+
+As $\operatorname{im}(D)=\mathbb{R}[x]_{\le2}$ (whole domain), $D$ is surjective.
+
+\end{solution}
+
+\subsubsection{Trace}
+
+Consider $\operatorname{tr}:M_2(\mathbb{R})\longrightarrow\mathbb{R}$ defined by
+$
+\operatorname{tr}
+\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix}
+= a+d.
+$
+
+\begin{solution}
+First, compute the kernel.
+\[
+\begin{aligned}
+\operatorname{ker}(\operatorname{tr})
+&=
+\left\{
+A\in M_2(\mathbb{R}):\operatorname{tr}(A)=0
+\right\}\\
+&=
+\left\{
+\begin{pmatrix}
+a&b\\
+c&\textcolor{red}{-a}
+\end{pmatrix}
+:
+a,b,c\in\mathbb{R}
+\right\}.
+\end{aligned}
+\]
+
+Equivalently,
+\[
+\operatorname{ker}(\operatorname{tr})=\operatorname{span}
+\left\{
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix},
+\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix},
+\begin{pmatrix}
+0&0\\
+1&0
+\end{pmatrix}
+\right\}.
+\]
+
+Hence, $\operatorname{ker}(\operatorname{tr})\neq\{\mathbf{0}\}$, so $\operatorname{tr}$ is not injective.
+
+Next, compute the image. For every $r\in\mathbb{R}$,
+\[
+r=\operatorname{tr}
+\begin{pmatrix}
+r&0\\
+0&0
+\end{pmatrix}.
+\]
+
+Thus, $\operatorname{im}(\operatorname{tr})=\mathbb{R}$ $\implies\operatorname{"tr"}$ is surjective.
+
+\end{solution}
+
+\section{Rank-Nullity Theorem}
+
+\subsection{Definition}
+
+\textbf{Definition 4.5.1.}
+Let $f: V \rightarrow W$ be a linear map. Define
+\begin{itemize}
+    \item[1.] the \emph{nullity} of $f$ by $\operatorname{nullity}(f)$ = $\operatorname{dim}(\operatorname{ker}(f))$.
+    \item[2.] the \emph{rank} of $f$ by $\operatorname{rank}(f)$ = $\operatorname{dim}(\operatorname{ker}(f))$
+\end{itemize}
+
+\newpage
+
+\subsection{Theorem}
+
+\textbf{Theorem 4.5.1. (Rank-Nullity Theorem)}
+
+Let $V$ be a finite-dimensional vector space, and let $f:V\rightarrow W$ be a linear transformation.
+
+Then we have
+\[
+\operatorname{nullity}(f)+\operatorname{rank}(f)=\operatorname{dim}(V).
+\]
+
+
+\begin{proof}
+\fbox{Idea: $\operatorname{ker}(f)\subseteq V$}
+
+Let $S$ = $\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$ be a basis of $\operatorname{ker}(f)\quad$
+(i.e. $\operatorname{nullity}(f)$ = $\operatorname{dim}(\operatorname{ker}(f))$)
+
+By the Basis Extension Theorem, we may extend $S$to a basis of $V$:
+\[
+S'=\{\mathbf{v}_1,\ldots,\mathbf{v}_n,\textcolor{red}{\mathbf{s}_1,\ldots,\mathbf{s}_k}\}\text{ : a basis of }V.\text{ (i.e. $\operatorname{dim}(V)=n+k$)} 
+\]
+
+We claim that $S''=\{\textcolor{red}{f(\mathbf{s}_1),\ldots,f(\mathbf{s}_k)}\}$ forms a basis of $\operatorname{im}(f)$.
+
+\begin{proof}[Proof of Claim]
+
+We first show that it spans $\operatorname{im}(f)$.
+
+Let $\mathbf{w}\in\operatorname{im}(f)$ $\implies \mathbf{w}=f(\textcolor{red}{\mathbf{v}}) \text{ for \textcolor{red}{some $\mathbf{v} \in V$} } $
+
+As $S'$ is a basis of $V$, we can write
+\[
+\textcolor{red}{\mathbf{v}}=\sum_{i=1}^{n}\alpha_i\mathbf{v}_i+\sum_{i=1}^{k}\beta_i\textcolor{red}{\mathbf{s}_i}.
+\]
+
+Then,
+\begin{align*}
+\mathbf{w}
+&=
+f(\textcolor{red}{\mathbf{v}}) \\
+&=
+f\!\left(
+\sum_{i=1}^{n}\alpha_i\mathbf{v}_i+\sum_{i=1}^{k}\beta_i\textcolor{red}{\mathbf{s}_i}
+\right) \\
+&=
+\sum_{i=1}^{n}\alpha_i\textcolor{red}{f(\mathbf{v}_i)}+\sum_{i=1}^{k}\beta_i\textcolor{red}{f(\mathbf{s}_i)} \\
+&= 
+\sum_{i=1}^{k}\beta_i\textcolor{red}{f(\mathbf{s}_i)} \implies S''\text{ spans }\operatorname{im}(f)
+\end{align*}
+
+Next, we prove linear independence. Suppose
+\[
+\sum_{i=1}^{k}r_i\textcolor{red}{f(\mathbf{s}_i)=\mathbf{0}}.
+\]
+
+Then
+\[
+\textcolor{red}{f}\!\left(
+\sum_{i=1}^{k}r_i\mathbf{s}_i
+\right)
+= \mathbf{0},
+\]
+
+so
+\[
+\sum_{i=1}^{k}r_i\mathbf{s}_i\in\operatorname{ker}(f).
+\]
+
+As $S$ is a basis of $\operatorname{ker(f)}$,
+\[
+\sum_{i=1}^{k}r_i\mathbf{s}_i=\sum_{i=1}^{n}f_i\mathbf{v}_i \text{ for some scalars $f_i$. }
+\]
+
+$\implies\sum_{i=1}^{k}r_i\mathbf{s}_i+\sum_{i=1}^{n}(-f_i)\mathbf{v}_i=\mathbf{0}$
+
+\medskip
+
+As $S'$ is a basis of $V$, it is linearly independent, this forces $r_i=0, f_i = 0$, $\forall i$.
+
+Thus, $\{f(\mathbf{s}_1),\ldots,f(\mathbf{s}_k)\}$ is linearly independent.Hence it forms a basis of $\operatorname{im}(f)$.
+
+\end{proof}
+
+Consequently,
+\[
+\operatorname{rank}(f)=\operatorname{dim}(\operatorname{im}(f))=\textcolor{red}{k}=(n+k)-n=\operatorname{dim(V)}-\operatorname{nullity}(f),
+\]
+
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{Differentiation}
+
+Recall the linear transformation $D:\mathbb{R}[x]_{\le3}\longrightarrow \mathbb{R}[x]_{\le2}$ defined by
+\[
+D(f(x))=f'(x).
+\]
+
+We have $\operatorname{ker}(D)=\mathbb{R}\text{ and }\operatorname{im}(D)=\mathbb{R}[x]_{\le2}$.
+\begin{solution}
+clearly,
+\[
+\operatorname{nullity}(D)= \operatorname{dim}_{\textcolor{red}{\mathbb{R}}}(\operatorname{ker}(D))=\operatorname{dim}_{\textcolor{red}{\mathbb{R}}}(\mathbb{R})=1
+\]   
+and
+\[
+\operatorname{rank}(D)=\operatorname{dim}_{\textcolor{red}{\mathbb{R}}}(\operatorname{im}(D))=\operatorname{dim}_{\textcolor{red}{\mathbb{R}}}(\mathbb{R}[x]_{\le2})=3
+\] 
+\end{solution}
+
+\newpage
+
+\subsubsection{Trace}
+
+Recall that for tr: $\operatorname{tr}:M_2(\mathbb{R})\longrightarrow \mathbb{R}$ defined by
+\[
+\operatorname{tr}
+\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix}
+= 
+a+d,
+\]
+
+we have
+$
+\operatorname{ker}(\operatorname{tr})=\operatorname{span}
+\left\{
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix},
+\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix},
+\begin{pmatrix}
+0&0\\
+1&0
+\end{pmatrix}
+\right\}
+$
+and $\operatorname{im}(\operatorname{tr})=\mathbb{R}$.
+
+\begin{solution}
+we have
+\[
+\operatorname{nullity}(\operatorname{tr})=\operatorname{dim}(\operatorname{ker}(\operatorname{tr}))=3,
+\]
+
+and
+\[
+\operatorname{rank}(\operatorname{tr})=\operatorname{dim}(\operatorname{im}(\operatorname{tr}))=\operatorname{dim}(\mathbb{R})=1.
+\]
+
+Notice that
+\[
+3+1=\textcolor{red}{4=\operatorname{dim}(\underbrace{M_2(\mathbb{R})}_{\text{domain}})},
+\]
+
+which equals the dimension of the domain.    
+\end{solution}
+
+
+\subsubsection{Identity Map}
+Let $V$ be an $n$-dimensional vector space, and consider the identity map $\operatorname{id}_V:V\rightarrow V$ defined by
+
+\[
+\operatorname{id}_V(\mathbf{v})=\mathbf{v},\quad\forall\,\mathbf{v}\in V.
+\]
+
+\begin{solution}
+
+Note that:
+\[
+\operatorname{ker}(\operatorname{id}_V)=\{\mathbf{0}_V\},\quad\operatorname{im}(\operatorname{id}_V)=V,
+\]
+
+we obtain
+\[
+\operatorname{nullity}(\operatorname{id}_V)=\operatorname{dim}(\operatorname{ker}(\operatorname{id}_V))=\operatorname{dim}(\{\mathbf{0}_V\})=0,
+\]
+
+and
+\[
+\operatorname{rank}(\operatorname{id}_V)=\operatorname{dim}(\operatorname{im}(\operatorname{id}_V))=\operatorname{dim}(V)=\textcolor{red}{\text{dimension of the domain of }f}=n.
+\]
+
+Hence,
+\[
+\operatorname{rank}(\operatorname{id}_V)+\operatorname{nullity}(\operatorname{id}_V)=n=\operatorname{dim}(V).
+\]
+
+\end{solution}
+
+\newpage
+
+\section{Rounding up}
+
+\subsection{Remark}
+
+\begin{enumerate}
+
+\item (Nullity and Rank of a Matrix)
+
+A matrix $A\in M_{m\times n}(F)$ naturally induces the linear transformation $f_A:F^n\rightarrow F^m$ defined by
+$f_A(\mathbf{v})=A\mathbf{v}$. From now on, we identify the matrix $A$ with its associated linear transformation $f_A$.
+and denote $f_A$ simply by $A$. That is: 
+\[
+\operatorname{ker}(A)=\operatorname{ker}(f_A) \text{ and } \operatorname{im}(A)=\operatorname{im}(f_A),
+\]
+
+\item (Injectivity and Surjectivity)
+
+For a linear transformation $f:V\rightarrow W$, we have
+\[
+\operatorname{nullity}(f)=0
+\iff
+\operatorname{ker(f)}=\{\mathbf{0}_V\}
+\iff
+f\text{ is injective}.
+\]
+
+Dually,
+\[
+\operatorname{rank}(f)=\operatorname{dim}(W)
+\iff
+\operatorname{im}(f)=W
+\iff
+f\text{ is surjective}.
+\]
+
+\end{enumerate}
+
+
+\end{document}
