@@ -1,0 +1,1141 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]}
+{\end{proof}}
+
+\newenvironment{Remark}
+{\begin{proof}[Remark]}
+{\end{proof}}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    \vspace*{\fill}
+
+    {\Huge Linear Transformations II}
+
+    \vspace{1cm}
+
+    {\Large Jin-Ren Ryan Wang\par}
+
+    \vspace{0.5cm}
+
+    {\large \today\par}
+
+    \vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\section{Isomorphism of vector spaces}
+
+\subsection{Definition}
+
+\textbf{Definition 5.1.1. (inverse function)}
+A function $f:A\to B$ is called \emph{bijective} if $f$ is both injective and surjective.
+If $f:A\to B$ is bijective, then its inverse function $f^{-1}:B\to A$ exists and satisfies
+$f^{-1}(f(a))=a,\quad \forall a\in A$ and $f\!\left(f^{-1}(b)\right)=b,\quad \forall b\in B$.
+
+\medskip
+
+\textbf{Definition 5.1.2.}
+Let $V$ and $W$ be vector spaces over a field $F$.
+
+\begin{description}
+    \item[1.] $f:V\to W$ is called a \emph{(linear) isomorphism from $V$ onto $W$} if $f$ is a bijective\\
+    linear map.
+
+    \item[2.] We say that $V$ and $W$ are \emph{isomorphic as vector spaces} if there exists a linear\\
+    isomorphism $f:V\to W$.
+\end{description}
+
+\subsection{Theorem}
+
+\textbf{Theorem 5.1.1.}
+Let $f:V\to W$ be a linear map of vector spaces. If $f$ is bijective 
+
+(and hence $f^{-1}$ exists), then $f^{-1}:W\to V$ is also linear.
+
+\begin{proof}
+Since $f$ is surjective, every $\mathbf{w}\in W$ can be written as $\mathbf{w}=f(\mathbf{v})$ for some $\mathbf{v}\in V$.
+
+We verify the two properties of linearity.
+
+\begin{enumerate}
+    \item \textbf{Additivity.}
+
+    Let $\textcolor{red}{\mathbf{w}_1}=\textcolor{red}{f(\mathbf{v}_1)},\textcolor{red}{\mathbf{w}_2}=\textcolor{red}{f(\mathbf{v}_2)}$, where $\textcolor{red}{\mathbf{v}_1,\mathbf{v}_2\in V}$. Then
+    \begin{align*}
+    f^{-1}(\textcolor{red}{\mathbf{w}_1+\mathbf{w}_2})
+        &=f^{-1}\!\left(\textcolor{red}{f(\mathbf{v}_1)+f(\mathbf{v}_2)}\right)\\
+        &=f^{-1}\!\left(\textcolor{red}{f(\mathbf{v}_1+\mathbf{v}_2)}\right)\\
+        &=\textcolor{red}{\mathbf{v}_1+\mathbf{v}_2}\\
+        &=\textcolor{red}{f^{-1}(\mathbf{w}_1)+f^{-1}(\mathbf{w}_2)}.
+    \end{align*}
+    \item \textbf{Homogeneity.}
+
+    Let $\lambda\in F$, $\textcolor{red}{\mathbf{w} \in W}$, \textcolor{red}{so $\mathbf{w}=f(\mathbf{v})$ for some $\mathbf{v}\in V$}. Then
+    \begin{align*}
+    f^{-1}(\lambda\textcolor{red}{\mathbf{w}})
+        &=f^{-1}(\lambda \textcolor{red}{f(\mathbf{v})})\\
+        &=f^{-1}(f(\lambda\textcolor{red}{\mathbf{v}}))\\
+        &=\lambda\textcolor{red}{\mathbf{v}}\\
+        &=\lambda \textcolor{red}{f^{-1}(\mathbf{w})}.
+    \end{align*}
+\end{enumerate}
+
+This shows $f^{-1}:W\to V$ is also linear.
+\end{proof}
+
+\textbf{Theorem 5.1.2.}
+Let $V$ be a vector space over a field $F$ of dimension $n$. Let $S=\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$
+be a basis of $V$. Then the function $\phi_S:V\to F^n$ defined by
+\[
+\mathbf{v}\mapsto[\mathbf{v}]_S.
+\]
+is a linear isomorphism.
+
+\begin{proof}
+Write
+\[
+\mathbf{v}=\sum_{i=1}^n\textcolor{red}{\alpha_i}\mathbf{v}_i,\qquad\mathbf{v}'=\sum_{i=1}^n\textcolor{red}{\alpha_i'}\mathbf{v}_i.
+\]
+
+We prove the statement in three steps.
+
+\begin{enumerate}
+    \item \fbox{$\phi_S$ is linear.}
+
+    By definition, $[\mathbf{v}]_S=(\alpha_1,\alpha_2,\ldots,\alpha_n)$.
+
+    Hence
+    \begin{align*}
+    \phi_S(\mathbf{v}+\mathbf{v}')
+        &=\phi_S\!\left(
+        \sum_{i=1}^n\textcolor{red}{(\alpha_i+\alpha_i')}\mathbf{v}_i
+        \right)                                                   \\
+        &=(\textcolor{red}{\alpha_1+\alpha_1',\ldots,\alpha_n+\alpha_n'})   \\
+        &=(\alpha_1,\ldots,\alpha_n)+(\alpha_1',\ldots,\alpha_n') \\
+        &=\phi_S(\mathbf{v})+\phi_S(\mathbf{v}').
+    \end{align*}
+
+    Likewise, for any $\lambda\in F$,
+    \begin{align*}
+    \phi_S(\lambda\mathbf{v})
+        &=\phi_S\!\left(
+        \sum_{i=1}^n(\lambda\textcolor{red}{\alpha_i})\mathbf{v}_i
+        \right)                                     \\
+        &=(\lambda\textcolor{red}{\alpha_1},\ldots,\lambda\textcolor{red}{\alpha_n}) \\
+        &=\lambda(\textcolor{red}{\alpha_1,\ldots,\alpha_n})   \\
+        &=\lambda\phi_S(\mathbf{v}).
+    \end{align*}
+
+    Therefore, $\phi_S$ is linear.
+
+    \item \fbox{$\phi_S$ is injective.}
+
+    Let $\mathbf{v}\in\ker(\phi_S)$ $\implies$ $\phi_S(\mathbf{v})=\textcolor{red}{(0,\ldots,0)}$.
+    $\implies\mathbf{v} =\sum_{i=1}^n\textcolor{red}{0}\,\mathbf{v}_i =\mathbf{0}_V$.
+
+    Thus
+    \[
+    \ker(\phi_S)=\{\mathbf{0}\},
+    \]
+    and therefore $\phi_S$ is injective.
+
+    \item \fbox{$\phi_S$ is surjective.}
+
+    By the Rank--Nullity Theorem,
+    \[
+    \operatorname{rank}(\phi_S)+\operatorname{nullity}(\phi_S)=\underbrace{\dim_F(V)}_{\textcolor{red}{\text{n}}}.
+    \]
+
+    Since $\phi_S$ is injective,
+    \[
+    \operatorname{nullity}(\phi_S)=0.
+    \]
+
+    Hence
+    \[
+    \operatorname{rank}(\phi_S)=\textcolor{red}{n}=\dim_F(V).
+    \]
+
+    Because $\dim_F(F^n)=n$, we conclude that $\operatorname{im}(\phi_S)=F^n$.
+    Therefore, $\phi_S$ is surjective.
+\end{enumerate}
+
+Hence $\phi_S$ is a linear isomorphism.
+\end{proof}
+
+\textbf{Theorem 5.1.3.}
+Let $V$ and $W$ be two finite-dimensional vector spaces over a field $F$. Then$V$ and $W$ are isomorphic as vector spaces
+if and only if $\dim_F(V)=\dim_F(W)$.
+
+\begin{proof}
+We prove both directions.
+
+\begin{description}
+    \item[\textcolor{red}{($\Rightarrow$)}]
+    Suppose $V$ and $W$ are isomorphic. By definition, $\exists$ a linear isomorphism $f:V\to W$
+
+    Since $f$ is injective $\Longleftrightarrow$ $\operatorname{nullity}(f)=0$, and $f$ is surjective $\Longleftrightarrow$ $\operatorname{rank}(f)=\dim_F(W)$.
+
+    By the Rank--Nullity Theorem, $\operatorname{rank}(f)+\operatorname{nullity}(f)=\dim_F(\textcolor{red}{V})$.
+
+    Hence $\dim_F(W)+0=\dim_F(V)$, so $\dim_F(V)=\dim_F(W)$.
+
+    \item[\textcolor{red}{($\Leftarrow$)}]
+    Suppose $\dim_F(V)=\dim_F(W)=n$. Fix a basis $S$ of $V$, and a basis $S'$ of $W$.
+    
+    By Theorem 5.1.2, the coordinate maps
+    \[
+    \phi_{\textcolor{red}{S}}:V\to F^{\textcolor{red}{n}},\qquad\phi_{\textcolor{red}{S'}}:W\to F^{\textcolor{red}{n}}
+    \]
+    are linear isomorphisms.
+
+    Now, $\begin{tikzcd} V\arrow[r, "\phi_{\textcolor{red}{S}}"]&F^{\textcolor{red}{n}}\arrow[r, "\phi_{\textcolor{red}{S'}}^{-1}"]&W \end{tikzcd}$
+
+    Therefore, their composition $\phi_{S'}^{-1}\circ\phi_S:V\to W$ is also a linear isomorphism. 
+    
+    Hence, $V\cong W$. 
+
+\end{description}
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{Trivial Example}
+
+Let $V$ be a vector space and let $\operatorname{id}_V:V\to V$ be the identity map on $V$. Then
+
+\begin{solution}
+Recall
+\[
+\operatorname{id}_V(\mathbf{v})=\mathbf{v},\quad \forall\,\mathbf{v}\in V.
+\]
+
+So
+
+\begin{enumerate}
+    \item $\operatorname{id}_V$ is a $\textcolor{red}{\text{linear map}}$.
+
+    \item $\ker(\operatorname{id}_V)=\{\mathbf{0_V}\}$, hence $\operatorname{id}_V$ is $\textcolor{red}{\text{injective}}$.
+
+    \item $\operatorname{im}(\operatorname{id}_V)=\underbrace{V}_{\textcolor{red}{\text{entire domain}}}$, hence $\operatorname{id}_V$ is $\textcolor{red}{\text{surjective}}$.
+\end{enumerate}
+
+Therefore, $\operatorname{id}_V:V\to V$ is a $\textcolor{red}{\text{linear isomorphism}}$. Consequently, V is isomorphic to itself.
+
+Also, \fbox{\text{Every vector space is isomorphic to itself}}
+
+\end{solution}
+
+\section{Representations of Linear Maps as Matrices}
+
+In this section, we describe a systematic way to represent every linear map 
+
+$f:V\to W$ by a concrete matrix.
+
+To do this, we begin a linear map $f:V\to W$ where $\dim_F(V)=n$ and $\dim_F(W)=m$.
+
+Suppose we have fixed\
+\[
+B_1=\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\} \text{ a basis of $V$}
+\]
+\[
+B_2=\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_m\} \text{ a basis of $W$}
+\]
+
+\medskip
+
+Since $f$ is linear, it is completely determined by its values on the basis vectors of $V$. For each $\mathbf{v}_j\in B_1$, we can write
+\[
+f(\mathbf{v}_j)=\alpha_{1j}\mathbf{w}_1+\alpha_{2j}\mathbf{w}_2+\cdots+\alpha_{mj}\mathbf{w}_m,\qquad j=1,\ldots,n.
+\]
+
+That is, we express each $f(\mathbf{v}_j)$ as a linear combination of the basis vectors of $W$.
+
+\medskip
+
+We now collect the coefficients into a matrix. Specifically, we define
+\[
+[f]_{B_1}^{B_2}=(\alpha_{ij})_{i,j}=
+\begin{pmatrix}
+\alpha_{11} & \alpha_{12} & \cdots & \alpha_{1n}\\
+\alpha_{21} & \alpha_{22} & \cdots & \alpha_{2n}\\
+\vdots      & \vdots      & \ddots & \vdots\\
+\alpha_{m1} & \alpha_{m2} & \cdots & \alpha_{mn}
+\end{pmatrix},
+\]
+whose $j$-th column is exactly the coordinate vector of $f(\mathbf{v}_j)$ with respect to the basis $B_2$.
+
+\subsection{Definition}
+
+\textbf{Definition 5.2.1.}
+The matrix constructed above is called the \emph{matrix representing
+$f$ with respect to the bases $B_1$ and $B_2$}. We denote it by $[f]_{B_1}^{B_2}$.
+
+\textbf{Definition 5.2.2.}
+Let $A = (\alpha_{ij})$ be an $l\times m$ matrix and $B = \beta_{ij}$ be an $m \times n$ matrix.
+
+Then the product AB is a $l \times n$ matrix $C = (\gamma_{ij})$ where,
+\[
+(i,j)\text{-entry of }AB = \gamma_{ij} = \sum_{\textcolor{red}{k}=1}^{m} \alpha_{i\textcolor{red}{k}}\beta_{\textcolor{red}{k}j}
+\]
+
+\subsection{Theorem}
+
+\textbf{Theorem 5.2.1.}
+Let $f:V\to W$ be a linear map between finite-dimensional vector spaces over a field $F$.
+Fix a basis $B_1$ be a basis of $V$, and $B_2$ be a basis of $W$.
+
+Then, for every $\mathbf{v}\in V$, we have the equality of matrices (and vectors):
+\[
+[f]_{B_1}^{B_2}[\mathbf{v}]_{B_1}=[f(\mathbf{v})]_{B_2}.
+\]
+
+\begin{proof}
+Let $B_1=\{\mathbf{v}_1,\ldots,\mathbf{v}_n\}$, $B_2=\{\mathbf{w}_1,\ldots,\mathbf{w}_m\}$
+
+Let
+\[
+\textcolor{red}{[f]_{B_1}^{B_2}=(\alpha_{ij})_{i,j} \Longleftrightarrow f(\mathbf{v}_j)=\sum_{i=1}^{m}\alpha_{ij}\mathbf{w}_i,\forall j}
+\]
+
+And let
+\[
+[\mathbf{v}]_{B_1}=
+\begin{pmatrix}
+\lambda_1\\
+\vdots\\
+\lambda_n
+\end{pmatrix} \Longleftrightarrow \mathbf{v}=\sum_{j=1}^{n}\lambda_j\mathbf{v}_j
+\]
+
+Then
+\begin{align*}
+[f]_{B_1}^{B_2}[\mathbf{v}]_{B_1}
+=
+(\alpha_{ij})_{i,j}
+\begin{pmatrix}
+\lambda_1\\
+\vdots\\
+\lambda_n
+\end{pmatrix} 
+=
+\begin{pmatrix}
+\sum_{j=1}^{n}\alpha_{1j}\lambda_j\\
+\vdots\\
+\sum_{j=1}^{n}\alpha_{mj}\lambda_j
+\end{pmatrix}.
+\end{align*}
+On the other hand, since $f$ is linear,
+\begin{align*}
+f(\mathbf{v})
+&=
+f\left(
+\sum_{j=1}^{n}\lambda_j\textcolor{red}{\mathbf{v}_j}
+\right)                                              
+=
+\sum_{j=1}^{n}\lambda_j\textcolor{red}{f(\mathbf{v}_j)}            
+=
+\sum_{j=1}^{n}\lambda_j
+\left(
+\textcolor{red}{\sum_{i=1}^{m}\alpha_{ij}\mathbf{w}_i}
+\right)                              
+=
+\textcolor{red}{\sum_{i=1}^{m}}
+\left(
+\sum_{j=1}^{n}\alpha_{ij}\lambda_j
+\right)
+\textcolor{red}{\mathbf{w}_i}.
+\end{align*}
+
+Hence,
+\[
+[f(\mathbf{v})]_{B_2}=
+\begin{pmatrix}
+\sum_{j=1}^{n}\alpha_{1j}\lambda_j\\
+\vdots\\
+\sum_{j=1}^{n}\alpha_{mj}\lambda_j
+\end{pmatrix},
+\]
+which is exactly the vector obtained above. Therefore,
+\[
+[f]_{B_1}^{B_2}[\mathbf{v}]_{B_1}=[f(\mathbf{v})]_{B_2}.
+\]
+
+\begin{Remark}
+The theorem can be summarized by the following commutative diagram:
+\[
+\begin{array}{ccc}
+V & \xrightarrow{\;f\;} & W\\
+\downarrow{\scriptstyle\phi_{B_1}} && \downarrow{\scriptstyle\phi_{B_2}}\\
+F^n & \textcolor{red}{\xrightarrow{\;[f]_{B_1}^{B_2}\;}} & F^m
+\end{array}
+\]
+
+That is,
+\[
+\textcolor{red}{[f]_{B_1}^{B_2}}\circ\phi_{B_1}=\phi_{B_2}\circ f,
+\]
+or equivalently,
+\[
+\textcolor{red}{[f]_{B_1}^{B_2}}[\mathbf{v}]_{B_1}=[f(\mathbf{v})]_{B_2},\qquad\forall\,\mathbf{v}\in V.
+\]
+\end{Remark}
+
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{Matrix Representation of Differentiation}
+
+Consider the linear map $D:\mathbb{R}[x]_{\le 3}\to \mathbb{R}[x]_{\le 2}$ defined by $p(x)\mapsto p'(x)$.
+Fix the bases 
+\[
+S_1=\{1,x,x^2,x^3\}\text{ of }\mathbb{R}[x]_{\le 3},\text{ and } S_2=\{1,x,x^2\}\text{ of }\mathbb{R}[x]_{\le 2}.
+\]
+Find the matrix $[D]_{S_1}^{S_2}$
+
+\begin{solution}
+We compute the images of the basis vectors of $S_1$ 
+
+and express them in terms of the basis $S_2$.
+
+\medskip
+
+First,
+\[
+D(\textcolor{red}{1})=0=\textcolor{red}{0}\cdot1+\textcolor{red}{0}\cdot x+\textcolor{red}{0}\cdot x^2,
+\]
+so
+\[
+[D(1)]_{S_2}=(0,0,0)^T.
+\]
+
+Next,
+\[
+D(\textcolor{red}{x})=1=\textcolor{red}{1}\cdot1+\textcolor{red}{0}\cdot x+\textcolor{red}{0}\cdot x^2,
+\]
+so
+\[
+[D(x)]_{S_2}=(1,0,0)^T.
+\]
+
+Similarly,
+\[
+D(\textcolor{red}{x^2})=2x=\textcolor{red}{0}\cdot1+\textcolor{red}{2}\cdot x+\textcolor{red}{0}\cdot x^2,
+\quad
+[D(x^2)]_{S_2}=(0,2,0)^T,
+\]
+
+and
+\[
+D(\textcolor{red}{x^3})=3x^2=\textcolor{red}{0}\cdot1+\textcolor{red}{0}\cdot x+\textcolor{red}{3}\cdot x^2,
+\quad
+[D(x^3)]_{S_2}=(0,0,3)^T.
+\]
+
+\medskip
+
+Placing these coordinate vectors as columns, we obtain
+\[
+[D]_{\textcolor{red}{S_1}}^{\textcolor{red}{S_2}}
+=
+\begin{pmatrix}
+0 & 1 & 0 & 0\\
+0 & 0 & 2 & 0\\
+0 & 0 & 0 & 3
+\end{pmatrix}.
+\]
+
+\begin{Remark}
+For example, if
+\[
+p(x)=\textcolor{red}{1+2x+4x^3},\qquad D[p(x)]=\textcolor{red}{2 + 12x^2}
+\]
+then
+\[
+[p(x)]_{S_1}=
+\begin{pmatrix}
+\textcolor{red}{1}\\
+\textcolor{red}{2}\\
+\textcolor{red}{0}\\
+\textcolor{red}{4}
+\end{pmatrix},
+\qquad
+[D(p(x))]_{S_2}=
+\begin{pmatrix}
+\textcolor{red}{2}\\
+\textcolor{red}{0}\\
+\textcolor{red}{12}
+\end{pmatrix}.
+\]
+
+We observe that
+\[
+[D(p(x))]_{S_2}=[D]_{S_1}^{S_2}[p(x)]_{S_1}.
+\]
+
+Thus differentiation has been translated into matrix multiplication.
+\end{Remark}
+
+\end{solution}
+
+\subsubsection{Matrix Representations under Different Bases}
+
+Consider the linear map $f:\mathbb{R}^3\rightarrow\mathbb{R}^3$, defined by
+\[
+(x,y,z)\longmapsto
+(-x-2y+2z,\,
+4x+3y-4z,\,
+-2y+z).
+\]
+
+\begin{enumerate}
+    \item[(a)] Verify that $f$ is a linear transformation.
+    \item[(b)] Find the matrix representing $f$ with respect to the
+    standard basis of $\mathbb{R}^3$ (for both the domain and codomain).
+    \item[(c)] Verify that
+    \[
+    S=\{(1,0,1),(0,1,1),(1,-1,1)\}
+    \]
+    is a basis of $\mathbb{R}^3$. Find the matrix $[f]_S^S$.
+\end{enumerate}
+
+\newpage
+
+\begin{solution}
+The following are the solutions of three subproblems
+
+\medskip
+
+\text{(a)}
+
+For any $\mathbf{u}=(x_1,y_1,z_1)$, $\mathbf{v}=(x_2,y_2,z_2)\in\mathbb{R}^3$,
+\[
+\begin{aligned}
+f(\mathbf{u}+\mathbf{v})
+&=
+f(x_1+x_2,\,
+y_1+y_2,\,
+z_1+z_2) \\
+&=
+\Bigl(
+-(x_1+x_2)-2(y_1+y_2)+2(z_1+z_2),\\
+&\qquad
+4(x_1+x_2)+3(y_1+y_2)-4(z_1+z_2),\\
+&\qquad
+-2(y_1+y_2)+(z_1+z_2)
+\Bigr) \\
+&=
+f(\mathbf{u})+f(\mathbf{v}).
+\end{aligned}
+\]
+
+Moreover, for any $\lambda\in\mathbb{R}$,
+\[
+\begin{aligned}
+f(\lambda\mathbf{u})
+&=
+f(\lambda x_1,\lambda y_1,\lambda z_1)   \\
+&=
+\Bigl(
+-\lambda x_1-2\lambda y_1+2\lambda z_1,\,
+4\lambda x_1+3\lambda y_1-4\lambda z_1,\,
+-2\lambda y_1+\lambda z_1
+\Bigr)    \\
+&=
+\lambda f(\mathbf{u}).
+\end{aligned}
+\]
+
+Therefore, $f$ satisfies both additivity and homogeneity. Hence, $f:\mathbb{R}^3\to\mathbb{R}^3$
+is a linear transformation.
+
+\medskip
+
+\text{(b)}
+Let $B=\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$ be the standard basis of $\mathbb R^3$.
+
+Compute the images of the basis vectors:
+\[
+f(\textcolor{red}{\mathbf e_1})=(-1,4,0)=\textcolor{red}{(-1)}\quad \mathbf e_1+\textcolor{red}{4}\quad \mathbf e_2+\textcolor{red}{0}\quad \mathbf e_3,
+\]
+\[
+f(\textcolor{red}{\mathbf e_2})=(-2,3,-2)=\textcolor{red}{(-2)}\quad \mathbf e_1+\textcolor{red}{3}\quad \mathbf e_2+\textcolor{red}{(-2)}\quad \mathbf e_3,
+\]
+\[
+f(\textcolor{red}{\mathbf e_3})=(2,-4,1)=\textcolor{red}{1}\quad \mathbf e_1+\textcolor{red}{-4}\quad \mathbf e_2+\textcolor{red}{1}\quad \mathbf e_3.
+\]
+Hence,
+\[
+[f]_B^B=
+\begin{pmatrix}
+-1&-2&2\\
+4&3&-4\\
+0&-2&1
+\end{pmatrix}.
+\]
+
+\medskip
+
+\text{(c)}
+
+Let
+\[
+S=\{\mathbf v_1,\mathbf v_2,\mathbf v_3\}=\{(1,0,1),(0,1,1),(1,-1,1)\}.
+\]
+
+Compute
+\[
+\begin{aligned}
+f(\textcolor{red}{\mathbf v_1})
+    &=(1,0,1)=\textcolor{red}{1}\mathbf v_1+\textcolor{red}{0}\mathbf v_2+\textcolor{red}{0}\mathbf v_3,\\
+f(\textcolor{red}{\mathbf v_2})
+    &=(0,-1,-1)=\textcolor{red}{0}\mathbf v_1+\textcolor{red}{(-1)}\mathbf v_2+\textcolor{red}{0}\mathbf v_3,\\
+f(\mathbf v_3)
+    &=(3,-3,3)=\textcolor{red}{0}\mathbf v_1+\textcolor{red}{0}\mathbf v_2+\textcolor{red}{3}\mathbf v_3.
+\end{aligned}
+\]
+
+Therefore,
+\[
+[f]_S^S=
+\begin{pmatrix}
+1&0&0\\
+0&-1&0\\
+0&0&3
+\end{pmatrix}.
+\]
+
+\begin{Remark}
+Although the \textcolor{red}{moral standard basis is convenient} for computation, 
+
+\textcolor{red}{it is not necessarily the "nicest" basis for representing a linear transformation}.
+
+Question: How to find the "nice" basis for a linear map f?
+
+Answer: Diagonalization Theory
+\end{Remark}
+
+\end{solution}
+
+\subsubsection{Using Matrix Representations to Study a Linear Map}
+
+Consider the function $f:\mathbb{R}[x]_{\le2}\longrightarrow\mathbb{R}[x]_{\le3}$
+\[
+p(x)\longmapsto-\frac{d}{dx}\bigl(p(x^2-1)\bigr)+\int_2^x p(t)\,dt.
+\]
+
+\begin{enumerate}
+    \item[(a)] Verify that $f$ is a linear transformation.
+    \item[(b)] Find $\ker(f)$. Is $f$ injective?
+    \item[(c)] Find $\operatorname{rank}(f)$. Is $f$ surjective?
+\end{enumerate}
+
+\begin{solution}{
+The following are the solutions of abobe three subproblems
+
+\medskip
+
+\text{(a)}
+
+Let $p(x),q(x)\in\mathbb{R}[x]_{\le2}$ and let $\lambda\in\mathbb{R}$.
+
+Observe that differentiation, composition with $x^2-1$, and integration
+are all linear operators. Hence
+
+\begin{align*}
+f(p+q)
+&=
+-\frac{d}{dx}\!\left((p+q)(x^2-1)\right)
++\int_2^x(p(t)+q(t))\,dt      \\
+&=
+-\frac{d}{dx}\bigl(p(x^2-1)\bigr)
+-\frac{d}{dx}\bigl(q(x^2-1)\bigr)\\
+&\qquad
++\int_2^xp(t)\,dt
++\int_2^xq(t)\,dt             \\
+&=
+f(p)+f(q).
+\end{align*}
+
+Similarly,
+\begin{align*}
+f(\lambda p)=-\frac{d}{dx}\!\left(\lambda p(x^2-1)\right)+\int_2^x\lambda p(t)\,dt
+=
+\lambda
+\left(
+-\frac{d}{dx}(p(x^2-1))
++\int_2^xp(t)\,dt
+\right)
+=
+\lambda f(p).
+\end{align*}
+
+Therefore, $f$ satisfies additivity and homogeneity. Hence,
+$f$ is a linear transformation.
+}
+
+\medskip
+
+\text{(b)}
+
+Fix a basis $S_1=\{1,x,x^2\}$ \textcolor{red}{(domain)}, and a basis $S_2=\{1,x,x^2,x^3\}$ \textcolor{red}{(co-domain)}.
+
+Compute the images of the basis vectors:
+\[
+f(\textcolor{red}{1})=x-2 = \textcolor{red}{(-2)} + \textcolor{red}{1}x + \textcolor{red}{0}x^2 + \textcolor{red}{0}x^3
+\]
+\[
+f(\textcolor{red}{x})=-2x+\frac12x^2-2 =\textcolor{red}{(-2)} + \textcolor{red}{(-2)}x + \textcolor{red}{\frac12}x^2 + \textcolor{red}{(\frac{-11}{3})}x^3
+\]
+\[
+f(\textcolor{red}{x^2})=-\frac13x^3+4x-\frac83 = \textcolor{red}{(\frac{-8}{3})} + \textcolor{red}{4}x + \textcolor{red}{0}x^2 + \textcolor{red}{(\frac{-11}{3})}x^3
+\]
+
+Hence
+
+\[
+A \coloneq [f]_{S_1}^{S_2}=
+\begin{pmatrix}
+-2&-2&\frac{-8}3\\
+1&-2&4\\
+0&\frac12&0\\
+0&0&\frac{-11}3
+\end{pmatrix}.
+\]
+
+Since
+
+\[
+\ker(f)
+\cong
+\ker([f]_{S_1}^{S_2}),
+\]
+
+and the above matrix has trivial nullspace,
+
+\[
+\ker(A)=\ker([f]_{S_1}^{S_2})=\{\mathbf0\}=
+\left\{
+\begin{pmatrix}
+0\\
+0\\
+0\\
+\end{pmatrix}
+\right\}
+\]
+
+we conclude that
+
+\[
+\ker(f)=\{0\textcolor{red}{\text{ (zero polynomial)}}\},
+\]
+
+where $0$ denotes the zero polynomial.
+
+Therefore, $f$ is injective.
+
+\text{(c)}
+
+By the Rank--Nullity Theorem,
+\[
+\operatorname{rank}(f)+\operatorname{nullity}(f)=\textcolor{red}{\dim\!\left(\mathbb{R}[x]_{\le2}\right)}.
+\]
+
+Since $\ker(f)=\{0\}$, we have $\operatorname{nullity}(f)=0$.
+$\implies\operatorname{rank}(f)=\textcolor{red}{3}$, however, $\dim\!\left(\mathbb{R}[x]_{\le3}\right)=\textcolor{red}{4}$
+
+$\implies\operatorname{rank}(f)\neq\dim\!\left(\textcolor{red}{\underbrace{\mathbb{R}[x]_{\le3}}_{\text{co-domain}}}\right)$
+
+$\implies$ $f$ is NOT surjective.
+\end{solution}
+
+\newpage
+
+\section{Composition of linear maps and matrix multiplication}
+
+\subsection{Definition}
+
+\textbf{Definition 5.3.1.}
+Let $f:A\to B$ and $g:B\to C$ be two functions.
+The \emph{composition} of $f$ and $g$ is the function $g\circ f:A\to C$ is defined by
+\[
+(g\circ f)(a)=g(f(a)),\qquad \forall\,a\in A.
+\]
+
+For $f:A\to A$ then we denote $f^n\coloneq\underbrace{f\circ f\circ\cdots\circ f}_{n\text{ times}}$.
+
+\subsection{Theorem}
+
+\textbf{Theorem 5.3.1.}
+Let $f:V\to U$ and $g:U\to W$ be linear maps between finite-dimensional vector spaces over a field
+$F$. Fix
+\[
+\text{a basis $B_1$ of $V$ },\text{a basis $B_2$ of $U$ },\text{a basis $B_3$ of $W$ }
+\]
+
+Then we have an equality of matrices:
+\[
+[g\circ f]_{B_1}^{B_3}=[g]_{B_2}^{B_3} \cdot [f]_{B_1}^{B_2}.
+\]
+
+\begin{proof}
+
+Let
+\[
+\begin{align*}
+B_1=\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_m\} \text{ be a basis of $V$}\\
+B_2=\{\mathbf{u}_1,\mathbf{u}_2,\ldots,\mathbf{u}_n\} \text{ be a basis of $U$}\\
+B_3=\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_p\} \text{ be a basis of $W$}
+\end{align*}
+\]
+
+Let
+\[
+\begin{align*}
+[f]_{B_1}^{B_2}=(\alpha_{ij})_{i,j} \text{ which means } f(\mathbf{v}_j)=\sum_{k=1}^{n}\alpha_{kj}\mathbf{u}_k\\
+[g]_{B_2}^{B_3}=(\beta_{ij})_{i,j} \text{ which means } g(\mathbf{u}_k)=\sum_{i=1}^{p}\beta_{ik}\mathbf{w}_i
+\end{align*}
+\]
+
+We now determine the matrix
+\[
+[g\circ f]_{B_1}^{B_3}.
+\]
+
+For each basis vector $\mathbf{v}_j$,
+
+\begin{align*}
+(g\circ f)(\textcolor{red}{\mathbf{v}_j})
+&=
+g\!\left(f(\mathbf{v}_j)\right)                                           \\
+&=
+g\!\left(
+\sum_{k=1}^{n}\alpha_{kj}\textcolor{red}{\mathbf{u}_k}
+\right)                                                                    \\
+&=
+\sum_{k=1}^{n}\alpha_{kj}\textcolor{red}{g(\mathbf{u}_k)}
+\qquad
+(\text{since }g\text{ is linear})                                          \\
+&=
+\sum_{k=1}^{n}\alpha_{kj}\textcolor{red}{\sum_{i=1}^{p}\beta_{ik}\mathbf{w}_i}                                      \\
+&=
+\textcolor{red}{\sum_{i=1}^{p}}
+\left(
+\sum_{k=1}^{n}\beta_{ik}\alpha_{kj}
+\right)
+\textcolor{red}{\mathbf{w}_i}.
+\end{align*}
+
+Hence, the $(i,j)$-entry of $[g\circ f]_{B_1}^{B_3}$ is $\sum_{k=1}^{n}\beta_{ik}\alpha_{kj}$,
+which is exactly the $(i,j)$-entry of the matrix product $[g]_{B_2}^{B_3} \cdot[f]_{B_1}^{B_2}$.
+
+Therefore,
+\[
+[g\circ f]_{B_1}^{B_3}=[g]_{B_2}^{B_3}\cdot[f]_{B_1}^{B_2}.
+\]
+
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{Composition of Matrix Multiplication}
+
+The point $(a,b)$ in $\mathbb{R}^2$ is first rotatedcounterclockwise by $\frac{\pi}4$ about the origin and then
+reflected about the line $y=\sqrt3\,x$. Find the resulting point.
+
+
+\begin{solution}
+
+Let 
+\[
+\begin{align*}
+\text{$B$ be the standard basis of $\mathbb{R}^2$}\\
+\textcolor{red}{T_1}:\text{rotation by }\frac{\pi}{4}\text{ (anti-clockwise)}\\
+T_2:\text{reflection along the line }y=\textcolor{red}{\tan\!\left(\frac{\pi}{3}\right)}x
+\end{align*}
+\]
+
+Then
+\[
+[\textcolor{red}{T_1}]_B^B=
+\begin{pmatrix}
+\cos\frac{\pi}{4} & -\sin\frac{\pi}{4}\\
+\sin\frac{\pi}{4} & \cos\frac{\pi}{4}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\dfrac1{\sqrt2} & -\dfrac1{\sqrt2}\\[2mm]
+\dfrac1{\sqrt2} & \dfrac1{\sqrt2}
+\end{pmatrix}.
+\]
+\[
+[T_2]_B^B=
+\begin{pmatrix}
+\cos\frac{2\pi}{3} & \sin\frac{2\pi}{3}\\
+\sin\frac{2\pi}{3} & -\cos\frac{2\pi}{3}
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\dfrac12 & \dfrac{\sqrt3}{2}\\[2mm]
+\dfrac{\sqrt3}{2} & \dfrac12
+\end{pmatrix}.
+\]
+
+\newpage
+
+Hence, 
+\[
+[T_2\circ \textcolor{red}{T_1}]_B^B=[T_2]_B^B\cdot[\textcolor{red}{T_1}]_B^B \textcolor{red}{\text{ (matrix multiplication)}}
+\]
+\[
+=
+\begin{pmatrix}
+-\dfrac12 & \dfrac{\sqrt3}{2}\\[2mm]
+\dfrac{\sqrt3}{2} & \dfrac12
+\end{pmatrix}
+\begin{pmatrix}
+\dfrac1{\sqrt2} & -\dfrac1{\sqrt2}\\[2mm]
+\dfrac1{\sqrt2} & \dfrac1{\sqrt2}
+\end{pmatrix}
+\]
+\[
+=
+\begin{pmatrix}
+\dfrac{-1+\sqrt3}{2\sqrt2}
+&
+\dfrac{1+\sqrt3}{2\sqrt2}
+\\[3mm]
+\dfrac{1+\sqrt3}{2\sqrt2}
+&
+\dfrac{1-\sqrt3}{2\sqrt2}
+\end{pmatrix}.
+\]
+
+Therefore,
+\[
+\begin{pmatrix}
+a\\
+b
+\end{pmatrix}
+\longmapsto
+\begin{pmatrix}
+\dfrac{-1+\sqrt3}{2\sqrt2}
+&
+\dfrac{1+\sqrt3}{2\sqrt2}
+\\[3mm]
+\dfrac{1+\sqrt3}{2\sqrt2}
+&
+\dfrac{1-\sqrt3}{2\sqrt2}
+\end{pmatrix}
+\begin{pmatrix}
+a\\
+b
+\end{pmatrix}
+=
+\underbrace{
+\begin{pmatrix}
+\dfrac{-1+\sqrt3}{2\sqrt2}a
++\dfrac{1+\sqrt3}{2\sqrt2}b
+\\[3mm]
+\dfrac{1+\sqrt3}{2\sqrt2}a
++\dfrac{1-\sqrt3}{2\sqrt2}b
+\end{pmatrix}
+}_{\textcolor{red}{\text{in standard basis of B}}}.
+\]
+
+\end{solution}
+
+\newpage
+
+\section{Inverse of a matrix}
+
+\subsection{Definition}
+
+\textbf{Definition 5.4.1.}
+Let $A\in M_n(F)$ be a square matrix. If there exists a matrix $B\in M_n(F)$ s.t. $AB=BA=I_n$,
+then
+\begin{enumerate}
+    \item we say that $A$ is \emph{invertible} (or \emph{non-singular}); and
+
+    \item we call $B$ the \emph{inverse} of $A$ and denote it by $A^{-1}$.
+\end{enumerate}
+
+\subsection{Theorem}
+
+\textbf{Theorem 5.4.1.}
+Let $A\in M_{m\times n}(F)$. Suppose there exists $B\in M_{n\times m}(F)$ s.t.
+\[
+BA=I_{\textcolor{red}{n}}\text{ and }AB=I_{\textcolor{red}{m}}.
+\]
+
+Then $n=m=\operatorname{rank}(A)$.
+
+\begin{proof}
+
+We shall show that $\operatorname{rank}(A)=m=n$.
+
+\text{(1)} First observe that
+\[
+\operatorname{rank}(A)=\operatorname{rank}(A\overbrace{\textcolor{red}{BA}}^{\textcolor{red}{I_n}})\le\operatorname{rank}(AB)=\operatorname{rank}(\textcolor{red}{I_m})=m,
+\]
+
+On the other hand,
+\[
+m=\operatorname{rank}(I_m)=\operatorname{rank}(AB)\le\operatorname{rank}(A).
+\]
+
+Therefore,
+\[
+\operatorname{rank}(A)=m.
+\]
+
+\medskip
+
+\text{(2)} Similarly,
+\[
+\operatorname{rank}(A)=\operatorname{rank}(ABA)\le\operatorname{rank}(BA)=\operatorname{rank}(\textcolor{red}{I_n})=n,
+\]
+
+Also,
+\[
+n=\operatorname{rank}(I_n)=\operatorname{rank}(BA)\le\operatorname{rank}(A).
+\]
+
+Hence,
+\[
+\operatorname{rank}(A)=n.
+\]
+
+Therefore, if $A$ has an inverse, then
+\[
+\textcolor{red}{n=m=\operatorname{rank}(A)}.
+\]
+
+\begin{Remark}
+Rank inequalities
+\[
+\left\{   
+\begin{aligned}     
+\operatorname{rank}(f\circ g)\le\operatorname{rank}(f)\\
+\operatorname{rank}(f\circ g)\le\operatorname{rank}(g)
+\end{aligned}
+\right.  
+\]
+
+and \textcolor{red}{matrix version}
+\[
+\textcolor{red}{
+\left\{   
+\begin{aligned}     
+\operatorname{rank}(AB)\le\operatorname{rank}(A)\\
+\operatorname{rank}(AB)\le\operatorname{rank}(B)
+\end{aligned}
+\right.  
+}
+\]
+\end{Remark}
+
+\end{proof}
+
+\textbf{Theorem 5.4.2.}
+Let $f:V\to W$ be an isomorphism of finite-dimensional vector spaces.
+Fix any basis \(B_1\) of \(V\) and \(B_2\) of \(W\).
+Then we have an equality of matrices
+\[
+\left([f]_{B_1}^{B_2}\right)^{-1}=[f^{-1}]_{\textcolor{red}{B_2}}^{\textcolor{red}{B_1}}.
+\]
+
+In other words, the inverse of a matrix represents the inverse of a linear map.
+
+\begin{proof}
+
+By Theorem 5.3.1,
+\[
+[f^{-1}]_{B_2}^{B_1}[f]_{B_1}^{B_2}=[f^{-1}\circ f]_{B_1}^{B_1}.
+\]
+
+Since $f^{-1}\circ f=\operatorname{id}_V$, we obtain
+\[
+[f^{-1}\circ f]_{B_1}^{B_1}=[\operatorname{id}_V]_{B_1}^{B_1}=I_n,\text{ where }n=\dim(V)
+\]
+Therefore,
+\[
+[f^{-1}]_{B_2}^{B_1}=\left([f]_{B_1}^{B_2}\right)^{-1}.
+\]
+
+\end{proof}
+
+\section{Remark}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Vector space / Linear map world}
+&
+\textbf{Vector / Matrix world}
+\\
+\hline
+
+$f:V\rightarrow W$
+&
+$[f]_{B_1}^{B_2}$ \textcolor{red}{ \text{(matrix)}}
+\\
+\hline
+
+Composition
+$f\circ g$
+&
+Multiplication $[f\circ g]_{\textcolor{red}{B_1}}^{\textcolor{red}{B_3}}=[f]_{\textcolor{red}{B_2}}^{\textcolor{red}{B_3}}[g]_{\textcolor{red}{B_1}}^{\textcolor{red}{B_2}}$
+\\
+\hline
+
+Addition
+$f+g$,
+Scaling
+$\lambda f$
+&
+Addition
+$[f+g]_{\textcolor{red}{B_1}}^{\textcolor{red}{B_2}}=[f]_{\textcolor{red}{B_1}}^{\textcolor{red}{B_2}}+[g]_{\textcolor{red}{B_1}}^{\textcolor{red}{B_2}}$,
+Scaling
+$[\lambda f]_{\textcolor{red}{B_1}}^{\textcolor{red}{B_2}}=\lambda[f]_{\textcolor{red}{B_1}}^{\textcolor{red}{B_2}}$
+\\
+\hline
+
+Inverse
+$f^{-1}:W\rightarrow V$
+&
+Matrix inverse
+$[f^{-1}]_{\textcolor{red}{B_2}}^{\textcolor{red}{B_1}}=([f]_{\textcolor{red}{B_1}}^{\textcolor{red}{B_2}})^{-1}$
+\\
+\hline
+\end{tabular}
+
+\end{center}
+Question: When is a matrix invertible?
+
+\end{document}
