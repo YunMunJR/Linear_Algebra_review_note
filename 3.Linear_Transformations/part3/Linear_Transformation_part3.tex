@@ -1,0 +1,812 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]}
+{\end{proof}}
+
+\newenvironment{Remark}
+{\begin{proof}[Remark]}
+{\end{proof}}
+
+\newenvironment{Goal}
+{\begin{proof}[Goal]}
+{\end{proof}}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    \vspace*{\fill}
+
+    {\Huge Linear Transformations III}
+
+    \vspace{1cm}
+
+    {\Large Jin-Ren Ryan Wang\par}
+
+    \vspace{0.5cm}
+
+    {\large August 1, 2026\par}
+
+    \vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\section{Row operations and elementary row matrices}
+
+Historically, matrices were invented and used to simplify the process of
+solving systems of linear equations. One key technique for resolving such
+systems is the method of Gaussian elimination, which involves three types of
+fundamental operations on a matrix $A$:
+
+\begin{enumerate}
+    \item[(I)] Interchanging two rows of $A$.
+    \item[(II)] Multiplying any row of $A$ by a nonzero scalar.
+    \item[(III)] Adding any scalar multiple of a row of $A$ to another row.
+\end{enumerate}
+
+These operations are referred to as elementary row operations. Our goal is to
+develop a concise mathematical theory that underlies these operations. To
+begin with, we define three types of elementary matrices.
+\subsection{Definition}
+
+\textbf{Definition 6.1.1.}
+An $(m \times m)$ elementary row matrix is a matrix obtained by
+performing exactly one elementary row operation on the
+$(m \times m)$ identity matrix $\mathbf{I}_m$.
+
+We denote the three types of elementary row matrices by
+\[
+E^{\mathrm{I}}_{i,j},
+\quad
+E^{\mathrm{II}}_{\lambda,i},
+\quad
+E^{\mathrm{III}}_{\lambda,i,j},
+\text{ respectively.}
+\]
+
+\textbf{Definition 6.1.2.}
+An $m\times n$ matrix $A$ is said to be in row echelon form (REF)
+if the following conditions are satisfied.
+
+\begin{enumerate}
+    \item Every nonzero row is above every zero row.
+    \item The first nonzero entry (leading entry) of each nonzero row
+    occurs strictly to the right of the first nonzero entry of the
+    previous row.
+\end{enumerate}
+
+\subsection{Theorem}
+
+\textbf{Theorem 6.1.1.}
+Let $A$ be a matrix with $m$ rows. Then the matrices obtained by
+\begin{enumerate}
+    \item performing one of the row operations (I), (II), or (III) on $A$, and
+    \item multiplying the corresponding elementary row matrix $E$ to the left of $A$, i.e. the matrix
+    $EA$
+\end{enumerate}
+are the same.
+
+\begin{proof}
+The result follows directly from the definition of matrix multiplication.
+\end{proof}
+
+\textbf{Theorem 6.1.2.}
+Every (square) elementary row matrix is invertible, and its inverse is given by
+\[
+\left(E^{\mathrm{I}}_{i,j}\right)^{-1}=E^{\mathrm{I}}_{i,j},\qquad
+\left(E^{\mathrm{II}}_{\lambda,i}\right)^{-1}=E^{\mathrm{II}}_{\frac{1}{\lambda},i},\qquad
+\left(E^{\mathrm{III}}_{\lambda,i,j}\right)^{-1}=E^{\mathrm{III}}_{-\lambda,i,j},
+\text{ respectively.}
+\]
+
+\begin{proof}
+For each type of elementary row operation:
+
+\begin{enumerate}
+    \item[(I)] Interchange rows $i$ and $j$ of $A$.
+    \item[(II)] Multiply the $i$-th row of $A$ by a nonzero scalar \fcolorbox{red}{white}{$\lambda$}.
+    \item[(III)] Add \fcolorbox{red}{white}{$\lambda$} times the $i$-th row of $A$ to the $j$-th row.
+\end{enumerate}
+
+Each operation can be undone by the corresponding inverse row operation:
+
+\begin{enumerate}
+    \item[(I)] Interchange rows $i$ and $j$ again.
+    \item[(II)] Multiply the $i$-th row by $\dfrac{1}{\lambda}$.
+    \item[(III)] Add \fcolorbox{red}{white}{$-\lambda$} times the $i$-th row to the $j$-th row.
+\end{enumerate}
+
+These inverse row operations correspond to the elementary matrices $E^{\mathrm{I}}_{i,j}$,
+$E^{\mathrm{II}}_{\frac{1}{\lambda},i}$, $E^{\mathrm{III}}_{-\lambda,i,j}$
+respectively. Hence every elementary row matrix is invertible with the stated inverse.
+\end{proof}
+
+\textbf{Theorem 6.1.3.}
+
+Let $A$ be a matrix with $m$ rows. If $Q$ is an invertible
+$m \times m$ matrix \textcolor{red}{\text{(i.e. $Q^{-1}$ exists)}}, then
+\[
+\operatorname{rank}(QA)=\operatorname{rank}(A).
+\]
+In particular, left multiplication by an invertible matrix preserves the rank.
+
+\begin{proof}
+By the rank inequality,
+\[
+\left\{
+\begin{aligned}
+\operatorname{rank}(QA) &\le \operatorname{rank}(A)\\
+\operatorname{rank}(A) &= \operatorname{rank}(Q^{-1}QA) \le \operatorname{rank}(QA)
+\end{aligned}
+\right.  
+\]
+
+Since $Q$ is invertible,
+\[
+A=Q^{-1}(QA),
+\]
+and hence
+\[
+\operatorname{rank}(A)=\operatorname{rank}\!\left(Q^{-1}(QA)\right)\le \operatorname{rank}(QA).
+\]
+
+Therefore,
+\[
+\operatorname{rank}(QA)=\operatorname{rank}(A).
+\]
+
+Since \textcolor{red}{all elementary row matrices E are invertible}, it follows that
+\[
+\operatorname{rank}(\textcolor{red}{E}A)=\operatorname{rank}(A)
+\]
+for every elementary row matrix $E$. Hence elementary row operations preserve the rank.
+
+\begin{Goal}
+To compute the rank of a matrix $A$, we apply elementary row operations
+to row-reduce $A$ into a simpler form. Since elementary row operations
+preserve the rank, the rank of the reduced matrix is equal to the rank
+of the original matrix.
+\end{Goal}
+
+\end{proof}
+
+\textbf{Theorem 6.1.4.}
+If $A$ is in its REF, then $\operatorname{rank}(A)=\text{the number of nonzero rows of }A$.
+
+\begin{proof}
+We postpone the proof of this result. (Although it is easy to verify
+the statement by considering concrete examples.)
+\end{proof}
+
+\textbf{Theorem 6.1.5.}
+Let $A$ be a matrix with $m$ rows. $A$ can be transformed into a REF by a finite number of elementary row operations.
+Equivalently, there exists an invertible $m\times m$ matrix $Q$ s.t. $QA$ is in its REF.
+
+\begin{proof}
+Suppose that $A$ is transformed into REF after \textcolor{red}{$k$
+elementary row operations}. 
+
+Let the corresponding elementary row matrices be $\textcolor{red}{E_1,E_2,\ldots,E_k}$.
+
+Then $\textcolor{red}{(E_kE_{k-1}\cdots E_2E_1)}A$ is in REF.
+
+We can take $Q=\textcolor{red}{E_kE_{k-1}\cdots E_2E_1}$ $\implies$ $QA$ is in row echelon form.
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{Identity matrices examples}
+
+The following are the three types of elementary row matrices obtained by
+performing one elementary row operation on the identity matrix
+\[
+I_3=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{pmatrix}.
+\]
+
+
+\[
+E^{\mathrm{I}}_{1,2}=
+\underbrace{
+\begin{pmatrix}
+0&1&0\\
+1&0&0\\
+0&0&1
+\end{pmatrix}}_{\textcolor{red}{\text{$r_1 \leftrightarrow r_2$}}},
+\qquad
+E^{\mathrm{II}}_{\textcolor{red}{\lambda},3}=
+\underbrace{
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+0&0&\lambda
+\end{pmatrix}}_{\textcolor{red}{\text{$r_3 \rightarrow \lambda r_3$}}},
+\qquad
+E^{\mathrm{III}}_{\textcolor{red}{\mu},2,3}=
+\underbrace{
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+0&\mu&1
+\end{pmatrix}}_{\textcolor{red}{\text{$r_3 \rightarrow \mu r_2 + r_3$}}}.
+\]
+
+\subsubsection{Row operations $\leftrightarrow$ left multiplication}
+
+Consider the 2 by 3 matrix
+$A=
+\begin{pmatrix}
+1&2&3\\
+3&4&5
+\end{pmatrix}.
+$
+We can
+
+\begin{enumerate}
+    \item[(I)] Swap the first and second rows:
+    \[
+    \begin{pmatrix}
+    3&4&5\\
+    1&2&3
+    \end{pmatrix}
+    =
+    \textcolor{red}{E^{\mathrm{I}}_{1,2}}A
+    =
+    \textcolor{red}{\begin{pmatrix}
+    0&1\\
+    1&0
+    \end{pmatrix}}
+    \begin{pmatrix}
+    1&2&3\\
+    3&4&5
+    \end{pmatrix}.
+    \]
+
+    \item[(II)] Multiply the second row by $5$:
+    \[
+    \begin{pmatrix}
+    1&2&3\\
+    15&20&25
+    \end{pmatrix}
+    =
+    \textcolor{red}{E^{\mathrm{II}}_{5,2}}A
+    =
+    \textcolor{red}{\begin{pmatrix}
+    1&0\\
+    0&5
+    \end{pmatrix}}
+    \begin{pmatrix}
+    1&2&3\\
+    3&4&5
+    \end{pmatrix}.
+    \]
+
+    \item[(III)] Replace the second row by $-3r_1+r_2$:
+    \[
+    \begin{pmatrix}
+    1&2&3\\
+    0&-2&-4
+    \end{pmatrix}
+    =
+    \textcolor{red}{E^{\mathrm{III}}_{-3,1,2}}A
+    =
+    \textcolor{red}{\begin{pmatrix}
+    1&0\\
+    -3&1
+    \end{pmatrix}}
+    \begin{pmatrix}
+    1&2&3\\
+    3&4&5
+    \end{pmatrix}.
+    \]
+\end{enumerate}
+
+\subsubsection{row echelon form (REF)}
+
+1. The following matrices are in row echelon form (REF):
+\[
+\begin{pmatrix}
+1&2&3&4&5\\
+0&0&6&0&7\\
+0&0&0&8&9
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+1&2\\
+0&3\\
+0&0
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+1&2&3\\
+0&4&5\\
+0&0&6
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+1&2&3\\
+0&0&4\\
+0&0&0
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+1&3&4&6\\
+0&4&5&11\\
+0&0&6&12
+\end{pmatrix}.
+\]
+
+2. The following matrices are \emph{not} in row echelon form (REF):
+\[
+\begin{pmatrix}
+1&2&3&4&5\\
+0&0&0&6&7\\
+0&0&8&0&9
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+1&2\\
+0&0\\
+0&3
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+1&2&3\\
+0&0&4\\
+0&0&1
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+1&2&3\\
+0&0&4\\
+0&0&4
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+1&3&4&6\\
+0&4&5&11\\
+0&6&0&12
+\end{pmatrix}.
+\]
+
+\newpage
+
+\subsubsection{compute REF}
+
+Consider the matrix
+\[
+A=
+\begin{pmatrix}
+1&2&3&3&3\\
+2&4&2&-4&2\\
+0&0&1&2&1\\
+3&6&3&-6&3
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+    \item[(a)] Transform $A$ into its row echelon form (REF).
+    \item[(b)] Find the rank and nullity of $A$.
+\end{enumerate}
+
+\begin{solution}
+(a) Perform the following elementary row operations:
+\[
+\begin{aligned}
+R_2 &\leftarrow R_2-2R_1,\\
+R_4 &\leftarrow R_4-3R_1,\\
+R_3 &\leftarrow R_3+\frac14R_2,\\
+R_4 &\leftarrow R_4-\frac32R_2.
+\end{aligned}
+\]
+Hence,
+\[
+A
+=
+\begin{pmatrix}
+1&2&3&3&3\\
+0&0&4&-10&4\\
+0&0&0&-\frac12&2\\
+0&0&0&0&0
+\end{pmatrix},
+\]
+which is in REF.
+
+(b) Since the row echelon form has three nonzero rows, $\operatorname{rank}(A)=3$.
+
+Because $A$ has $5$ columns, the Rank--Nullity Theorem gives $\operatorname{rank}(A)+\operatorname{nullity}(A)=\textcolor{red}{5}$.
+Therefore, $\operatorname{nullity}(A)=5-3=\textcolor{red}{2}$.
+
+\end{solution}
+
+\newpage
+
+\section{Column operations}
+
+In analogy to elementary row operations, we can introduce
+\emph{elementary column operations}. The corresponding theory is almost
+identical, except that it has a more natural connection with the column
+space and the rank of a matrix.
+
+To begin with, we restate the definitions and theorems for row
+operations in terms of columns.
+
+There are three types of elementary column operations on a matrix $A$.
+
+\begin{enumerate}
+    \item[(I)] Interchange columns $i$ and $j$ of $A$.
+    \item[(II)] Multiply the $i$-th column of $A$ by a nonzero scalar $\lambda$.
+    \item[(III)] Add $\lambda$ times the $i$-th column to the $j$-th column.
+\end{enumerate}
+
+\subsection{Definition}
+
+\textbf{Definition 6.2.1.}
+An $(n\times n)$ elementary column matrix is a matrix obtained by
+performing exactly one elementary column operation on the
+$(n\times n)$ identity matrix $I_n$.
+
+We denote the three types of elementary column matrices by
+\[
+E^{\mathrm{I}}_{i,j},\quad E^{\mathrm{II}}_{\lambda,i},\quad E^{\mathrm{III}}_{\lambda,i,j},
+\]
+respectively.
+
+\medskip
+
+\textbf{Definition 6.2.2.}
+An $m\times n$ matrix $A$ is said to be in its
+column echelon form (CEF) if all of the following conditions
+are satisfied:
+
+\begin{enumerate}
+    \item Any column containing a nonzero entry is on the left of any
+    zero columns.
+
+    \item The first nonzero entry of each column occurs strictly below
+    the first nonzero entry of the previous column.
+\end{enumerate}
+
+\subsection{Theorem}
+
+\textbf{Theorem 6.2.1.}
+Let $A$ be a matrix with $n$ columns. Then the matrices obtained by
+
+\begin{enumerate}
+    \item performing one of the column operations (I), (II), or (III) on $A$, and
+    \item multiplying the corresponding elementary column matrix $E$ to the right of $A$, i.e., $AE$
+\end{enumerate}
+
+are the same.
+
+\begin{proof}
+This can be verified directly from the definition of matrix multiplication.
+\end{proof}
+
+\textbf{Theorem 6.2.2.}
+Let $A$ be a matrix with $n$ columns. If $P$ is an invertible
+$n\times n$ matrix, then we have
+\[
+\operatorname{rank}(AP)=\operatorname{rank}(A).
+\]
+
+In particular, multiplying an invertible matrix from the right preserves
+the rank.
+\begin{Remark}
+Since elementary column operations correspond to right multiplication
+by invertible elementary matrices, column operations preserve the rank.
+\end{Remark}
+
+\textbf{Theorem 6.2.3.}
+Let $A$ be a matrix with $m$ columns
+$\{\mathbf{c}_1,\ldots,\mathbf{c}_m\}$. Then
+
+\begin{enumerate}
+    \item $\operatorname{im}(A)=\operatorname{span}\{\mathbf{c}_1,\ldots,\mathbf{c}_m\}$.
+
+    \item $\operatorname{rank}(A)$ equals the maximal number of linearly
+    independent columns of $A$.
+
+    \item $\operatorname{rank}(A)$ equals the number of nonzero columns
+    when we transform $A$ into its column echelon form (CEF).
+\end{enumerate}
+
+\begin{proof}
+We prove the three statements separately.
+
+\medskip
+\noindent
+\textit{Proof of (1).}
+By definition,
+\begin{align*}
+\operatorname{im}(A)
+&=
+\left\{
+\textcolor{red}{A}\mathbf{x}:\mathbf{x}\in\mathbb{F}^m
+\right\} \\
+&=
+\left\{
+x_1\textcolor{red}{\mathbf{c}_1}+x_2\textcolor{red}{\mathbf{c}}_2+\cdots+x_m\textcolor{red}{\mathbf{c}_m}
+:x_1,\ldots,x_m\in\mathbb{F}
+\right\} \\
+&=
+\operatorname{span}
+\{\textcolor{red}{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_m}\}.
+\end{align*}
+
+\medskip
+
+\noindent
+
+\textit{Proof of (2).}
+Apply the sifting process to $\{\textcolor{red}{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_m}\}$.
+
+We obtain a maximal linearly independent set formed by the columns
+
+$\mathbf{c}_i$, which forms a basis of $\operatorname{im}(A)$ by (1).
+
+Hence,the size of "sifited" set = $\dim\bigl(\operatorname{im}(A)\bigr)=\operatorname{rank}(A)$.
+
+\medskip
+\noindent
+\textit{Proof of (3).}
+A column \textcolor{red}{$\mathbf{c}_i$} is removed by the sifting process if and only if
+the \textcolor{red}{$i$-th column} becomes a zero column after applying suitable elementary
+column operations.
+
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{column echelon form (CEF)}
+Consider the matrix
+\[
+A=
+\begin{pmatrix}
+1&2&3\\
+4&5&6
+\end{pmatrix}
+\in M_{2\times 3}(\mathbb{R}).
+\]
+Find $\operatorname{im}(A)$, a basis of $\operatorname{im}(A)$, and transform
+$A$ into its column echelon form (CEF).
+
+\begin{solution}
+The image of $A$ is the span of its columns:
+\[
+\operatorname{im}(A)
+=
+\operatorname{span}
+\left\{
+\begin{pmatrix}1\\4\end{pmatrix},
+\begin{pmatrix}2\\5\end{pmatrix},
+\begin{pmatrix}3\\6\end{pmatrix}
+\right\}.
+\]
+
+Applying the sifting process, we observe that
+\[
+\begin{pmatrix}3\\6\end{pmatrix}
+=
+\textcolor{red}{-1}\begin{pmatrix}1\\4\end{pmatrix}
++
+\textcolor{red}{2}\begin{pmatrix}2\\5\end{pmatrix}.
+\]
+Hence, we obtain
+\[
+\left\{
+\begin{pmatrix}1\\4\end{pmatrix},
+\begin{pmatrix}2\\5\end{pmatrix}
+\right\}
+\]
+forms a basis of $\operatorname{im}(A)$. In particular, $\operatorname{rank}(A)=2$.
+
+Using elementary column operations,
+\[
+\begin{pmatrix}
+1&2&3\\
+4&5&6
+\end{pmatrix}
+\sim
+\begin{pmatrix}
+1&0&0\\
+4&-3&0
+\end{pmatrix},
+\]
+which is in column echelon form (CEF).
+\end{solution}
+
+\newpage
+
+\section{Smith Normal Form}
+
+\subsection{Definition}
+\textbf{Definition 6.3.1.}
+An $m\times n$ matrix $A$ is said to be in its
+Smith normal form (SNF) if all of the following conditions
+are satisfied:
+
+\begin{enumerate}
+    \item $A$ is both in row echelon form (REF) and column echelon form (CEF).
+    \item All nonzero entries of $A$ are $1$.
+\end{enumerate}
+
+A typical matrix in Smith normal form is given below
+\[
+\begin{pmatrix}
+I_r & 0_{r,n-r}\\
+0_{m-r,r} & 0_{m-r,n-r}
+\end{pmatrix},
+\]
+where $\mathbf{0}_{k,\ell}$ denotes the $k\times\ell$ zero matrix.
+
+\subsection{Theorem}
+
+\textbf{Theorem 6.3.1.} (QAP Theorem)
+Let $A$ be an $m\times n$ matrix. Then there exist invertible matrices
+$Q\in M_m(\mathbb{F})$ and $P\in M_n(\mathbb{F})$
+s.t.
+\[
+QAP=
+\begin{pmatrix}
+I_r & 0_{r,n-r}\\
+0_{m-r,r} & 0_{m-r,n-r}
+\end{pmatrix}.
+\]
+Moreover, $r=\operatorname{rank}(A)$.
+
+\begin{proof}
+Given a matrix $A$, we first use \textcolor{red}{row operations} to transform $A$ into
+its row echelon form (REF) $\Leftrightarrow$ \textcolor{red}{$\exists$ there  an invertible matrix
+$Q$} s.t. $QA$ is in REF.
+
+Next, we perform column operations on $QA$.
+
+\begin{enumerate}
+    \item First, use Type III column operations to "clean up" all
+    entries to the right of the leading entries of each column.
+
+    \item Second, use Type I column operations to move all newly
+    obtained "zero columns" to the right.
+
+    \item Third, use Type II column operations to "rescale" all nonzero
+    entries to $1$.
+\end{enumerate}
+
+Hence, the resulting matrix is in Smith normal form. Since column
+operations correspond to right multiplication by elementary matrices,
+there $\exists$ an invertible matrix $P$ s.t.
+\[
+\textcolor{red}{QA}P
+=
+\underbrace{
+\begin{pmatrix}
+I_r & 0_{r,n-r}\\
+0_{m-r,r} & 0_{m-r,n-r}
+\end{pmatrix}.}_{\textcolor{red}{\text{SNF}}}
+\]
+
+Moreover, multiplication by invertible matrices preserves rank.
+Therefore,
+\[
+\operatorname{rank}(A)
+=
+\operatorname{rank}(QAP)
+=
+\operatorname{rank}
+\begin{pmatrix}
+I_r & 0_{r,n-r}\\
+0_{m-r,r} & 0_{m-r,n-r}
+\end{pmatrix}
+=
+r.
+\]
+
+Thus, $r=\operatorname{rank}(A)$.
+\end{proof}
+
+\textbf{Theorem 6.3.2.}
+Let $A$ be an $m\times n$ matrix. Then $\operatorname{rank}(A)=\operatorname{rank}(A^t)$.
+
+\begin{Remark}
+In some textbooks, this theorem is referred to as
+'row rank = column rank'.
+\end{Remark}
+
+\begin{proof}
+Given $A$, by the \textcolor{red}{QAP Theorem}, there exist invertible matrices
+$P$ and $Q$ s.t.
+\[
+QAP=
+\begin{pmatrix}
+\textcolor{red}{I_r} & 0\\
+0 & 0
+\end{pmatrix}.
+\]
+
+Taking transpose, we have
+\[
+P^tA^tQ^t
+=
+(QAP)^t
+=
+\begin{pmatrix}
+\textcolor{red}{I_r} & 0\\
+0 & 0
+\end{pmatrix}.
+\]
+
+Therefore,
+\[
+\operatorname{rank}(A)
+=
+\operatorname{rank}(QAP)
+=
+\textcolor{red}{r}
+=
+\operatorname{rank}(P^tA^tQ^t)
+\leq
+\operatorname{rank}(A^t),
+\]
+where the first equality follows since $P$ and $Q$ are invertible.
+
+Since $P^t$ and $Q^t$ are also invertible, the same argument applied
+in the reverse direction gives
+\[
+\operatorname{rank}(A^t)
+\leq
+\operatorname{rank}(A).
+\]
+
+Hence, $\operatorname{rank}(A)=\operatorname{rank}(A^t)$.
+\end{proof}
+
+\textbf{Theorem 6.3.3.}
+Let $A$ be an $m\times n$ matrix. Then the following quantities are equal:
+
+\begin{enumerate}
+    \item the rank of $A$;
+    \item the maximal number of linearly independent columns of $A$;
+    \item the number of nonzero columns in CEF;
+    \item the rank of $A^t$;
+    \item the maximal number of linearly independent rows of $A$;
+    \item the number of nonzero rows in REF.
+\end{enumerate}
+
+\begin{proof}
+By the previous results,
+\begin{align*}
+\operatorname{rank}(A)
+&= \operatorname{rank}(A^t) \\
+&= \text{the maximal number of linearly independent columns of } A^t \\
+&= \text{the number of nonzero columns in CEF} \\
+&= \text{the maximal number of linearly independent} \textcolor{red}{\text{ rows of A}} \\
+&= \text{the number of nonzero} \textcolor{red}{\text{ rows in REF}}.
+\end{align*}
+\end{proof}
+
+\end{document}
