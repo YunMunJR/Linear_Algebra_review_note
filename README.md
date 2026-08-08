@@ -1,6 +1,6 @@
 # Linear Algebra Review Note
 This repository is my own review on courses Introduction to Linear Algebra I and Introduction to Linear Algebra II at department of Mathematics, NTU.
 
-Completed part: Fields and Vector Spaces, Basis and Dimension
+Completed part: Fields and Vector Spaces, Basis and Dimension, Linear Transformations
 
-Last update: 2026/07/31
+Last update: 2026/08/08
