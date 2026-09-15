@@ -1,0 +1,1136 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]}
+{\end{proof}}
+
+\newenvironment{Remark}
+{\begin{proof}[Remark]}
+{\end{proof}}
+
+\newenvironment{Goal}
+{\begin{proof}[Goal]}
+{\end{proof}}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    \vspace*{\fill}
+
+    {\Huge Linear Transformations IV}
+
+    \vspace{1cm}
+
+    {\Large Jin-Ren Ryan Wang\par}
+
+    \vspace{0.5cm}
+
+    {\large August 9, 2026\par}
+
+    \vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\section{Recap on elementary matrices}
+
+\subsection{Definition}
+
+\textbf{Definition 7.1.1.}
+We identify elementary row matrices and elementary column matrices as follows:
+\[
+E_{i,j}^{\mathrm{I}}
+    = E_{\mathrm{I}}^{\,i,j}, \qquad
+E_{\lambda,i}^{\mathrm{II}}
+    = E_{\mathrm{II}}^{\,\lambda,i}, \qquad
+E_{\mu,i,j}^{\mathrm{III}}
+    = E_{\mathrm{III}}^{\,\mu,i,j}.
+\]
+
+From now on, we simply refer to them as \emph{elementary matrices}.
+
+\subsection{Theorem}
+
+\textbf{Theorem 7.1.1}
+Every invertible matrix can be written as a product of elementary matrices.
+
+\begin{proof}
+Let $A$ be an invertible matrix. Since $A$ is invertible,
+\begin{enumerate}
+    \item $A$ is an $n\times n$ square matrix;
+    \item $\operatorname{rank}(A)=n$.
+\end{enumerate}
+
+By the QAP Theorem, there exist elementary matrices $\textcolor{red}{E_1,E_2,\ldots,E_k},\quad G_1,G_2,\ldots,G_\ell$,
+s.t. $\textcolor{red}{(E_1E_2\cdots E_k)}\,\textcolor{blue}{A}\,(G_1G_2\cdots G_\ell)= \underbrace{I_n}_{\textcolor{red}{\text{SNF of $A$}}}$ .
+
+Hence, $A=\textcolor{red}{(E_1E_2\cdots E_k)^{-1}}\textcolor{blue}{I_n}(G_1G_2\cdots G_\ell)^{-1}$,
+
+$\implies$ $A=\textcolor{red}{E_k^{-1}\cdots E_2^{-1}E_1^{-1}G_\ell^{-1}\cdots G_2^{-1}G_1^{-1}}$.
+
+Since the inverse of every elementary matrix is again an elementary matrix, $A$ is a product of elementary matrices.
+\end{proof}
+
+\section{Augmented matrices}
+
+\textbf{Definition}
+
+\textbf{Definition 7.2.1.}
+Let $A\in M_{m\times p}(F), \qquad B\in M_{m\times q}(F)$. The \emph{augmented matrix} $(A\mid B)$ is an
+$m\times (p+q)$ matrix for which the first $p$ columns give the matrix $A$ and the last $q$ columns give the matrix $B$.
+
+\textbf{Note. }
+The vertical line is placed to separate the matrices $A$ and $B$ for convenience only.
+
+Let
+\[
+A=
+\begin{pmatrix}
+1 & 2\\
+3 & 4
+\end{pmatrix}.
+\]
+
+Then
+\[
+(A\mid I_2)=
+\left(
+\begin{array}{cc|cc}
+1 & 2 & 1 & 0\\
+3 & 4 & 0 & 1
+\end{array}
+\right).
+\]
+
+\newpage
+
+\section{Application: Finding inverse of a matrix}
+
+Let $A$ be an $(n\times n)$ invertible matrix. Consider the augmented matrix
+$(A\mid I_n)$ formed by $A$ and $I_n$. The key observation is that
+\[
+\textcolor{red}{A^{-1}}(A\mid I_n)=(I_n\mid \textcolor{red}{A^{-1}}).
+\]
+
+By Theorem 7.1.1, $A^{-1}$, as an invertible matrix, can be written as a
+product of elementary matrices. Therefore,
+\[
+\underbrace{\textcolor{red}{(E_1E_2\cdots E_k)}}_{\textcolor{red}{A^{-1}}}(A\mid I_n)=(I_n\mid A^{-1}),
+\]
+where
+\[
+A^{-1}=E_1E_2\cdots E_k.
+\]
+
+Since multiplying elementary matrices from the left corresponds to
+conducting \emph{row operations}, the above operations give us a concrete
+strategy to compute the inverse of a given matrix $A$, which we record below.
+
+\subsection{Theorem}
+
+\textbf{Theorem 7.3.1.}
+Let $A$ be an $(n\times n)$ invertible matrix. If we conduct row operations
+to transform the augmented matrix
+\[
+(A\mid I_n)\xrightarrow{\text{row operations}}(I_n\mid B),
+\]
+Then $B=A^{-1}$.
+\subsection{Example}
+\subsubsection{Example 1}
+Compute the inverse of the matrix
+\[
+A=
+\begin{pmatrix}
+1 & 2 & 1\\
+0 & 1 & 3\\
+2 & 4 & -1
+\end{pmatrix}.
+\]
+
+\begin{solution}
+We aim to transform the augmented matrix $(A\mid I_3)$ into the form
+$(I_3\mid B)$ by row operations.
+
+\begin{align*}
+(A\mid I_3)
+&=
+\left(
+\begin{array}{ccc|ccc}
+1 & 2 & 1  & 1 & 0 & 0\\
+0 & 1 & 3  & 0 & 1 & 0\\
+2 & 4 & -1 & 0 & 0 & 1
+\end{array}
+\right) \\[0.5em]
+&\longrightarrow
+\left(
+\begin{array}{ccc|ccc}
+1 & 2 & 1  & 1  & 0 & 0\\
+0 & 1 & 3  & 0  & 1 & 0\\
+0 & 0 & -3 & -2 & 0 & 1
+\end{array}
+\right) \\[0.5em]
+&\longrightarrow
+\left(
+\begin{array}{ccc|ccc}
+1 & 2 & 1 & 1           & 0 & 0\\
+0 & 1 & 3 & 0           & 1 & 0\\
+0 & 0 & 1 & \frac{2}{3} & 0 & -\frac{1}{3}
+\end{array}
+\right) \\[0.5em]
+&\longrightarrow
+\left(
+\begin{array}{ccc|ccc}
+1 & 2 & 0 & \frac{1}{3}  & 0 & \frac{1}{3}\\
+0 & 1 & 0 & -2            & 1 & 1\\
+0 & 0 & 1 & \frac{2}{3}   & 0 & -\frac{1}{3}
+\end{array}
+\right) \\[0.5em]
+&\longrightarrow
+\left(
+\begin{array}{ccc|ccc}
+1 & 0 & 0 & \frac{13}{3} & -2 & -\frac{5}{3}\\
+0 & 1 & 0 & -2           & 1  & 1\\
+0 & 0 & 1 & \frac{2}{3}  & 0  & -\frac{1}{3}
+\end{array}
+\right).
+\end{align*}
+
+Thus,
+\[
+\boxed{
+A^{-1}
+=
+\begin{pmatrix}
+\frac{13}{3} & -2 & -\frac{5}{3}\\
+-2 & 1 & 1\\
+\frac{2}{3} & 0 & -\frac{1}{3}
+\end{pmatrix}
+}.
+\]
+\end{solution}
+
+\subsubsection{Example 2}
+Consider the function $T:\mathbb{R}[x]_{\leq 2}\to\mathbb{R}[x]_{\leq 2}$
+defined by
+\[
+T(p(x))=p(x)+p'(x)+p''(x).
+\]
+Let $B=\{1,x,x^2\}$ be a basis of $\mathbb{R}[x]_{\leq 2}$.
+
+\begin{enumerate}
+    \item[(a)] Prove that $T$ is a linear transformation.
+    \item[(b)] Find $[T]^B_B$. Is $T$ an isomorphism?
+    \item[(c)] Write down the inverse function $T^{-1}$.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item[(a)]
+For any $p(x),q(x)\in\mathbb{R}[x]_{\leq 2}$,
+\begin{align*}
+T(p(x)+q(x))
+&=(p(x)+q(x))+(p(x)+q(x))'+(p(x)+q(x))''\\
+&=p(x)+q(x)+p'(x)+q'(x)+p''(x)+q''(x)\\
+&=\bigl(p(x)+p'(x)+p''(x)\bigr)
+ +\bigl(q(x)+q'(x)+q''(x)\bigr)\\
+&=T(p(x))+T(q(x)).
+\end{align*}
+
+Also, for any $\alpha\in\mathbb{R}$,
+\begin{align*}
+T(\alpha p(x))
+&=\alpha p(x)+(\alpha p(x))'+(\alpha p(x))''\\
+&=\alpha p(x)+\alpha p'(x)+\alpha p''(x)\\
+&=\alpha\bigl(p(x)+p'(x)+p''(x)\bigr)\\
+&=\alpha T(p(x)).
+\end{align*}
+
+Therefore, $T$ is a linear transformation.
+
+\item[(b)]
+We have
+\begin{align*}
+T(\textcolor{red}{1})
+&=1
+ =1\cdot1+0\cdot x+0\cdot x^2,\\
+T(\textcolor{red}{x})
+&=x+1
+ =1\cdot1+1\cdot x+0\cdot x^2,\\
+T(\textcolor{red}{x^2})
+&=x^2+2x+2
+ =2\cdot1+2\cdot x+1\cdot x^2.
+\end{align*}
+
+So,
+$
+[T]^B_B=
+\begin{pmatrix}
+1 & 1 & 2\\
+0 & 1 & 2\\
+0 & 0 & 1
+\end{pmatrix}.
+$ is already in REF, and
+\[
+\operatorname{rank}[T]^B_B=3=\dim(\mathbb{R}[x]_{\leq2}) \implies \text{surjective}
+\]
+\[
+\operatorname{nullity}[T]^B_B=\underbrace{\textcolor{red}{3}}_{\textcolor{red}{\text{dim of domain}}}-\underbrace{3}_{\text{rank}}=0 \implies \text{injective}
+\]
+so $T$ is an isomorphism.
+
+\item[(c)]
+We first compute the inverse matrix. Note: $[T^{-1}]_B^B = ([T]_B^B)^{-1}$
+
+Consider
+\[
+\left(
+\begin{array}{ccc|ccc}
+1&1&2&1&0&0\\
+0&1&2&0&1&0\\
+0&0&1&0&0&1
+\end{array}
+\right)
+\longrightarrow
+\left(
+\begin{array}{ccc|ccc}
+1&1&0&1&0&-2\\
+0&1&0&0&1&-2\\
+0&0&1&0&0&1
+\end{array}
+\right)
+\]
+and then
+\[
+\longrightarrow
+\left(
+\begin{array}{ccc|ccc}
+1&0&0&1&-1&0\\
+0&1&0&0&1&-2\\
+0&0&1&0&0&1
+\end{array}
+\right).
+\]
+
+Therefore,
+\[
+[T^{-1}]^B_B
+=
+\left([T]^B_B\right)^{-1}
+=
+\begin{pmatrix}
+1&-1&0\\
+0&1&-2\\
+0&0&1
+\end{pmatrix}.
+\]
+
+For
+\[
+p(x)=a+bx+cx^2,
+\]
+we have
+\[
+\begin{pmatrix}
+1&-1&0\\
+0&1&-2\\
+0&0&1
+\end{pmatrix}
+\begin{pmatrix}
+a\\b\\c
+\end{pmatrix}
+=
+\begin{pmatrix}
+a-b\\
+b-2c\\
+c
+\end{pmatrix}.
+\]
+
+Translating back to $\mathbb{R}[x]_{\leq2}$,
+\[
+\boxed{
+T^{-1}(a+bx+cx^2)
+=
+(a-b)+(b-2c)x+cx^2
+}.
+\]
+
+\end{enumerate}
+\end{solution}
+
+\section{Application: System of linear equations}
+
+Historically, matrices arise when one attempts to solve systems of linear
+equations. For example, consider the system
+\[
+\begin{cases}
+x+2y=3,\\
+3x+4y=1.
+\end{cases}
+\]
+
+A condensed way to write the above system is
+$\left(
+\begin{array}{cc|c}
+1 & 2 & 3\\
+3 & 4 & 1
+\end{array}
+\right).$ This is called the \emph{augmented matrix} for the above system of equations.
+
+\subsection{Definition}
+
+\textbf{Definition 7.4.1.}
+Let $(A\mid \mathbf{b})$ be the augmented matrix associated with a system
+of linear equations $A\mathbf{x}=\mathbf{b}$. We call the system of equations
+\begin{itemize}
+    \item \emph{homogeneous} if $\mathbf{b}=\mathbf{0}$;
+    \item \emph{inhomogeneous} if $\mathbf{b}\neq\mathbf{0}$.
+\end{itemize}
+
+\subsection{Theorem}
+
+\textbf{Theorem 7.4.1.}
+The solution set of a homogeneous system $(A\mid \mathbf{0})$ coincides
+with the subspace $\ker(A)$. In particular,
+\[
+\underbrace{dim(\ker(A))}_{\operatorname{nullity}(A)}=(\text{number of columns of }A)-\operatorname{rank}(A).
+\]
+
+\begin{proof}
+A vector $\mathbf{x}$ is a solution of $(A\mid\mathbf{0})$ $\Leftrightarrow$ $A\mathbf{x}=\mathbf{0}$
+
+$\implies$ $(A\mid\mathbf{0})$ $\Leftrightarrow$ $\mathbf{x}\in\ker(A)$.
+
+Moreover, by the rank-nullity theorem,
+\[
+\dim(\ker(A))=\operatorname{nullity}(A)=(\text{number of columns of }A)-\operatorname{rank}(A).
+\]
+\end{proof}
+
+\textbf{Theorem 7.4.2.}
+Let $A\in M_{m\times n}(F)$. If $m<n$, then the homogeneous system
+$(A\mid\mathbf{0})$ has a non-zero solution.
+
+\begin{proof}
+Since $A\in M_{m\times n}(F)$ represents a linear map $F^n \longrightarrow F^m$,
+we have $\operatorname{im}(A)\subseteq F^m$. Therefore, $\operatorname{rank}(A)\leq m$.
+By the rank-nullity theorem,
+\begin{align*}
+\dim(\ker(A))
+&=(\text{number of columns of }A)-\operatorname{rank}(A)\\
+&=n-\operatorname{rank}(A)\\
+&\geq n-m \textcolor{red}{\text{ $\geq 1$}} \implies \textcolor{red}{\text{$n \geq m$}}
+\end{align*}
+Hence, $\ker(A)\neq\{\mathbf{0}\}$. Therefore, there $\exists$ some non-zero vector $\mathbf{x}\in\ker(A)$
+s.t. $A\mathbf{x}=\mathbf{0}$.
+
+Thus, the homogeneous system $(A\mid\mathbf{0})$ has a non-zero solution.
+\end{proof}
+
+\textbf{Theorem 7.4.3.}
+Let $(A\mid\mathbf{b})$ be the augmented matrix of a general system of
+equations. Then the system is \emph{consistent} (has a solution) iff.
+\[
+\operatorname{rank}(A)=\operatorname{rank}(A\mid\mathbf{b}).
+\]
+
+\begin{proof}
+Let $A=
+\begin{pmatrix}
+\mathbf{c}_1 & \mathbf{c}_2 & \cdots & \mathbf{c}_n
+\end{pmatrix}$.
+
+$(\Rightarrow)$
+
+Suppose $\mathbf{x}=
+\begin{pmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{pmatrix}$
+is a solution of $A\mathbf{x}=\mathbf{b}$.
+
+$\implies$ $x_1\mathbf{c}_1+x_2\mathbf{c}_2+\cdots+x_n\mathbf{c}_n=\mathbf{b}$.
+
+$\implies$ $\mathbf{b}\in \operatorname{span} \{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\}$.
+
+$\implies$ $\operatorname{span}\{\underbrace{\mathbf{c}_1,\ldots,\mathbf{c}_n}_{\text{columns of $A$}}\}=\operatorname{span}\{\underbrace{\mathbf{c}_1,\ldots,\mathbf{c}_n,\mathbf{b}}_{\textcolor{red}{\text{columns of ($A\mid\mathbf{b}$)}}}\}$.
+
+$\implies$ $\operatorname{im}(\textcolor{red}{A})=\operatorname{im}(\textcolor{red}{A\mid\mathbf{b}})$,
+
+$\implies$ $\operatorname{rank}(A)=\operatorname{rank}(A\mid\mathbf{b})$.
+
+\medskip
+
+$(\Leftarrow)$
+Conversely, suppose $\operatorname{rank}(A)=\operatorname{rank}(A\mid\mathbf{b})$.
+
+$\implies$ $\operatorname{im}(A)\subseteq\operatorname{im}(A\mid\mathbf{b})$.
+
+Since these two subspaces have the same dimension, they must be equal
+
+$\implies$ $\operatorname{im}(A)=\operatorname{im}(A\mid\mathbf{b})$.
+
+Thus, $\mathbf{b}\in\operatorname{span}\{\mathbf{c}_1,\ldots,\mathbf{c}_n\}$.
+
+$\implies$ $\exists$ $x_1,\ldots,x_n$ s.t. $x_1\mathbf{c}_1+\cdots+x_n\mathbf{c}_n=\mathbf{b}$.
+Equivalently, there $\exists$ $\mathbf{x}$ s.t. $A\mathbf{x}=\mathbf{b}$.
+
+Therefore, the system is consistent.
+
+\end{proof}
+
+\textbf{Theorem 7.4.4. (Priciple of linearity)}
+Suppose $\mathbf{v}$ is a solution to the system of equations
+$(A\mid\mathbf{b})$. Then the general solution of $(A\mid\mathbf{b})$
+is given by
+\[
+\mathbf{v}+\ker(A)
+\coloneqq
+\left\{
+\mathbf{v}+\mathbf{n}:\mathbf{n}\in\ker(A)
+\right\}.
+\]
+
+\begin{proof}
+Given that $\mathbf{v}$ is a solution of $(A\mid\mathbf{b})$, we have $A\mathbf{v}=\mathbf{b}$ $\textup{  (1)}$
+
+Suppose $\mathbf{u}$ is another solution of $(A\mid\mathbf{b})$. Then $A\mathbf{u}=\mathbf{b}$ $\textup{  (2)}$
+
+Consider \textup{(2)} $-$ \textup{(1)}:
+\begin{align*}
+A\mathbf{u}-A\mathbf{v}
+    &=\mathbf{b}-\mathbf{b}\\
+\Longleftrightarrow\quad
+A(\mathbf{u}-\mathbf{v})
+    &=\mathbf{0}\\
+\Longleftrightarrow\quad
+\mathbf{u}-\mathbf{v}
+    &\in\ker(A)\\
+\Longleftrightarrow\quad
+\mathbf{u}-\mathbf{v}
+    &=\mathbf{n}
+    \quad\text{for some }\mathbf{n}\in\ker(A)\\
+\Longleftrightarrow\quad
+\mathbf{u}
+    &=\mathbf{v}+\mathbf{n}
+    \quad\text{for some }\mathbf{n}\in\ker(A).
+\end{align*}
+
+Hence, the general solution of $(A\mid\mathbf{b})$ is $\mathbf{v}+\ker(A)$.
+
+\end{proof}
+\begin{Remark}
+In particular, the system $(A\mid\mathbf{b})$ has a \textbf{unique} solution iff.
+\[
+\begin{cases}
+\operatorname{rank}(A)=\operatorname{rank}(A\mid\mathbf{b}),\\[0.3em]
+\ker(A)=\{\mathbf{0}\}.
+\end{cases}
+\]
+\end{Remark}
+
+\subsection{Example}
+
+\subsubsection{General systems: Spanning}
+Does $(3,3,2)$ belong to $\operatorname{span}\{(1,1,1),(1,-1,0)\}$?
+\begin{solution}
+Suppose it does. Then there $\exists$ $a,b\in\mathbb{R}$ s.t.
+\[
+(3,3,2)=a(1,1,1)+b(1,-1,0).
+\]
+
+Equivalently,
+\[
+\begin{cases}
+a+b=3,\\
+a-b=3,\\
+a=2.
+\end{cases}
+\]
+
+Consider the coefficient matrix
+\[
+A=
+\begin{pmatrix}
+1 & 1\\
+1 & -1\\
+1 & 0
+\end{pmatrix}.
+\]
+We have $\operatorname{rank}(A)=2$.
+
+On the other hand, the augmented matrix is
+\[
+(A\mid\mathbf{b})=
+\left(
+\begin{array}{cc|c}
+1 & 1  & 3\\
+1 & -1 & 3\\
+1 & 0  & 2
+\end{array}
+\right),
+\]
+and $\operatorname{rank}(A\mid\mathbf{b})=3$.
+
+Thus, $\operatorname{rank}(A)\neq\operatorname{rank}(A\mid\mathbf{b})$,
+so the corresponding system is inconsistent.
+
+Hence,
+$\boxed{
+(3,3,2)
+\notin
+\operatorname{span}\{(1,1,1),(1,-1,0)\}
+}.$
+
+\end{solution}
+
+\subsubsection{General systems: Linear Transformations}
+
+Consider the linear transformation $T:\mathbb{R}[x]_{\leq 2}\to\mathbb{R}[x]_{\leq 2}$ defined by
+\[
+T(a+bx+cx^2)=(a+b+c)+(a-b+c)x+(a+c)x^2.
+\]
+Does $3+3x+2x^2$ belong to $\operatorname{im}(T)$?
+
+\begin{solution}
+Suppose it does. $\implies$ $3+3x+2x^2=T(a+bx+cx^2)$ for some $a,b,c\in\mathbb{R}$,
+
+By comparing the coefficients, we obtain
+\[
+\begin{cases}
+a+b+c=3,\\
+a-b+c=3,\\
+a+c=2.
+\end{cases}
+\tag{*}
+\]
+
+The coefficient matrix of $(*)$ is
+\[
+A=
+\begin{pmatrix}
+1 & 1  & 1\\
+1 & -1 & 1\\
+1 & 0  & 1
+\end{pmatrix},
+\]
+and $\operatorname{rank}(A)=2$.
+
+On the other hand,
+\[
+\operatorname{rank}
+\left(
+\begin{array}{ccc|c}
+1 & 1  & 1 & 3\\
+1 & -1 & 1 & 3\\
+1 & 0  & 1 & 2
+\end{array}
+\right)
+=3.
+\]
+
+Therefore, $\operatorname{rank}(A)\neq\operatorname{rank}(A\mid\mathbf{b})$, so $(*)$ has no solution.
+
+Hence,
+$\boxed{
+3+3x+2x^2\notin\operatorname{im}(T)
+}.$
+
+\end{solution}
+
+\subsubsection{Inhomogeneous systems}
+Consider the inhomogeneous system
+$\begin{cases}
+x_1+2x_2+3x_3=4,\\
+5x_1+6x_2+7x_3=8.
+\end{cases}
+$ Find the general solution.
+
+\begin{solution}
+The general solution is given by
+\[
+\left\{
+\begin{pmatrix}
+x_1\\
+x_2\\
+x_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+-2+t\\
+3-2t\\
+t
+\end{pmatrix}
+:t\in\mathbb{R}
+\right\}.
+\]
+\begin{align*}
+&=
+\left\{
+\begin{pmatrix}
+-2\\
+3\\
+0
+\end{pmatrix}
++
+t
+\begin{pmatrix}
+1\\
+-2\\
+1
+\end{pmatrix}
+:t\in\mathbb{R}
+\right\}\\
+&=
+\begin{pmatrix}
+-2\\
+3\\
+0
+\end{pmatrix}
++
+\operatorname{span}
+\left\{
+\begin{pmatrix}
+1\\
+-2\\
+1
+\end{pmatrix}
+\right\}.
+\end{align*}
+
+Here,
+$\begin{pmatrix}
+-2\\
+3\\
+0
+\end{pmatrix}$ is a particular solution, while
+$\operatorname{span}
+\left\{
+\begin{pmatrix}
+1\\
+-2\\
+1
+\end{pmatrix}
+\right\}
+=\ker
+\begin{pmatrix}
+1&2&3\\
+5&6&7
+\end{pmatrix}$.
+
+
+Thus, the general solution has the form 
+$\boxed{
+\text{particular solution}+\ker(A)
+}$.
+\end{solution}
+
+\section{TFAE Theorem Ver.1}
+
+\subsection{Theorem}
+
+\textbf{Theorem 7.5.1.}
+Let $T:V\to W$ be a linear transformation s.t.
+\[
+\dim(V)=\dim(W)<\infty.
+\]
+Therefore, having fixed bases, $T$ can be represented by a \textbf{square matrix} $A$.
+
+The following are equivalent (TFAE).
+\begin{enumerate}
+    \item $T$ is injective.
+    
+    \item $\ker(T)=\{\mathbf{0}_V\}$.
+    
+    \item $\operatorname{nullity}(T)=0$.
+    
+    \item $\operatorname{rank}(T)=\dim(W)$
+    ($T$ has full rank).
+    
+    \item $\operatorname{im}(T)=W$.
+    
+    \item $T$ is surjective.
+    
+    \item $T$ is an isomorphism (bijective linear map).
+    
+    \item $A$ is invertible ($A^{-1}$ exists).
+    
+    \item $\ker(A)=\{\mathbf{0}\}$.
+    
+    \item $A$ has full rank.
+    
+    \item All the rows of $A$ are linearly independent.
+    
+    \item All the columns of $A$ are linearly independent.
+    
+    \item The system of equations $A\mathbf{x}=\mathbf{b}$
+    has a unique solution, namely $\mathbf{x}=A^{-1}\mathbf{b}$.
+\end{enumerate}
+
+\newpage
+
+\subsection{Example}
+
+\subsubsection{Prove that a matrix is invertible}
+Let $A\in M_n(F)$. It is known that $A^k=\mathbf{0}$
+for some positive integer $k$.
+
+Prove that $A+I_n$ is invertible.
+
+\begin{proof}
+Consider $\ker(A+I_n)$.
+
+Let $\mathbf{v}\in\ker(A+I_n)$. Then
+\begin{align*}
+(A+I_n)\mathbf{v}&=\mathbf{0}\\
+A\mathbf{v}+\mathbf{v}&=\mathbf{0}\\
+A\mathbf{v}&=-\mathbf{v}.
+\end{align*}
+
+Multiplying $A$ to the left on both sides gives
+\[
+A^2\mathbf{v}
+=-A\mathbf{v}
+=(-1)(-\mathbf{v})
+=(-1)^2\mathbf{v}.
+\]
+
+Inductively, $\textcolor{red}{\mathbf{0} =}$ $A^k\mathbf{v}=(-1)^k\mathbf{v}\implies \mathbf{v}=\mathbf{0}$.
+Hence, $\ker(A+I_n)=\{\mathbf{0}\}$.
+
+By TFAE, since $A+I_n$ is a square matrix, $A+I_n$ is invertible.
+\end{proof}
+
+\section{Change of coordinate matrix}
+
+\subsection{Definition}
+
+\textbf{Definition 7.6.1.}
+Let $V$ be a finite-dimensional vector space. Suppose $S_1$ and $S_2$
+are two bases of $V$. Then the \emph{change of coordinate matrix},
+or \emph{transition matrix}, from $S_1$-basis to $S_2$-basis is the matrix
+$[\operatorname{id}_V]_{S_1}^{S_2}$.
+
+\begin{Remark}
+Let $Q=[\operatorname{id}_V]_{S_1}^{S_2}$.
+
+\begin{enumerate}
+    \item Since $\operatorname{id}_V$ is an isomorphism, the matrix $Q$
+    is invertible. Moreover,
+    \[
+    Q^{-1}
+    =
+    [\operatorname{id}_V]_{S_2}^{S_1}.
+    \]
+
+    \item For any $\mathbf{v}\in V$, we have
+    \[
+    [\operatorname{id}_V]_{S_1}^{S_2}
+    [\mathbf{v}]_{S_1}
+    =
+    [\mathbf{v}]_{S_2}.
+    \]
+
+    In other words, the matrix
+    $[\operatorname{id}_V]_{S_1}^{S_2}$ converts the coordinate vector
+    of $\mathbf{v}$ in the $S_1$-basis into the coordinate vector of
+    $\mathbf{v}$ in the $S_2$-basis. This explains the name
+    ``change of coordinate'' matrix.
+\end{enumerate}
+\end{Remark}
+
+\textbf{Definition 7.6.2.}
+Let $V$ be a vector space. A linear transformation $T:V\to V$
+is called a \emph{linear operator on $V$} or an \emph{endomorphism on $V$}.
+
+\subsection{Theorem}
+
+\textbf{Theorem 7.6.1.}
+Let $V$ be finite-dimensional and let $T:V\to V$ be a linear operator.
+Suppose
+\begin{itemize}
+    \item $S_1,S_2$ are two bases of the vector space $V$;
+    
+    \item $Q=[\operatorname{id}_V]_{S_1}^{S_2}$
+    is the change of coordinate matrix from $S_1$ to $S_2$.
+\end{itemize}
+
+Then we have an equality of matrices:
+\[
+\boxed{[T]_{S_1}^{S_1}=Q^{-1}[T]_{S_2}^{S_2}Q}.
+\]
+
+\begin{proof}
+Consider the following diagram:
+\[
+\begin{tikzcd}[row sep=large, column sep=huge]
+V_{S_1}
+    \arrow[r,
+        "{\textcolor{red}{[\textcolor{black}{T}]_{S_1}^{S_1}}}"]
+    \arrow[d,
+        "{\textcolor{red}{
+        Q=[\textcolor{black}{\operatorname{id}_V}]_{S_1}^{S_2}
+        }}"']
+&
+V_{S_1}
+\\
+V_{S_2}
+    \arrow[r,
+        "{\textcolor{red}{[\textcolor{black}{T}]_{S_2}^{S_2}}}"']
+&
+V_{S_2}
+\arrow[u,
+        "{\textcolor{red}{
+        [\textcolor{black}{\operatorname{id}_V}]_{S_2}^{S_1}=Q^{-1}
+        }}"']
+\end{tikzcd}
+\]
+
+Here the subscripts indicate the bases used for the coordinates.
+Since
+\[
+\textcolor{red}{
+Q=[\textcolor{black}{\operatorname{id}_V}]_{S_1}^{S_2}
+}
+\qquad\text{and}\qquad
+\textcolor{red}{
+[\textcolor{black}{\operatorname{id}_V}]_{S_2}^{S_1}=Q^{-1},
+}
+\]
+So $\textcolor{red}{[\textcolor{black}{T}]_{S_1}^{S_1}=Q^{-1}[\textcolor{black}{T}]_{S_2}^{S_2}Q.}$
+
+\end{proof}
+
+\subsection{Example}
+
+\subsubsection{Change of coordinate matrices}
+Let $B$ be the standard basis of $\mathbb{R}^2$ and
+be the basis $S=\{(1,3),(2,5)\}$ of $\mathbb{R}^2$.
+
+\begin{enumerate}
+    \item[(a)] Find the change of coordinate matrix from $S$ to $B$.
+    
+    \item[(b)] Find the change of coordinate matrix from $B$ to $S$.
+    
+    \item[(c)] Find $[(-2,3)]_S$.
+\end{enumerate}
+
+\begin{solution}
+Let $B=\{\mathbf{e}_1,\mathbf{e}_2\}$.
+
+\begin{enumerate}
+    \item[(a)] We have
+    \begin{align*}
+        \operatorname{id}(\textcolor{red}{1,3})
+        &= (1,3)
+         = \mathbf{e}_1+3\mathbf{e}_2,\\
+        \operatorname{id}(\textcolor{red}{2,5})
+        &= (2,5)
+         = 2\mathbf{e}_1+5\mathbf{e}_2.
+    \end{align*}
+    Therefore,
+    $[\operatorname{id}]_{\textcolor{red}{S}}^B=
+    \begin{pmatrix}
+        1 & 2\\
+        3 & 5
+    \end{pmatrix}.$
+
+    \item[(b)] By the inverse relation between change of coordinate matrices,
+    \begin{align*}
+        [\operatorname{id}]_B^{\textcolor{red}{S}}
+        =
+        \left([\operatorname{id}]_{\textcolor{red}{S}}^B\right)^{-1}
+        =
+        \begin{pmatrix}
+            1 & 2\\
+            3 & 5
+        \end{pmatrix}^{-1}
+        =
+        \begin{pmatrix}
+            -5 & 2\\
+            3 & -1
+        \end{pmatrix}.
+    \end{align*}
+
+    \item[(c)] Since $[(-2,3)]_B
+    =
+    \begin{pmatrix}
+        -2\\
+        3
+    \end{pmatrix}$,
+    we have
+    \begin{align*}
+        [(-2,3)]_{\textcolor{red}{S}}
+        =
+        [\operatorname{id}]_B^{\textcolor{red}{S}}[(-2,3)]_B
+        =
+        \begin{pmatrix}
+            -5 & 2\\
+            3 & -1
+        \end{pmatrix}
+        \begin{pmatrix}
+            -2\\
+            3
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            16\\
+            -9
+        \end{pmatrix}.
+    \end{align*}
+
+    Indeed,
+    \[
+    16\textcolor{red}{(1,3)}-9\textcolor{red}{(2,5)}=\textcolor{red}{(-2,3)}.
+    \]
+\end{enumerate}
+\end{solution}
+
+\subsubsection{Matrix Representations under Different Bases}
+Let $T:\mathbb{R}^2\to\mathbb{R}^2$ be the linear operator on $\mathbb{R}^2$ defined by reflection by the 
+
+line $y=-x$. Let
+\[
+B=\{(1,0),(0,1)\}
+\qquad\text{and}\qquad
+S=\{(1,1),(1,-1)\}
+\]
+be two bases of $\mathbb{R}^2$.
+
+\begin{enumerate}
+    \item[(a)] Find the matrix $X=[T]_B^B$.
+
+    \item[(b)] Find the matrix $Y=[T]_S^S$.
+
+    \item[(c)] Find the change of coordinate matrix $Q$ from $S$ to $B$.
+
+    \item[(d)] Write down the relation between the matrices $X,Y,Q$.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item[(a)]
+\begin{align*}
+T(1,0)
+    &= (0,-1)
+     = 0\mathbf{e}_1-\mathbf{e}_2,\\
+T(0,1)
+    &= (-1,0)
+     = -\mathbf{e}_1+0\mathbf{e}_2.
+\end{align*}
+
+Therefore, $X=[T]_B^B=
+\begin{pmatrix}
+0 & -1\\
+-1 & 0
+\end{pmatrix}$.
+
+\item[(b)]
+\begin{align*}
+T(\textcolor{orange}{(1,1)})
+    &=(-1,-1)=-1\textcolor{orange}{(1,1)}+0\textcolor{orange}{(1,-1)},\\
+T(\textcolor{orange}{(1,-1)})
+    &=(1,-1)=0\textcolor{orange}{(1,1)}+1\textcolor{orange}{(1,-1)}.
+\end{align*}
+
+Therefore, $Y=[T]_{\textcolor{orange}{S}}^{\textcolor{orange}{S}}=
+\begin{pmatrix}
+-1 & 0\\
+0 & 1
+\end{pmatrix}$.
+
+\item[(c)]
+\begin{align*}
+\operatorname{id}(\textcolor{orange}{(1,1)})
+    &=(1,1)
+     =\mathbf{e}_1+\mathbf{e}_2,\\
+\operatorname{id}(\textcolor{orange}{(1,-1)})
+    &=(1,-1)
+     =\mathbf{e}_1-\mathbf{e}_2.
+\end{align*}
+
+Hence, $Q=[\operatorname{id}]_{\textcolor{orange}{S}}^B=
+\begin{pmatrix}
+1 & 1\\
+1 & -1
+\end{pmatrix}$.
+
+\item[(d)]
+Consider the following diagram:
+\[
+\begin{tikzcd}[row sep=large, column sep=huge]
+\mathbb{R}^2_{\textcolor{orange}{S\text{-basis}}}
+    \arrow[r,
+        "{\textcolor{orange}{
+        \textcolor{red}{Y=[T]}_S^S
+        }}"]
+    \arrow[d,
+        "{\textcolor{red}{
+        Q=[\operatorname{id}]_{\textcolor{orange}{S}}^{\textcolor{blue}{B}}
+        }}"']
+&
+\mathbb{R}^2_{\textcolor{orange}{S\text{-basis}}}
+\\
+\mathbb{R}^2_{\textcolor{blue}{B\text{-basis}}}
+    \arrow[r,
+        "{\textcolor{blue}{
+        \textcolor{red}{X=[T]}_B^B
+        }}"']
+&
+\mathbb{R}^2_{\textcolor{blue}{B\text{-basis}}}
+    \arrow[u,
+        "{\textcolor{red}{
+        [\operatorname{id}]_{\textcolor{blue}{B}}^{\textcolor{orange}{S}}=Q^{-1}
+        }}"']
+\end{tikzcd}
+\]
+
+Since
+\[
+\textcolor{blue}{X=[T]_B^B},
+\qquad
+\textcolor{red}{Y=[T]_S^S},
+\]
+following the diagram gives
+\[
+\boxed{
+\textcolor{red}{Y}
+=
+Q^{-1}\textcolor{blue}{X}Q
+}.
+\]
+
+Equivalently,
+\[
+\boxed{
+\textcolor{blue}{X}
+=
+Q\textcolor{red}{Y}Q^{-1}
+}.
+\]
+
+\end{enumerate}
+\end{solution}
+
+\end{document}
